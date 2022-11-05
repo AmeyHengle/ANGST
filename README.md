@@ -1,5 +1,17 @@
 # mental-health-comorbitidy-classification
 
+## Getting Started
+1. Make sure you have `git`, `python(>=3.8, <3.10)`, [`poetry`](https://python-poetry.org/docs/#installation) installed. Preferably within a virtual environment.
+
+2. Install dependencies
+```shell
+cd mental-health-comorbitidy-classification
+poetry install
+git init
+git add .
+git commit -m "add: initial commit."
+```
+
 ## Directory Structure
 
 | File                                      | Description                                                                  |
