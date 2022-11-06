@@ -1,8 +1,8 @@
 """
-python semantic-similarity.py \
+python3 semantic-similarity.py \
     --query=data/corpus/unlabeled_corpus.csv \
     --corpus=data/train/v0.0.0.csv \
-    --outfile=data/mappings/semantic-similarity-example.json \
+    --outfile=data/mappings/semantic-similarity.json \
     --model_name=all-mpnet-base-v2 \
     --topk=5 \
     ;
@@ -26,7 +26,7 @@ import constants as const
 
 
 if torch.cuda.is_available():
-    DEVICE = torch.device("cuda")
+    DEVICE = torch.device("cuda:0")
     print("Using GPU")
 else:
     DEVICE = torch.device("cpu")
@@ -88,18 +88,16 @@ def get_examplars_st(
     model.max_seq_length = max_seq_len
     model.to(DEVICE)
 
-
     logger.debug(f"\nCalculating corpus embeddings")
-    corpus_embeddings = model.encode(corpus, convert_to_tensor=True)
-    corpus_embeddings = corpus_embeddings.to(DEVICE)
+    corpus_embeddings = model.encode(corpus, convert_to_tensor=True, batch_size=2)
+    # corpus_embeddings = corpus_embeddings.to(DEVICE)
 
     logger.debug(f"\nCalculating query embeddings")
-    query_embeddings = model.encode(queries, convert_to_tensor=True)
-    query_embeddings = query_embeddings.to(DEVICE)
+    query_embeddings = model.encode(queries, convert_to_tensor=True, batch_size=2)
+    # query_embeddings = query_embeddings.to(DEVICE)
 
     logger.debug(f"\nGetting top {topk} matches for each query from corpus")
     matches = util.semantic_search(query_embeddings, corpus_embeddings, score_function=util.cos_sim, top_k=topk)
-
 
     logger.debug(f"\nGenerating exemplar_dict")
     if len(matches) != len(queries):
