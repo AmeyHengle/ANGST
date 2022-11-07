@@ -31,7 +31,7 @@ CONFIG_GPT = {
 
 CONFIG_SEMANTIC_SIMILARITY = {
     "model_name": 'all-mpnet-base-v2',
-    "max_seq_len": 1024,
+    "max_seq_len": 512,
     "topk": 5,
 }
 
