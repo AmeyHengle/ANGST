@@ -2,7 +2,7 @@ import os
 
 TRAIN = os.path.join('./','data/train')
 TEST = os.path.join('./','data/test')
-RUNS = os.path.join('./','runs/')
+ROOT = os.path.join('./')
 ANNOTATIONS_RAW = os.path.join('./','data/annotations/raw')
 ANNOTATIONS_PROC = os.path.join('./','data/annotations/processed')
 OPENAI_CREDS = os.path.join('./','creds/openai.json')
@@ -41,7 +41,7 @@ CONFIG_BM25 = {
 }
 
 CONFIG_TRAIN =  {
-    'num_train_epochs': 1,
+    'num_train_epochs': 5,
     'max_seq_length': 512,
     'overwrite_output_dir': True,
     'train_batch_size': 32,
