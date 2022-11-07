@@ -2,8 +2,8 @@
 python silver_labelling.py \
     --train_file=data/train/v0.0.0.csv \
     --corpus_file=data/corpus/unlabeled_corpus.csv \
-    --outfile=data/train/v0.1.0.csv \
-    --mapping_ss=data/mappings/semantic-similarity-example.json \
+    --outfile=data/train/v0.0.1.csv \
+    --mapping_ss=data/mappings/semantic-similarity.json \
     ;
 """
 
@@ -14,7 +14,7 @@ import argparse
 import constants as const
 from loguru import logger
 from collections import Counter
-from utils import clean_text, label_to_word, word_to_label, load_json
+from utils import clean_text, label_to_word, word_to_label, load_json, set_random_seed
 from prompting import (
     gpt,
     prompt_template1,
@@ -117,7 +117,10 @@ def get_silver_label(
     return silver_label
 
 
-if __name__ == "__main__":    
+if __name__ == "__main__":
+    SEED = const.RANDOM_STATE
+    set_random_seed(SEED)
+    
     parser = argparse.ArgumentParser()
     parser.add_argument("--train_file")
     parser.add_argument("--corpus_file")
@@ -137,7 +140,6 @@ if __name__ == "__main__":
     
     df_train = pd.read_csv(datapath_train)
     df_corpus = pd.read_csv(datapath_corpus)
-
 
     # Initialize variables
     id_col = const.ID_COL
@@ -160,7 +162,7 @@ if __name__ == "__main__":
         df_corpus = df_corpus.drop(['level_0'],axis=1)
     df_corpus = df_corpus.reset_index()
     df_corpus[silver_label_technique] = None
-    
+        
     for i in tqdm(range(df_corpus.shape[0]),desc=f"Generating silver labels"):
         post = df_corpus.iloc[i][text_col]
         id = df_corpus.iloc[i][id_col]
@@ -186,6 +188,8 @@ if __name__ == "__main__":
     # Save df_corpus populated with silver_labels
     logger.debug(f"Silver label dist:\n{df_corpus[silver_label_technique].value_counts()}")
     if args.concat_with_train:
+        df_train[const.LABEL_DESC_COL] = 'gold_label'
+        df_corpus[const.LABEL_DESC_COL] = 'silver_label'
         df_corpus = df_corpus.rename(columns={silver_label_technique: const.LABEL_COL})
         df_corpus = pd.concat([df_corpus, df_train])
     df_corpus.to_csv(outfile, index=False)

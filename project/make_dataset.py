@@ -6,8 +6,10 @@ from loguru import logger
 import os
 import json
 import constants as const
-from utils import clean_text, split_dataset
+from utils import clean_text, split_dataset, set_random_seed
 
+SEED = const.RANDOM_STATE
+set_random_seed(SEED)
 
 def preprocess(df: pd.DataFrame) -> pd.DataFrame:
     keep_cols = const.REDDIT_COLS + const.DISORDER_COLS

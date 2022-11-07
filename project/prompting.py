@@ -3,6 +3,10 @@ import os
 import json
 import constants as const
 from loguru import logger
+from utils import set_random_seed
+
+SEED = const.RANDOM_STATE
+set_random_seed(SEED)
 
 # --------------------------------------------------------------------------------------------------------------
 # GPT3 Code

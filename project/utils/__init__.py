@@ -1,12 +1,15 @@
 import string
 import re
-from cleantext import clean
-from loguru import logger
 import json
 import numpy as np
 import pandas as pd
-from sklearn.model_selection import train_test_split
+import torch
+import os
+import random
 import constants as const
+from cleantext import clean
+from loguru import logger
+from sklearn.model_selection import train_test_split
 
 def clean_text(text: str) -> str:
     """
@@ -141,3 +144,24 @@ def split_dataset(df: pd.DataFrame, test_size: float , id_col: str, stratify_col
     logger.debug(f"\nTest Set: {df_test.shape}\n{df_test[stratify_col].value_counts()}")
     
     return df_train, df_test
+
+
+def set_random_seed(seed: int = const.RANDOM_STATE):
+    """
+    Helper function to seed experiment for reproducibility.
+    If -1 is provided as seed, experiment uses random seed from 0~9999
+    Args:
+        seed (int): integer to be used as seed, use -1 to randomly seed experiment
+    """
+    print("Seed: {}".format(seed))
+
+    torch.backends.cudnn.benchmark = False
+    torch.backends.cudnn.enabled = False
+    torch.backends.cudnn.deterministic = True
+
+    random.seed(seed)
+    os.environ["PYTHONHASHSEED"] = str(seed)
+    np.random.seed(seed)
+    torch.manual_seed(seed)
+    torch.cuda.manual_seed(seed)
+    torch.cuda.manual_seed_all(seed)
