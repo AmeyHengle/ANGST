@@ -12,6 +12,7 @@ DISORDER_COLS = ["label_depressive_disorder", "label_anxiety_disorder"]
 TEXT_COL = "text"
 LABEL_COL = "labels"
 ID_COL = "id"
+LABEL_DESC_COL = "label_desc"
 
 TEST_SIZE = 0.3
 RANDOM_STATE = 1998
@@ -60,9 +61,9 @@ CONFIG_TRAIN =  {
 
 
 CONFIG_SILVER_LABELLING = {
-    "technique": "bm25",
+    "technique": "ss",
     "use_gpt": False,
-    "threshold_ss": 0.2,
+    "threshold_ss": 0.7,
     "threshold_dm25": 0.7,
-    "topk": 1
+    "topk": 5
 }

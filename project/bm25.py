@@ -2,7 +2,7 @@
 python bm25.py \
     --query=data/corpus/unlabeled_corpus.csv \
     --corpus=data/train/v0.0.0.csv \
-    --outfile=data/mappings/bm25-example.json \
+    --outfile=data/mappings/bm25.json \
     --topk=5 \
     ;
 """
@@ -17,7 +17,7 @@ import constants as const
 from tqdm import tqdm
 from loguru import logger
 from rank_bm25 import BM25Okapi
-from utils import clean_text, NpEncoder
+from utils import clean_text, NpEncoder, set_random_seed
 
 
 def get_examplars_bm25(
@@ -82,6 +82,8 @@ def get_examplars_bm25(
     
     
 if __name__ == "__main__":
+    SEED = const.RANDOM_STATE
+    set_random_seed(SEED)
     
     parser = argparse.ArgumentParser()
     parser.add_argument("--query")

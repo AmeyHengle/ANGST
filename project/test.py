@@ -15,7 +15,7 @@ import pandas as pd
 from loguru import logger
 import argparse
 import torch
-from utils import clean_text, label_to_word, word_to_label, load_json, save_json
+from utils import clean_text, label_to_word, word_to_label, load_json, save_json, set_random_seed
 import constants as const
 from simpletransformers.classification import (
     MultiLabelClassificationModel, MultiLabelClassificationArgs
@@ -126,7 +126,10 @@ def eval_pipeline(
     predictions_df['y_pred'] = y_pred
     predictions_df.to_csv(os.path.join(output_dir,"metrics","predictions.csv"),index=False)    
 
-if __name__ == "__main__":    
+if __name__ == "__main__":   
+    SEED = const.RANDOM_STATE
+    set_random_seed(SEED) 
+    
     parser = argparse.ArgumentParser()
     parser.add_argument("--test_file")
     parser.add_argument("--model_path")
