@@ -2,7 +2,7 @@ import os
 
 TRAIN = os.path.join('./','data/train')
 TEST = os.path.join('./','data/test')
-RESULTS = os.path.join('./','runs/')
+RUNS = os.path.join('./','runs/')
 ANNOTATIONS_RAW = os.path.join('./','data/annotations/raw')
 ANNOTATIONS_PROC = os.path.join('./','data/annotations/processed')
 OPENAI_CREDS = os.path.join('./','creds/openai.json')
@@ -41,7 +41,7 @@ CONFIG_BM25 = {
 
 CONFIG_TRAIN =  {
     'num_train_epochs': 1,
-    'max_seq_length': 128,
+    'max_seq_length': 512,
     'overwrite_output_dir': True,
     'train_batch_size': 32,
     'eval_batch_size': 32,
@@ -50,14 +50,19 @@ CONFIG_TRAIN =  {
     'use_multiprocessing_for_evaluation': False,
     'save_eval_checkpoints': False,
     'save_model_every_epoch': False,
-    'save_steps': -1
+    'save_optimizer_and_scheduler': False,
+    'save_steps': -1,
+    'use_early_stopping' : True,
+    'evaluate_during_training_verbose' : True,
+    'learning_rate' : 2e-5,
+    'no_cache': True
 }
 
 
 CONFIG_SILVER_LABELLING = {
-    "technique": "ss",
+    "technique": "bm25",
     "use_gpt": False,
     "threshold_ss": 0.2,
     "threshold_dm25": 0.7,
-    "topk": 3
+    "topk": 1
 }
