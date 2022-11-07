@@ -1,0 +1,15 @@
+,0
+accuracy_score,0.47
+hamming_loss,0.365
+micro_f1,0.3302752293577982
+macro_f1,0.23076923076923078
+weighted_f1,0.3116883116883117
+micro_auc,0.5599725477774259
+macro_auc,0.5248717948717949
+weighted_auc,0.5476190476190477
+one_error,0.53
+coverage,1.03
+ranking_loss,0.26
+micro_avg_precision,0.42649350649350654
+macro_avg_precision,0.4148224852071006
+weighted_avg_precision,0.4726173826173826

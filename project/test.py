@@ -119,7 +119,12 @@ def eval_pipeline(
     pd.DataFrame().from_dict([mlc_metrics]).T.to_csv(os.path.join(output_dir,"metrics","mlc_metrics.csv"),index=True)
     pd.DataFrame().from_dict(clf_report_mlc).T.to_csv(os.path.join(output_dir,"metrics","clf_report_mlc.csv"),index=True)
     pd.DataFrame().from_dict(clf_report_mcc).T.to_csv(os.path.join(output_dir,"metrics","clf_report_mcc.csv"),index=True)  
-    
+
+    # Save predictions
+    predictions_df = df_eval[[text_col]]
+    predictions_df['y_true'] = y_true
+    predictions_df['y_pred'] = y_pred
+    predictions_df.to_csv(os.path.join(output_dir,"metrics","predictions.csv"),index=False)    
 
 if __name__ == "__main__":    
     parser = argparse.ArgumentParser()

@@ -2,7 +2,7 @@
 python semantic-similarity.py \
     --query=data/corpus/unlabeled_corpus.csv \
     --corpus=data/train/v0.0.0.csv \
-    --outfile=data/mappings/semantic-similarity-example.json \
+    --outfile=data/mappings/semantic-similarity.json \
     --model_name=all-mpnet-base-v2 \
     --topk=5 \
     ;

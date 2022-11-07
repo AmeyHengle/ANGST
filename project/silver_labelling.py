@@ -66,7 +66,7 @@ def get_silver_label(
             raise Exception(
                 "missing mapping_dm25"
             )
-        search_keys = [x[0] for x in mapping_ss[id] if x[1] >= mapping_dm25][:topk]
+        search_keys = [x[0] for x in mapping_dm25[id]][:topk]
         #print(search_keys)
         matches = search_df[search_df[id_col].isin(search_keys)]
        
@@ -125,6 +125,7 @@ if __name__ == "__main__":
     parser.add_argument("--mapping_ss",default={})
     parser.add_argument("--mapping_dm25",default={})
     parser.add_argument("--config", default=const.CONFIG_SILVER_LABELLING)
+    parser.add_argument("--concat_with_train", default=True)
     args = parser.parse_args()
 
     datapath_train = args.train_file
@@ -184,4 +185,7 @@ if __name__ == "__main__":
     
     # Save df_corpus populated with silver_labels
     logger.debug(f"Silver label dist:\n{df_corpus[silver_label_technique].value_counts()}")
+    if args.concat_with_train:
+        df_corpus = df_corpus.rename(columns={silver_label_technique: const.LABEL_COL})
+        df_corpus = pd.concat([df_corpus, df_train])
     df_corpus.to_csv(outfile, index=False)

@@ -1,7 +1,7 @@
 """
 python train.py \
-    --train_file=data/train/v0.0.0.csv \
-    --val_file=data/train/v0.0.0.csv \
+    --train_file=data/train/v0.0.3.csv \
+    --val_file=data/test/test.csv \
     ;
 """
 
@@ -46,6 +46,8 @@ def preprocess_dataset(df:pd.DataFrame, text_col:str, label_col:str, normalize_t
     df = df.rename(columns={text_col: "text", label_col: "labels"})
     df = df[df["text"].notna()]
     df = df[df["labels"].notna()]
+    if 'level_0' in df.columns:
+        df = df.drop(['level_0'],axis=1)
     df = df.reset_index()
     
     return df
@@ -74,9 +76,9 @@ def get_metrics(y_true, y_pred):
 
 
     # --------------- Multi-class clf metrics ---------------
-    y_true = [label_to_word(x) for x in y_true]
-    y_pred = [label_to_word(x) for x in y_pred]
-    clf_report_mcc = classification_report(y_true, y_pred, output_dict=True)
+    y_true_word = [label_to_word(x) for x in y_true]
+    y_pred_word = [label_to_word(x) for x in y_pred]
+    clf_report_mcc = classification_report(y_true_word, y_pred_word, output_dict=True)
 
     return mlc_metrics, clf_report_mlc, clf_report_mcc
 
@@ -91,16 +93,19 @@ def train_pipeline(
     model_name: str, 
     model_type: str
 ):
-    if output_dir == const.RESULTS:
+    if output_dir == const.RUNS:
         run = str(datetime.datetime.now()).split('.')[0].replace(" ","_")
-        output_dir = os.path.join(output_dir, run)
-        os.mkdir(output_dir) 
-    if not os.path.exists(os.path.join(output_dir,"metrics")):
-        os.mkdir(os.path.join(output_dir,"metrics"))
-    if not os.path.exists(os.path.join(output_dir,"best_model")):
-        os.mkdir(os.path.join(output_dir,"best_model"))
+        model_dir = os.path.join(output_dir, "models", run)
+        results_dir = os.path.join(output_dir, "results", run)        
+        os.mkdir(model_dir) 
+        os.mkdir(results_dir)
+    if not os.path.exists(os.path.join(results_dir,"metrics")):
+        os.mkdir(os.path.join(results_dir,"metrics"))
+    if not os.path.exists(os.path.join(model_dir,"best_model")):
+        os.mkdir(os.path.join(model_dir,"best_model"))
 
-    classification_args['best_model_dir'] = os.path.join(output_dir,"best_model")
+    classification_args['output_dir'] = os.path.join(model_dir,"best_model")
+    classification_args['best_model_dir'] = os.path.join(model_dir,"best_model")
     classification_args['manual_seed'] = const.RANDOM_STATE
         
     # Load train and eval sets
@@ -140,18 +145,24 @@ def train_pipeline(
     mlc_metrics, clf_report_mlc, clf_report_mcc = get_metrics(y_true, y_pred)
     
     # Save Metrics
-    save_json(train_logs, os.path.join(output_dir,"metrics","train_logs.json"))
-    save_json(loss, os.path.join(output_dir,"metrics","mlc_loss.json"))
-    pd.DataFrame().from_dict([mlc_metrics]).T.to_csv(os.path.join(output_dir,"metrics","mlc_metrics.csv"),index=True)
-    pd.DataFrame().from_dict(clf_report_mlc).T.to_csv(os.path.join(output_dir,"metrics","clf_report_mlc.csv"),index=True)
-    pd.DataFrame().from_dict(clf_report_mcc).T.to_csv(os.path.join(output_dir,"metrics","clf_report_mcc.csv"),index=True)
+    save_json(train_logs, os.path.join(results_dir,"metrics","train_logs.json"))
+    save_json(loss, os.path.join(results_dir,"metrics","mlc_loss.json"))
+    pd.DataFrame().from_dict([mlc_metrics]).T.to_csv(os.path.join(results_dir,"metrics","mlc_metrics.csv"),index=True)
+    pd.DataFrame().from_dict(clf_report_mlc).T.to_csv(os.path.join(results_dir,"metrics","clf_report_mlc.csv"),index=True)
+    pd.DataFrame().from_dict(clf_report_mcc).T.to_csv(os.path.join(results_dir,"metrics","clf_report_mcc.csv"),index=True)
     
-
+    # Save predictions
+    predictions_df = df_eval[[text_col]]
+    predictions_df['y_true'] = y_true
+    predictions_df['y_pred'] = y_pred
+    predictions_df.to_csv(os.path.join(results_dir,"metrics","predictions.csv"),index=False)
+    
+    
 if __name__ == "__main__":    
     parser = argparse.ArgumentParser()
     parser.add_argument("--train_file")
     parser.add_argument("--val_file")
-    parser.add_argument("--output_dir", default=const.RESULTS)
+    parser.add_argument("--output_dir", default=const.RUNS)
     parser.add_argument("--classification_args", default=const.CONFIG_TRAIN)
     parser.add_argument("--text_col", default=const.TEXT_COL)
     parser.add_argument("--label_col", default=const.LABEL_COL)
