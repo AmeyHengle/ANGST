@@ -191,5 +191,6 @@ if __name__ == "__main__":
         df_train[const.LABEL_DESC_COL] = 'gold_label'
         df_corpus[const.LABEL_DESC_COL] = 'silver_label'
         df_corpus = df_corpus.rename(columns={silver_label_technique: const.LABEL_COL})
+        df_corpus = df_corpus[df_corpus[const.LABEL_COL].notna()]
         df_corpus = pd.concat([df_corpus, df_train])
     df_corpus.to_csv(outfile, index=False)

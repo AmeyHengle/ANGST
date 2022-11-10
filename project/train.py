@@ -1,6 +1,6 @@
 """
 python train.py \
-    --train_file=data/train/v0.0.3.csv \
+    --train_file=data/train/v0.0.4.csv \
     --val_file=data/test/test.csv \
     ;
 """
@@ -38,14 +38,15 @@ transformers_logger.setLevel(logging.WARNING)
 CUDA = torch.cuda.is_available()
 
 
-def preprocess_dataset(df:pd.DataFrame, text_col:str, label_col:str, normalize_text_col:bool=True)-> pd.DataFrame:
+def preprocess_dataset(df:pd.DataFrame, text_col:str, label_col:str, normalize_text_col:bool=True)-> pd.DataFrame:    
+    df = df.rename(columns={text_col: "text", label_col: "labels"})
+    df = df[df["text"].notna()]
+    df = df[df["labels"].notna()]
+    
     df[label_col] = df[label_col].apply(lambda x: json.loads(x))
     if normalize_text_col:
         df[text_col] = df[text_col].apply(lambda x: clean_text(x))
         
-    df = df.rename(columns={text_col: "text", label_col: "labels"})
-    df = df[df["text"].notna()]
-    df = df[df["labels"].notna()]
     if 'level_0' in df.columns:
         df = df.drop(['level_0'],axis=1)
     df = df.reset_index()
@@ -93,7 +94,7 @@ def train_pipeline(
     model_name: str, 
     model_type: str
 ):
-    if output_dir == const.RUNS:
+    if output_dir == const.ROOT:
         run = str(datetime.datetime.now()).split('.')[0].replace(" ","_")
         model_dir = os.path.join(output_dir, "models", run)
         results_dir = os.path.join(output_dir, "results", run)        
@@ -109,8 +110,8 @@ def train_pipeline(
     classification_args['manual_seed'] = const.RANDOM_STATE
         
     # Load train and eval sets
-    df_train = pd.read_csv(datapath_train).sample(100)
-    df_eval = pd.read_csv(datapath_eval).sample(100)
+    df_train = pd.read_csv(datapath_train)
+    df_eval = pd.read_csv(datapath_eval)
     
     df_train = preprocess_dataset(df_train,text_col,label_col)
     df_eval = preprocess_dataset(df_eval,text_col,label_col)
@@ -162,7 +163,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--train_file")
     parser.add_argument("--val_file")
-    parser.add_argument("--output_dir", default=const.RUNS)
+    parser.add_argument("--output_dir", default=const.ROOT)
     parser.add_argument("--classification_args", default=const.CONFIG_TRAIN)
     parser.add_argument("--text_col", default=const.TEXT_COL)
     parser.add_argument("--label_col", default=const.LABEL_COL)
