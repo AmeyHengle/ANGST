@@ -1,6 +1,6 @@
 """
 python train.py \
-    --train_file=data/train/v0.0.4.csv \
+    --train_file=data/train/v0.1.4.csv \
     --val_file=data/test/test.csv \
     ;
 """
@@ -95,7 +95,8 @@ def train_pipeline(
     model_type: str
 ):
     if output_dir == const.ROOT:
-        run = str(datetime.datetime.now()).split('.')[0].replace(" ","_")
+        # run = str(datetime.datetime.now()).split('.')[0].replace(" ","_")
+        run = datapath_train.split("/")[-1].replace(".csv","")
         model_dir = os.path.join(output_dir, "models", run)
         results_dir = os.path.join(output_dir, "results", run)        
         os.mkdir(model_dir) 
