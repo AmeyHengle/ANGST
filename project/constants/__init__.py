@@ -30,10 +30,20 @@ CONFIG_GPT = {
     "stop": ["\n"]
 }
 
+CONFIG_BLOOM = {
+    "api_url": "https://api-inference.huggingface.co/models/bigscience/bloom",
+    "temperature": 0.5,
+    "max_tokens": 15,
+    "top_p": 0.5,
+    "frequency_penalty": 0,
+    "presence_penalty": 0,
+    "stop_sequence": ["\n"]
+}
+
 CONFIG_SEMANTIC_SIMILARITY = {
     "model_name": 'all-mpnet-base-v2',
     "max_seq_len": 512,
-    "topk": 5,
+    "topk": 2,
 }
 
 CONFIG_BM25 = {
@@ -56,14 +66,16 @@ CONFIG_TRAIN =  {
     'use_early_stopping' : True,
     'evaluate_during_training_verbose' : True,
     'learning_rate' : 2e-5,
-    'no_cache': True
+    'no_cache': True,
+    'no_save': True
 }
 
 
 CONFIG_SILVER_LABELLING = {
-    "technique": "ss",
-    "use_gpt": False,
+    "technique": "bm25",
+    "use_nlg": True,
+    'nlg_pipeline': 'bloom',
     "threshold_ss": 0.7,
-    "threshold_dm25": 0.7,
-    "topk": 5
+    "threshold_bm25": 0.7,
+    "topk": 1
 }

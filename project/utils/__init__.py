@@ -97,8 +97,8 @@ def label_to_word(label: str):
     
 
 def word_to_label(word: str):
-    if not isinstance(label,str):
-        label = json.dumps(label)
+    if not isinstance(word,str):
+        word = json.dumps(word)
         
     if word == "Depression": return json.dumps([1,0])
     elif word == "Anxiety": return json.dumps([0,1])

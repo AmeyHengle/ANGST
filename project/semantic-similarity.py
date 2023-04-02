@@ -1,10 +1,10 @@
 """
 python3 semantic-similarity.py \
-    --query=data/corpus/unlabeled_corpus.csv \
-    --corpus=data/train/v0.0.0.csv \
-    --outfile=data/mappings/semantic-similarity.json \
+    --query=data/train/v0.0.0.csv \
+    --corpus=data/corpus/unlabeled_corpus.csv \
+    --outfile=data/mappings/semantic-similarity-ss-bloom-v0.0.1.json \
     --model_name=all-mpnet-base-v2 \
-    --topk=5 \
+    --topk=2 \
     ;
 """
 
@@ -18,6 +18,7 @@ from loguru import logger
 import warnings
 import torch
 import random
+import gc
 from sentence_transformers import SentenceTransformer, util
 warnings.filterwarnings("ignore")
 
@@ -43,6 +44,8 @@ def get_examplars_st(
     max_seq_len,
     topk,
 ):
+    gc.collect()
+    torch.cuda.empty_cache()
     
     logger.debug("\nFetching query and corpus files")
     df_corpus = pd.read_csv(datapath_corpus, usecols=[text_col, id_col])

@@ -2,7 +2,8 @@
 python silver_labelling.py \
     --train_file=data/train/v0.0.0.csv \
     --corpus_file=data/corpus/unlabeled_corpus.csv \
-    --outfile=data/train/v0.0.1.csv \
+    --outfile=data/train/v1.0.0.csv \
+    --mapping_bm25=data/mappings/bm25.json \
     --mapping_ss=data/mappings/semantic-similarity.json \
     ;
 """
@@ -17,6 +18,7 @@ from collections import Counter
 from utils import clean_text, label_to_word, word_to_label, load_json, set_random_seed
 from prompting import (
     gpt,
+    bloom,
     prompt_template1,
     prompt_template2,
     header1
@@ -34,17 +36,18 @@ def get_silver_label(
     id: str, 
     search_df: pd.DataFrame, 
     mapping_ss: dict,
-    mapping_dm25: dict,
+    mapping_bm25: dict,
     threshold_ss: float,
-    threshold_dm25: float,
+    threshold_bm25: float,
     topk: int, 
     id_col: str='id',
     label_col: str='labels',
     text_col: str='selftext',
     silver_label_technique: str='ss',
-    use_gpt: bool=False,
+    use_nlg: bool=False,
     prompt_header=None,
-    prompt_template=None
+    prompt_template=None,
+    nlg_pipeline=None
     ):
     silver_label = None
     matches = pd.DataFrame()
@@ -62,21 +65,21 @@ def get_silver_label(
         matches = search_df[search_df[id_col].isin(search_keys)]
         
     elif silver_label_technique == 'bm25':
-        if not mapping_dm25:
+        if not mapping_bm25:
             raise Exception(
-                "missing mapping_dm25"
+                "missing mapping_bm25"
             )
-        search_keys = [x[0] for x in mapping_dm25[id]][:topk]
+        search_keys = [x[0] for x in mapping_bm25[id]][:topk]
         #print(search_keys)
         matches = search_df[search_df[id_col].isin(search_keys)]
        
     elif silver_label_technique == 'ss+bm25':
-        if not mapping_ss or not mapping_dm25:
+        if not mapping_ss or not mapping_bm25:
             raise Exception(
-                f'Missing mapping_ss or mapping_dm25'
+                f'Missing mapping_ss or mapping_bm25'
             )
         search_keys1 = [x[0] for x in mapping_ss[id] if x[1] >= threshold_ss][:topk]
-        search_keys2 = [x[0] for x in mapping_ss[id] if x[1] >= threshold_dm25][:topk]
+        search_keys2 = [x[0] for x in mapping_bm25[id]][:topk]
         search_keys = list(set(search_keys1).intersection(search_keys2))
         #print(search_keys)
         matches = search_df[search_df[id_col].isin(search_keys)]
@@ -86,9 +89,9 @@ def get_silver_label(
     # --------------------------------------------------------------------------    
     if matches.shape[0] > 0:
         # --------------------------------------------------------------------------
-        # Silver Label using GPT
+        # Silver Label using GPT and BLOOM
         # --------------------------------------------------------------------------           
-        if use_gpt:
+        if use_nlg:
             examples = matches[text_col].values.tolist()
             groud_truth_labels = matches[label_col].values.tolist()
             
@@ -97,12 +100,18 @@ def get_silver_label(
                 disorder = label_to_word(label)
                 prompt += prompt_template(text, disorder)
             prompt += prompt_template(post,'')
+
+            # print(prompt)
             
-            # #print(prompt)
-            gpt_pred = gpt(prompt)
+            if nlg_pipeline == 'bloom':
+                text_generated = bloom(prompt)
+                logger.debug(f"bloom prediction: {text_generated}")
+            else:
+                text_generated = gpt(prompt)
+                logger.debug(f"gpt prediction: {text_generated}")
                                     
-            if gpt_pred:
-                silver_label = word_to_label(gpt_pred)
+            if text_generated:
+                silver_label = word_to_label(text_generated)
                 
         # --------------------------------------------------------------------------
         # Silver Label without GPT (Assigning Label of best match)
@@ -126,7 +135,7 @@ if __name__ == "__main__":
     parser.add_argument("--corpus_file")
     parser.add_argument("--outfile")
     parser.add_argument("--mapping_ss",default={})
-    parser.add_argument("--mapping_dm25",default={})
+    parser.add_argument("--mapping_bm25",default={})
     parser.add_argument("--config", default=const.CONFIG_SILVER_LABELLING)
     parser.add_argument("--concat_with_train", default=True)
     args = parser.parse_args()
@@ -136,7 +145,7 @@ if __name__ == "__main__":
     outfile = args.outfile
     config = args.config
     mapping_ss = args.mapping_ss
-    mapping_dm25 = args.mapping_dm25
+    mapping_bm25 = args.mapping_bm25
     
     df_train = pd.read_csv(datapath_train)
     df_corpus = pd.read_csv(datapath_corpus)
@@ -145,16 +154,17 @@ if __name__ == "__main__":
     id_col = const.ID_COL
     text_col = const.TEXT_COL
     silver_label_technique = config['technique'] or 'ss'
-    use_gpt = config['use_gpt']
+    use_nlg = config['use_nlg']
     topk = config['topk']
     threshold_ss = config['threshold_ss']
-    threshold_dm25 = config['threshold_dm25']
+    threshold_bm25 = config['threshold_bm25']
+    nlg_pipeline = config['nlg_pipeline'] or 'gpt'
     
     mapping_ss = load_json(mapping_ss) if mapping_ss!={} else mapping_ss
-    mapping_dm25 = load_json(mapping_dm25) if mapping_dm25!={} else mapping_dm25
+    mapping_bm25 = load_json(mapping_bm25) if mapping_bm25!={} else mapping_bm25
 
     prompt_header = header1
-    prompt_template = prompt_template2
+    prompt_template = prompt_template1
     
     
     # Fill label column if df_corpus with silver_labeld
@@ -173,14 +183,15 @@ if __name__ == "__main__":
                             text_col=text_col,
                             id_col=id_col,
                             mapping_ss=mapping_ss,
-                            mapping_dm25=mapping_dm25,
+                            mapping_bm25=mapping_bm25,
                             threshold_ss=threshold_ss,
-                            threshold_dm25=threshold_dm25,
+                            threshold_bm25=threshold_bm25,
                             topk=topk,
                             silver_label_technique=silver_label_technique,
-                            use_gpt=use_gpt,
+                            use_nlg=use_nlg,
                             prompt_header=prompt_header,
-                            prompt_template=prompt_template
+                            prompt_template=prompt_template,
+                            nlg_pipeline = nlg_pipeline
                         )
         df_corpus.at[i,silver_label_technique] = silver_label
         
