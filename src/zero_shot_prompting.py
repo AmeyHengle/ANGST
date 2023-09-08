@@ -134,9 +134,9 @@ if __name__ == "__main__":
                 temperature=0,
                 max_tokens=64,
                 api_key=API_KEY,
-                requests_per_minute=150,
+                requests_per_minute=100,
             )
         )
 
     prompt_data[f"results_{args.prompt_type}_{args.model}"] = predictions
-    prompt_data.to_csv(os.path.join(args.result_dir, f"zero_shot_{args.prompt_type}_{args.model}_{args.seed}.csv"), index=False)
+    prompt_data.to_csv(os.path.join(args.result_dir, f"zero_shot_{args.prompt_type}_{args.model}_seed_{args.seed}.csv"), index=False)
