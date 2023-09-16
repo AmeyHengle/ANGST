@@ -17,7 +17,7 @@ MODEL="gpt-4"
 #      'anxiety_mental_llm', 
 #      'depression_anxiety_comorbidity'
 # ]
-PROMPT_TYPE="depression_naive"
+PROMPT_TYPE="anxiety_hamilton"
 
 CUDA_VISIBLE_DEVICES=1 nohup python3 -u src/zero_shot_prompting.py \
 --seed $SEED \

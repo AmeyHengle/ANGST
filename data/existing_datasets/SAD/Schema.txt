@@ -1,0 +1,36 @@
+SAD - Schema (v1)
+================================
+Columns					Defintion
+
+sID					A sentence ID for keeping track of the sentences
+sentence				The input sentence from our prototype chatbot system, mTurk, or Inquire (LiveJournal)
+is_stressor				The final binary determination of whether the sentence is a stressful sentence
+is_stressor_conf			The percent of 5 raters who agree with the is_stressor determination
+is_covid				The final binary determination of whether the sentence is a covid-related sentence
+is_covid_conf				The percent of 5 rater who agree with the is_covid determination
+original_label				The original label assigned to the sentence either as labeled by the author or the scraping query
+top_label				The final determination of the most likely label based on a majority vote of 5 raters
+second_label				The final determination of the second most likely label based on a majority vote of 5 raters 
+avg_severity				The average severity rating out of 10 based on 5 raters
+median_severity				The median severity rating out of 10 based on 5 raters
+SD_severity				The standard deviation of the severity ratings out of 10 based on 5 raters
+Votes					The number of votes cast by the 5 raters out of a possible 2 votes for labels
+Financial Problem			Weight assigned to category based on the number of votes
+Other					Weight assigned to category based on the number of votes
+Everyday Decision Making		Weight assigned to category based on the number of votes
+Emotional Turmoil			Weight assigned to category based on the number of votes
+School	Family Issues			Weight assigned to category based on the number of votes
+Social Relationships			Weight assigned to category based on the number of votes
+Work					Weight assigned to category based on the number of votes
+Health, Fatigue, or Physical Pain	Weight assigned to category based on the number of votes	
+Source					Source of the sentence (Popbots Live, mTurk, mTurk_covid, Inquire, or InquireComposited)
+is_seed					Binary indicating the sentence was used in Inquire or InquireComposited web scraping
+
+================================
+Sources					Definition
+
+Popbots Live 				This data was extracted from live conversations with our prototype chatbot system
+mTurk					This data was sourced from Amazon Mechanical Turk prior to the COVID-19 pandemic in the US
+mTurk_covid				This data was sourced from Amazon Mechanical Turk during the COVID-19 pandemic in the US
+Inquire					This data was sourced by web scraping a repository of LiveJournal data available via the Inquire Tool using cosine-similarity, a seed sentence and its category, and human judgement
+InquireComposited			This data was sourced by web scraping a repository of LiveJournal data available via the Inquire Tool using cosine-similarity, an average of several seed sentences, and human judgement
