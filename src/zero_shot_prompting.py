@@ -94,6 +94,10 @@ if __name__ == "__main__":
     }[args.prompt_type]
     print(f"Using prompt {args.prompt_type}:\n{llm_prompt}\n\n")
     
+    if args.prompt_type in ['depression_mards', 'depression_phq9', 'anxiety_bai', 'anxiety_hamilton']:
+        max_tokens = 500
+    else:
+        max_tokens = 64
     prompt_data = pd.read_csv(args.data_path)
     # result_data = pd.read_csv(os.path.join(args.result_dir, f"zero_shot_{args.prompt_type}_{args.model}_seed_{args.seed}_old.csv"))
     # ids = result_data[result_data[f'results_{args.prompt_type}_{args.model}'].isnull()]['id'].tolist()
@@ -140,9 +144,9 @@ if __name__ == "__main__":
                 messages_list=input,
                 model=args.model,
                 temperature=0,
-                max_tokens=64,
+                max_tokens=max_tokens,
                 api_key=API_KEY,
-                requests_per_minute=25,
+                requests_per_minute=50,
             )
         )
 
