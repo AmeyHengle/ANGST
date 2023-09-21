@@ -22,9 +22,9 @@ from prompts import (
 
 # API_KEY = "OPENAI_API_KEY"
 # API_KEY = "ASYNC_OPENAI_API_KEY"
-# API_KEY = "SHRUTI_OPENAI_API_KEY"
+API_KEY = "SHRUTI_OPENAI_API_KEY"
 # API_KEY = "ANDY_OPENAI_API_KEY"
-API_KEY = "JOEL_OPENAI_API_KEY"
+# API_KEY = "JOEL_OPENAI_API_KEY"
 print(f"\nUsing {API_KEY}\n")
 
 
@@ -95,6 +95,10 @@ if __name__ == "__main__":
     print(f"Using prompt {args.prompt_type}:\n{llm_prompt}\n\n")
     
     prompt_data = pd.read_csv(args.data_path)
+    # result_data = pd.read_csv(os.path.join(args.result_dir, f"zero_shot_{args.prompt_type}_{args.model}_seed_{args.seed}_old.csv"))
+    # ids = result_data[result_data[f'results_{args.prompt_type}_{args.model}'].isnull()]['id'].tolist()
+    # prompt_data = prompt_data[prompt_data['id'].isin(ids)].reset_index(drop=True)
+    print(f"\nsize of prompt data: {prompt_data.shape}")
     
     if args.model in ['gpt-3.5-turbo', 'gpt-4', 'text-davinci-003', 'text-davinci-002', 'code-davinci-002']:
         
@@ -138,7 +142,7 @@ if __name__ == "__main__":
                 temperature=0,
                 max_tokens=64,
                 api_key=API_KEY,
-                requests_per_minute=100,
+                requests_per_minute=25,
             )
         )
 
