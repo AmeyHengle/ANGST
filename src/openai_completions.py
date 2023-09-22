@@ -15,7 +15,7 @@ from litellm import (
 
 ERROR_ERRORS_TO_MESSAGES = {
     error.InvalidRequestError: "OpenAI API Invalid Request: Prompt was filtered",
-    error.RateLimitError: "OpenAI API rate limit exceeded. Sleeping for 5 seconds.",
+    error.RateLimitError: "OpenAI API rate limit exceeded. Sleeping for 10 seconds.",
     error.APIConnectionError: "OpenAI API Connection Error: Error Communicating with OpenAI",  # noqa E501
     error.Timeout: "OpenAI APITimeout Error: OpenAI Timeout",
     error.ServiceUnavailableError: "OpenAI service unavailable error: {e}",
@@ -56,7 +56,7 @@ async def _throttled_openai_completion_acreate(
                     }
                 else:
                     logging.warning(ERROR_ERRORS_TO_MESSAGES[type(e)])
-                await asyncio.sleep(5)
+                await asyncio.sleep(10)
         return {"choices": [{"message": {"content": ""}}]}
 
 
@@ -139,8 +139,8 @@ async def _throttled_openai_chat_completion_acreate(
                     }
                 else:
                     logging.warning(ERROR_ERRORS_TO_MESSAGES[type(e)])
-                await asyncio.sleep(5)
-        return {"choices": [{"message": {"content": ""}}]}
+                await asyncio.sleep(10)
+        return {"choices": [{"message": {"content": "timelimit"}}]}
 
 
 
