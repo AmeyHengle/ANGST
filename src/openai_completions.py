@@ -140,7 +140,7 @@ async def _throttled_openai_chat_completion_acreate(
                 else:
                     logging.warning(ERROR_ERRORS_TO_MESSAGES[type(e)])
                 await asyncio.sleep(10)
-        return {"choices": [{"message": {"content": "timelimit"}}]}
+        return {"choices": [{"message": {"content": ""}}]}
 
 
 
