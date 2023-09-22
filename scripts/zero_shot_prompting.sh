@@ -3,8 +3,8 @@
 SEED=0
 DATA_PATH="./data/test/full_test.csv"
 RESULT_DIR="./results/zero_shot"
-MODEL="gpt-3.5-turbo"
-# MODEL="gpt-4"
+# MODEL="gpt-3.5-turbo"
+MODEL="gpt-4"
 
 # choices=[
 #     'depression_mards', 
