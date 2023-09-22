@@ -20,6 +20,7 @@ from prompts import (
     DEPRESSION_ANXIETY_COMORBIDITY,
 )
 
+
 API_KEY = "OPENAI_API_KEY"
 print(f"\nUsing {API_KEY}\n")
 
@@ -91,7 +92,7 @@ if __name__ == "__main__":
     print(f"Using prompt {args.prompt_type}:\n{llm_prompt}\n\n")
     
     if args.prompt_type in ['depression_mards', 'depression_phq9', 'anxiety_bai', 'anxiety_hamilton']:
-        max_tokens = 500
+        max_tokens = 200
     else:
         max_tokens = 64
     prompt_data = pd.read_csv(args.data_path)
@@ -102,6 +103,9 @@ if __name__ == "__main__":
         result_data = pd.read_csv(old_result_file)
         ids = result_data[result_data[f'results_{args.prompt_type}_{args.model}'].isnull()]['id'].tolist()
         prompt_data = prompt_data[prompt_data['id'].isin(ids)].reset_index(drop=True)
+        result_file = os.path.join(args.result_dir, f"zero_shot_{args.prompt_type}_{args.model}_seed_{args.seed}_new.csv")
+    else:
+        result_file = os.path.join(args.result_dir, f"zero_shot_{args.prompt_type}_{args.model}_seed_{args.seed}.csv")
     print(f"\nsize of prompt data: {prompt_data.shape}")
     
     if args.model in ['gpt-3.5-turbo', 'gpt-4', 'text-davinci-003', 'text-davinci-002', 'code-davinci-002']:
@@ -151,4 +155,4 @@ if __name__ == "__main__":
         )
 
     prompt_data[f"results_{args.prompt_type}_{args.model}"] = predictions
-    prompt_data.to_csv(os.path.join(args.result_dir, f"zero_shot_{args.prompt_type}_{args.model}_seed_{args.seed}.csv"), index=False)
+    prompt_data.to_csv(result_file, index=False)
