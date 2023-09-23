@@ -92,7 +92,7 @@ if __name__ == "__main__":
     print(f"Using prompt {args.prompt_type}:\n{llm_prompt}\n\n")
     
     if args.prompt_type in ['depression_mards', 'depression_phq9', 'anxiety_bai', 'anxiety_hamilton']:
-        max_tokens = 200
+        max_tokens = 256
     else:
         max_tokens = 64
     prompt_data = pd.read_csv(args.data_path)
