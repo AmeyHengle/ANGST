@@ -77,6 +77,29 @@ and answer the question.
 Determine if the poster of this post is depressed.
 '''
 
+DEPRESSION_ZEROSHOT = '''
+Given the below post, assess whether its content aligns with the criteria for clinical depression as defined in the DSM-5.
+Format your response as a JSON object {'depression':''} with values either 'yes' or 'no'.
+
+Post: {post}
+Assesement:
+'''
+
+DEPRESSION_FEWSHOT = '''
+Below are posts and their respective assessments based on the criteria for clinical depression as defined in the DSM-5.
+Format your response as a JSON object {'depression':''} with values either 'yes' or 'no'.
+
+Post: "Every night I lay in bed with intense fear and dread, and these feelings have persisted for a year."
+Assessment: {'depression': 'yes'}
+
+Post: "I have a cat named Whiskers and he loves playing with yarn."
+Assessment: {'depression': 'no'}
+
+Based on the above, assess the content of the following post:
+Post: "sample post"
+Assessment:
+'''
+
 # ----------------------------------------- ANXIETY PROMPTS -----------------------------------------
 
 ANXIETY_BAI = '''
@@ -186,13 +209,81 @@ and answer the question.
 Determine if the poster of this post has anxiety.
 '''
 
+ANXIETY_ZEROSHOT = '''
+Given the below post, assess whether its content aligns with the criteria for clinical anxiety as defined in the DSM-5.
+Format your response as a JSON object {'anxiety':''} with values either 'yes' or 'no'.
 
+Post: {post}
+Assesement: 
+'''
+
+ANXIETY_FEWSHOT = '''
+Below are posts and their respective assessments based on the criteria for clinical anxiety as defined in the DSM-5.
+Format your response as a JSON object {'anxiety':''} with values either 'yes' or 'no'.
+
+Post: "Every night I lay in bed with intense fear and dread, and these feelings have persisted for a year."
+Assessment: {'anxiety': 'yes'}
+
+Post: "I have a cat named Whiskers and he loves playing with yarn."
+Assessment: {'anxiety': 'no'}
+
+Based on the above, assess the content of the following post:
+Post: "sample post"
+Assessment:
+'''
 # ----------------------------------------- DEPRESSION-ANXIETY COMORBIDITY PROMPTS -----------------------------------------
 
-DEPRESSION_ANXIETY_COMORBIDITY = '''This person wrote this paragraph on social media. As a psychologist, read the post on social media
+DEPRESSION_ANXIETY_COMORBIDITY = """
+This person wrote this paragraph on social media. As a psychologist, read the post on social media
 and answer the following questions.
 1. Does the poster of this post have anxiety?
 2. Does if the poster of this post have depression?
-Format your response as a JSON object {'depression':'', 'anxiety': } with values strictly either 'yes' or 'no'.
+Format your response as a JSON object {'depression':'' 'anxiety': } with values strictly either 'yes' or 'no'.
 Do not return anything else apart from the json object.
+"""
+
+COMORBIDITY_ZEROSHOT_1 = """
+Given the below post, assess whether its content aligns with the criteria for clinical depression and clinical anxiety respectively as defined in the DSM-5.
+Format your response as a JSON object {'depression': '', 'anxiety': ''} with values either 'yes' or 'no'.
+
+Post: {post}
+Assesement: 
+"""
+
+COMORBIDITY_FEWSHOT_1 = """
+Below are posts and their respective assessments based on the criteria for clinical depression and clinical anxiety respectively as defined in the DSM-5.
+Format your response as a JSON object {'depression': '', 'anxiety': ''} with values either 'yes' or 'no'.
+
+Post: "Every night I lay in bed with intense fear and dread, and these feelings have persisted for a year."
+Assessment: {'depression': 'yes', 'anxiety': 'yes'}
+
+Post: "I have a cat named Whiskers and he loves playing with yarn."
+Assessment: {'depression': 'no', 'anxiety': 'no'}
+
+Based on the above, assess the content of the following post:
+Post: "sample post"
+Assessment:
+"""
+
+COMORBIDITY_ZEROSHOT_2 = """
+Given the below post, assess whether its content aligns with the criteria for either of clinical depression, clinical anxiety, comorbidity (depression and anxiety) or none as defined in the DSM-5.
+Format your response as a JSON object {'depression': '', 'anxiety': ''} with values either 'yes' or 'no'.
+
+Post: {post}
+Assesement: 
+"""
+
+COMORBIDITY_FEWSHOT_2 = '''
+Below are posts and their respective assessments based on the criteria for either of clinical depression, clinical anxiety, comorbidity (depression and anxiety) or none as defined in the DSM-5.
+Format your response as a JSON object {'depression': '', 'anxiety': ''} with values either 'yes' or 'no'.
+
+Post: "Every night I lay in bed with intense fear and dread, and these feelings have persisted for a year."
+Assessment: {'label': 'depression'}
+
+Post: "I have a cat named Whiskers and he loves playing with yarn."
+Assessment: {'label': 'none'}
+
+Based on the above, assess the content of the following post:
+Post: "sample post"
+Assessment:
 '''
