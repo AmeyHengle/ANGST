@@ -1,4 +1,4 @@
-zero_shot_depression_naive_gpt-3.5-turbo_seed_0,zero_shot_depression_naive_gpt-4_seed_0,zero_shot_depression_mards_gpt-3.5-turbo_seed_0_t=35,zero_shot_depression_mards_gpt-3.5-turbo_seed_0_t=20,zero_shot_depression_mards_gpt-4_seed_0_t=35,zero_shot_depression_mards_gpt-4_seed_0_t=20,zero_shot_depression_phq9_gpt-3.5-turbo_seed_0,zero_shot_depression_phq9_gpt-4_seed_0,d_true,id
+zero_shot_depression_naive_gpt-3.5-turbo_seed_0,zero_shot_depression_naive_gpt-4_seed_0,zero_shot_depression_mards_gpt-3.5-turbo_seed_0 t=35,zero_shot_depression_mards_gpt-3.5-turbo_seed_0 t=20,zero_shot_depression_mards_gpt-4_seed_0 t=35,zero_shot_depression_mards_gpt-4_seed_0 t=20,zero_shot_depression_phq9_gpt-3.5-turbo_seed_0,zero_shot_depression_phq9_gpt-4_seed_0,d_true,id
 1,1,1,1,1,1,0,0,1,8es6qn
 1,0,0,1,0,0,0,0,1,ar89pm
 1,1,0,1,0,1,1,1,1,5g4v1n
