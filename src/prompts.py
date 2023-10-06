@@ -100,6 +100,24 @@ Post: "sample post"
 Assessment:
 '''
 
+DEPRESSION_FEWSHOT_LANGCHAIN = {
+"few_shot_prefix": '''
+Below are posts and their respective assessments based on the criteria for clinical depression as defined in the DSM-5.
+Format your response as a JSON object {'depression': ''} with values either 'yes' or 'no'.
+'''
+,
+"prompt_template": lambda post, label: f'''
+Post: {post}
+Assesement: {label}
+'''
+,
+"few_shot_suffix": lambda post: f'''
+Based on the above, assess the content of the following post:
+Post: {post}
+Assessment:
+'''
+}
+
 # ----------------------------------------- ANXIETY PROMPTS -----------------------------------------
 
 ANXIETY_BAI = '''
@@ -231,6 +249,24 @@ Based on the above, assess the content of the following post:
 Post: "sample post"
 Assessment:
 '''
+
+ANXIETY_FEWSHOT_LANGCHAIN = {
+"few_shot_prefix": '''
+Below are posts and their respective assessments based on the criteria for clinical anxiety as defined in the DSM-5.
+Format your response as a JSON object {'anxiety':''} with values either 'yes' or 'no'.
+'''
+,
+"prompt_template": lambda post, label: f'''
+Post: {post}
+Assesement: {label}
+'''
+,
+"few_shot_suffix": lambda post: f'''
+Based on the above, assess the content of the following post:
+Post: {post}
+Assessment:
+'''
+}
 # ----------------------------------------- DEPRESSION-ANXIETY COMORBIDITY PROMPTS -----------------------------------------
 
 DEPRESSION_ANXIETY_COMORBIDITY = """
@@ -287,3 +323,21 @@ Based on the above, assess the content of the following post:
 Post: "sample post"
 Assessment:
 '''
+
+COMORBIDITY_FEWSHOT_LANGCHAIN = {
+"few_shot_prefix": '''
+Below are posts and their respective assessments based on the criteria for clinical depression and clinical anxiety respectively as defined in the DSM-5.
+Format your response as a JSON object {'depression': '', 'anxiety': ''} with values either 'yes' or 'no'.
+'''
+,
+"prompt_template": lambda post, label: f'''
+Post: {post}
+Assesement: {label}
+'''
+,
+"few_shot_suffix": lambda post: f'''
+Based on the above, assess the content of the following post:
+Post: {post}
+Assessment:
+'''
+}
