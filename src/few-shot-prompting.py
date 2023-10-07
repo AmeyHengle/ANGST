@@ -176,8 +176,8 @@ if __name__ == "__main__":
 """
 Usage:
 python src/few-shot-prompting.py \
-    anxiety \
-    4 \
-    data/few_shot_prompts/anxiety.csv \
+    comorbidity \
+    8 \
+    data/few_shot_prompts/comorbidity_8_ise.csv \
     ;
 """
