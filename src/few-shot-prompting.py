@@ -11,12 +11,13 @@ from prompts import DEPRESSION_FEWSHOT_LANGCHAIN, ANXIETY_FEWSHOT_LANGCHAIN, COM
 text_col = 'text'
 id_col = 'id'
 
-test_path = '/home/ameyh/mental-health-comorbitidy-classification/data/test/full_test.csv'
-corpus_path = '/home/ameyh/mental-health-comorbitidy-classification/data/silver_data/silver_labels_gpt.csv'
-mapping_path_depression = "/home/ameyh/mental-health-comorbitidy-classification/data/mappings/semantic-similarity-depression.json"
-mapping_path_anxiety = "/home/ameyh/mental-health-comorbitidy-classification/data/mappings/semantic-similarity-anxiety.json"
-mapping_path_comorbid = "/home/ameyh/mental-health-comorbitidy-classification/data/mappings/semantic-similarity-comorbid.json"
-mapping_path_normal = "/home/ameyh/mental-health-comorbitidy-classification/data/mappings/semantic-similarity-normal.json"
+sys.path.insert(0,'')
+test_path = 'data/test/full_test.csv'
+corpus_path = 'data/silver_data/silver_labels_gpt_3.5_turbo.csv'
+mapping_path_depression = "data/mappings/semantic-similarity-depression.json"
+mapping_path_anxiety = "data/mappings/semantic-similarity-anxiety.json"
+mapping_path_comorbid = "data/mappings/semantic-similarity-comorbid.json"
+mapping_path_normal = "data/mappings/semantic-similarity-normal.json"
 
 
 df_test = pd.read_csv(test_path).reset_index()
@@ -48,7 +49,6 @@ def merge_dicts(dict1, dict2):
 df_corpus['depression_label'] = df_corpus['depression_label'].apply(lambda label: {"depression": "yes"} if label == 1 else {"depression": "no"})
 df_corpus['anxiety_label'] = df_corpus['anxiety_label'].apply(lambda label: {"anxiety": "yes"} if label == 1 else {"anxiety": "no"})
 df_corpus['comorbidity_label'] = df_corpus.apply(lambda row: merge_dicts(row['depression_label'],row['anxiety_label']), axis=1)
-df_corpus['comorbidity_label'].value_counts()
 
 
 def generate_few_shot_prompts(topk=4, task_type='depression'):
@@ -175,9 +175,9 @@ if __name__ == "__main__":
     
 """
 Usage:
-python few-shot-prompting.py \
-    comorbidity \
+python src/few-shot-prompting.py \
+    anxiety \
     4 \
-    /home/ameyh/mental-health-comorbitidy-classification/predictions/comorbidy_zeroshot.csv \
+    data/few_shot_prompts/anxiety.csv \
     ;
 """
