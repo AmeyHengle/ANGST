@@ -3,8 +3,8 @@
 SEED=0
 DATA_PATH="./data/test/full_test.csv"
 RESULT_DIR="./results/zero_shot"
-MODEL="gpt-3.5-turbo"
-# MODEL="gpt-4"
+# MODEL="gpt-3.5-turbo"
+MODEL="gpt-4"
 
 # choices=[
 #     'depression_mards', 
@@ -17,7 +17,7 @@ MODEL="gpt-3.5-turbo"
 #      'anxiety_mental_llm', 
 #      'depression_anxiety_comorbidity'
 # ]
-PROMPT_TYPE="depression_mards"
+PROMPT_TYPE="anxiety_bai"
 
 CUDA_VISIBLE_DEVICES=1 nohup python3 -u src/prompting_zero_shot.py \
 --seed $SEED \

@@ -278,13 +278,6 @@ Format your response as a JSON object {'depression':'' 'anxiety': } with values 
 Do not return anything else apart from the json object.
 """
 
-COMORBIDITY_ZEROSHOT_1 = """
-Given the below post, assess whether its content aligns with the criteria for clinical depression and clinical anxiety respectively as defined in the DSM-5.
-Format your response as a JSON object {'depression': '', 'anxiety': ''} with values either 'yes' or 'no'.
-
-Post: {post}
-Assesement: 
-"""
 
 COMORBIDITY_FEWSHOT_1 = """
 Below are posts and their respective assessments based on the criteria for clinical depression and clinical anxiety respectively as defined in the DSM-5.
@@ -301,13 +294,6 @@ Post: "sample post"
 Assessment:
 """
 
-COMORBIDITY_ZEROSHOT_2 = """
-Given the below post, assess whether its content aligns with the criteria for either of clinical depression, clinical anxiety, comorbidity (depression and anxiety) or none as defined in the DSM-5.
-Format your response as a JSON object {'depression': '', 'anxiety': ''} with values either 'yes' or 'no'.
-
-Post: {post}
-Assesement: 
-"""
 
 COMORBIDITY_FEWSHOT_2 = '''
 Below are posts and their respective assessments based on the criteria for either of clinical depression, clinical anxiety, comorbidity (depression and anxiety) or none as defined in the DSM-5.

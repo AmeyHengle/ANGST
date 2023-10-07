@@ -92,7 +92,7 @@ if __name__ == "__main__":
     print(f"Using prompt {args.prompt_type}:\n{llm_prompt}\n\n")
     
     if args.prompt_type in ['depression_mards', 'depression_phq9', 'anxiety_bai', 'anxiety_hamilton']:
-        max_tokens = 256
+        max_tokens = 1024
     else:
         max_tokens = 64
     prompt_data = pd.read_csv(args.data_path)
@@ -150,7 +150,7 @@ if __name__ == "__main__":
                 temperature=0,
                 max_tokens=max_tokens,
                 api_key=API_KEY,
-                requests_per_minute=50,
+                requests_per_minute=25,
             )
         )
 
