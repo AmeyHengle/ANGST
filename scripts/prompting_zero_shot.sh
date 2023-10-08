@@ -2,7 +2,7 @@
 
 DATA_PATH="./data/test/full_test.csv"
 RESULT_DIR="./results/zero_shot"
-VERSION=2
+VERSION=3
 
 # MODEL="gpt-3.5-turbo"
 MODEL="gpt-4"
