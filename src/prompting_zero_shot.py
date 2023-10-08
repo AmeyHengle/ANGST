@@ -20,8 +20,10 @@ from prompts import (
     DEPRESSION_ANXIETY_COMORBIDITY,
 )
 
-
-API_KEY = "OPENAI_API_KEY"
+# API_KEY = "OPENAI_API_KEY"
+# API_KEY = "SHRUTI_OPENAI_API_KEY"
+API_KEY = "ANDY_OPENAI_API_KEY"
+# API_KEY = "JOEL_OPENAI_API_KEY"
 print(f"\nUsing {API_KEY}\n")
 
 
@@ -52,6 +54,12 @@ def parse_config():
         default="depression_naive",
         choices=['depression_mards', 'depression_phq9', 'depression_naive', 'depression_mental_llm', 'anxiety_bai', 'anxiety_hamilton', 'anxiety_naive', 'anxiety_mental_llm', 'depression_anxiety_comorbidity'],
         help='Type of prompt to use.'
+    )
+    parser.add_argument(
+        '--version', 
+        type=int, 
+        default=1,
+        help="Version of data"
     )
     parser.add_argument(
         '--result_dir', 
@@ -97,16 +105,17 @@ if __name__ == "__main__":
         max_tokens = 64
     prompt_data = pd.read_csv(args.data_path)
     
-    old_result_file = os.path.join(args.result_dir, f"zero_shot_{args.prompt_type}_{args.model}_seed_{args.seed}_old.csv")
+    old_result_file = os.path.join(args.result_dir, f"zero_shot_{args.prompt_type}_{args.model}_seed_{args.seed}_v{args.version}_old.csv")
     if os.path.isfile(old_result_file):
         print("Found existing results")
         result_data = pd.read_csv(old_result_file)
         ids = result_data[result_data[f'results_{args.prompt_type}_{args.model}'].isnull()]['id'].tolist()
         prompt_data = prompt_data[prompt_data['id'].isin(ids)].reset_index(drop=True)
-        result_file = os.path.join(args.result_dir, f"zero_shot_{args.prompt_type}_{args.model}_seed_{args.seed}_new.csv")
+        result_file = os.path.join(args.result_dir, f"zero_shot_{args.prompt_type}_{args.model}_seed_{args.seed}_v{args.version}_new.csv")
     else:
-        result_file = os.path.join(args.result_dir, f"zero_shot_{args.prompt_type}_{args.model}_seed_{args.seed}.csv")
+        result_file = os.path.join(args.result_dir, f"zero_shot_{args.prompt_type}_{args.model}_seed_{args.seed}_v{args.version}.csv")
     print(f"\nsize of prompt data: {prompt_data.shape}")
+    print(f"\nresult_file: {result_file}")
     
     if args.model in ['gpt-3.5-turbo', 'gpt-4', 'text-davinci-003', 'text-davinci-002', 'code-davinci-002']:
         
