@@ -12,9 +12,9 @@ from prompts import CHAT_MODEL_ROLE
    
 
 # API_KEY = "OPENAI_API_KEY"
-# API_KEY = "SHRUTI_OPENAI_API_KEY"
+API_KEY = "SHRUTI_OPENAI_API_KEY"
 # API_KEY = "ANDY_OPENAI_API_KEY"
-API_KEY = "JOEL_OPENAI_API_KEY"
+# API_KEY = "JOEL_OPENAI_API_KEY"
 print(f"\nUsing {API_KEY}\n")
 
 
@@ -87,7 +87,7 @@ if __name__ == "__main__":
         result_data = pd.read_csv(old_result_file)
         ids = result_data[result_data[f'results_{args.prompt_type}_{args.model}'].isnull()]['id'].tolist()
         prompt_data = prompt_data[prompt_data['id'].isin(ids)].reset_index(drop=True)
-        esult_file = os.path.join(args.result_dir, f"few_shot_{args.prompt_type}_{args.model}_num_examples_{args.num_examples_per_label}_seed_{args.seed}_new.csv")
+        result_file = os.path.join(args.result_dir, f"few_shot_{args.prompt_type}_{args.model}_num_examples_{args.num_examples_per_label}_seed_{args.seed}_new.csv")
     else:
         result_file = os.path.join(args.result_dir, f"few_shot_{args.prompt_type}_{args.model}_num_examples_{args.num_examples_per_label}_seed_{args.seed}.csv")
     print(f"\nsize of prompt data: {prompt_data.shape}")
@@ -127,7 +127,7 @@ if __name__ == "__main__":
                 temperature=0,
                 max_tokens=max_tokens,
                 api_key=API_KEY,
-                requests_per_minute=25,
+                requests_per_minute=30,
             )
         )
 
