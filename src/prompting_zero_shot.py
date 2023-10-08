@@ -11,18 +11,18 @@ from prompts import (
     CHAT_MODEL_ROLE,
     DEPRESSION_MARDS,
     DEPRESSION_PHQ9,
-    DEPRESSION_NAIVE,
+    DEPRESSION,
     DEPRESSION_MENTAL_LLM,
     ANXIETY_BAI,
     ANXIETY_HAMILTON,
-    ANXIETY_NAIVE,
+    ANXIETY,
     ANXIETY_MENTAL_LLM,
     DEPRESSION_ANXIETY_COMORBIDITY,
 )
 
 # API_KEY = "OPENAI_API_KEY"
-# API_KEY = "SHRUTI_OPENAI_API_KEY"
-API_KEY = "ANDY_OPENAI_API_KEY"
+API_KEY = "SHRUTI_OPENAI_API_KEY"
+# API_KEY = "ANDY_OPENAI_API_KEY"
 # API_KEY = "JOEL_OPENAI_API_KEY"
 print(f"\nUsing {API_KEY}\n")
 
@@ -51,8 +51,8 @@ def parse_config():
     parser.add_argument(
         '--prompt_type', 
         type=str, 
-        default="depression_naive",
-        choices=['depression_mards', 'depression_phq9', 'depression_naive', 'depression_mental_llm', 'anxiety_bai', 'anxiety_hamilton', 'anxiety_naive', 'anxiety_mental_llm', 'depression_anxiety_comorbidity'],
+        default="depression",
+        choices=['depression_mards', 'depression_phq9', 'depression', 'depression_mental_llm', 'anxiety_bai', 'anxiety_hamilton', 'anxiety', 'anxiety_mental_llm', 'depression_anxiety_comorbidity'],
         help='Type of prompt to use.'
     )
     parser.add_argument(
@@ -89,11 +89,11 @@ if __name__ == "__main__":
     llm_prompt = {
         'depression_mards': DEPRESSION_MARDS, 
          'depression_phq9': DEPRESSION_PHQ9, 
-         'depression_naive': DEPRESSION_NAIVE, 
+         'depression': DEPRESSION, 
          'depression_mental_llm': DEPRESSION_MENTAL_LLM, 
          'anxiety_bai': ANXIETY_BAI, 
          'anxiety_hamilton': ANXIETY_HAMILTON, 
-         'anxiety_naive': ANXIETY_NAIVE,
+         'anxiety': ANXIETY,
          'anxiety_mental_llm': ANXIETY_MENTAL_LLM,
          'depression_anxiety_comorbidity': DEPRESSION_ANXIETY_COMORBIDITY,
     }[args.prompt_type]
