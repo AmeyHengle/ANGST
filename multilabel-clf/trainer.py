@@ -207,6 +207,7 @@ def training_pipeline(
         output_dir=output_dir,
         evaluation_strategy="epoch",
         save_strategy="epoch",
+        save_total_limit = 1,
         greater_is_better=True,
         learning_rate=learning_rate,
         per_device_train_batch_size=batch_size,
@@ -347,7 +348,7 @@ python trainer.py \
     --max_length 12 \
     --batch_size 128 \
     --learning_rate 2e-5 \
-    --num_epochs 1 \
+    --num_epochs 30 \
     --metric_name f1 \
     --random_state 42 \
 ;

@@ -169,6 +169,7 @@ def training_pipeline(
         output_dir=output_dir,
         evaluation_strategy="epoch",
         save_strategy="epoch",
+        save_total_limit = 1,
         greater_is_better=True,
         learning_rate=learning_rate,
         per_device_train_batch_size=batch_size,
