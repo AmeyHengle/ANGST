@@ -61,7 +61,7 @@ Post:
 ```
 '''
 
-DEPRESSION_NAIVE = '''
+DEPRESSION = '''
 Assess whether the content of the post delimited by triple backticks aligns with the criteria for clinical depression as defined in DSM-5:
 Format your response as a JSON object {'depression':''} with values strictly either 'yes' or 'no'.
 Do not return anything else apart from the json object.
@@ -210,7 +210,7 @@ Post:
 
 
 
-ANXIETY_NAIVE = '''
+ANXIETY = '''
 Assess whether the content of the post delimited by triple backticks aligns with the criteria for clinical anxiety as defined in DSM-5:
 Format your response as a JSON object {'anxiety':''} with values strictly either 'yes' or 'no'.
 Do not return anything else apart from the json object.
