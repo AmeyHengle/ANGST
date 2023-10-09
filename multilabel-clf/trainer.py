@@ -58,7 +58,6 @@ def training_pipeline(model_name, text_col, max_length, batch_size, num_epochs, 
     df_test['depression'] = df_test['disorder'].apply(lambda x: True if 'depressive_disorder' in x else False)
     df_test['anxiety'] = df_test['disorder'].apply(lambda x: True if 'anxiety' in x else False)
 
-
     df_train_dict = {
         'id': df_train['id'].values.tolist(),
         'text': df_train['text'].values.tolist(),
