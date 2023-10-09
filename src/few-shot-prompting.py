@@ -18,7 +18,7 @@ mapping_path_depression = "data/mappings/semantic-similarity-depression.json"
 mapping_path_anxiety = "data/mappings/semantic-similarity-anxiety.json"
 mapping_path_comorbid = "data/mappings/semantic-similarity-comorbid.json"
 mapping_path_normal = "data/mappings/semantic-similarity-normal.json"
-
+mapping_path_semantic_similiary = "data/mappings/semantic-similarity-only.json"
 
 df_test = pd.read_csv(test_path).reset_index()
 df_corpus = pd.read_csv(corpus_path).reset_index()
@@ -26,7 +26,7 @@ mapping_depression = json.load(open(mapping_path_depression))
 mapping_anxiety = json.load(open(mapping_path_anxiety))
 mapping_comorbid = json.load(open(mapping_path_comorbid))
 mapping_normal = json.load(open(mapping_path_normal))
-
+mapping_semantic_similiary = json.load(open(mapping_path_semantic_similiary))
 
 print('-'*50)
 print(f"Test set size: {df_test.shape[0]}")
@@ -35,6 +35,8 @@ print(f"Total mapping (Depression): {len(mapping_depression)}")
 print(f"Total mapping (Anxiety): {len(mapping_anxiety)}")
 print(f"Total mapping (Comorbid): {len(mapping_comorbid)}")
 print(f"Total mapping (Normal): {len(mapping_normal)}")
+print(f"Total mapping (Semantic Similarity): {len(mapping_semantic_similiary)}")
+
 print('-'*50)
 
 
@@ -51,19 +53,26 @@ df_corpus['anxiety_label'] = df_corpus['anxiety_label'].apply(lambda label: {"an
 df_corpus['comorbidity_label'] = df_corpus.apply(lambda row: merge_dicts(row['depression_label'],row['anxiety_label']), axis=1)
 
 
-def generate_few_shot_prompts(topk=4, task_type='depression'):
+def generate_few_shot_prompts(topk=4, task_type='depression', use_semantic_similarity_only=False):
     prompts = []
+    exemplar_labels = []
     
     for i in tqdm(range(df_test.shape[0]), desc=f"Generating few shot prompts"):
         few_shot_examples = []
+        few_shot_labels = []
         input_post = df_test.iloc[i][text_col]
         
-        if task_type == 'depression':        
-            exemplars_d = mapping_depression[df_test.iloc[i][id_col]]
-            exemplar_ids_d = [i[0] for i in exemplars_d][:int(topk/2)]
-            exemplars_n = mapping_normal[df_test.iloc[i][id_col]]
-            exemplar_ids_n = [i[0] for i in exemplars_n][:int(topk/2)]
-            exemplar_ids = exemplar_ids_d + exemplar_ids_n
+        if task_type == 'depression':
+            if use_semantic_similarity_only:
+                exemplars = mapping_semantic_similiary[df_test.iloc[i][id_col]]
+                exemplar_ids = [i[0] for i in exemplars][:int(topk)]
+
+            else:
+                exemplars_d = mapping_depression[df_test.iloc[i][id_col]]
+                exemplar_ids_d = [i[0] for i in exemplars_d][:int(topk/2)]
+                exemplars_n = mapping_normal[df_test.iloc[i][id_col]]
+                exemplar_ids_n = [i[0] for i in exemplars_n][:int(topk/2)]
+                exemplar_ids = exemplar_ids_d + exemplar_ids_n
     
             exemplar_df = df_corpus[df_corpus[id_col].isin(exemplar_ids)]
             exemplar_df = exemplar_df.sample(exemplar_df.shape[0])
@@ -71,7 +80,7 @@ def generate_few_shot_prompts(topk=4, task_type='depression'):
             for j, row in exemplar_df.iterrows():
                 exemplar_post = row['text']
                 exemplar_label = row['depression_label']
-                
+                few_shot_labels.append(exemplar_label)
                 few_shot_examples.append(
                     {
                         'post': exemplar_post,
@@ -82,14 +91,18 @@ def generate_few_shot_prompts(topk=4, task_type='depression'):
             prompt_template = DEPRESSION_FEWSHOT_LANGCHAIN['prompt_template']
             few_shot_prefix = DEPRESSION_FEWSHOT_LANGCHAIN['few_shot_prefix']
             few_shot_suffix = DEPRESSION_FEWSHOT_LANGCHAIN['few_shot_suffix'](input_post)
-            
-        
+                  
         elif task_type == 'anxiety':
-            exemplars_a = mapping_anxiety[df_test.iloc[i][id_col]]
-            exemplar_ids_a = [i[0] for i in exemplars_a][:int(topk/2)]
-            exemplars_n = mapping_normal[df_test.iloc[i][id_col]]
-            exemplar_ids_n = [i[0] for i in exemplars_n][:int(topk/2)]
-            exemplar_ids = exemplar_ids_a + exemplar_ids_n
+            if use_semantic_similarity_only:
+                exemplars = mapping_semantic_similiary[df_test.iloc[i][id_col]]
+                exemplar_ids = [i[0] for i in exemplars][:int(topk)]
+
+            else:
+                exemplars_a = mapping_anxiety[df_test.iloc[i][id_col]]
+                exemplar_ids_a = [i[0] for i in exemplars_a][:int(topk/2)]
+                exemplars_n = mapping_normal[df_test.iloc[i][id_col]]
+                exemplar_ids_n = [i[0] for i in exemplars_n][:int(topk/2)]
+                exemplar_ids = exemplar_ids_a + exemplar_ids_n
 
             exemplar_df = df_corpus[df_corpus[id_col].isin(exemplar_ids)]
             exemplar_df = exemplar_df.sample(exemplar_df.shape[0])
@@ -97,32 +110,36 @@ def generate_few_shot_prompts(topk=4, task_type='depression'):
             for j, row in exemplar_df.iterrows():
                 exemplar_post = row['text']
                 exemplar_label = row['anxiety_label']
-                
+                few_shot_labels.append(exemplar_label)
                 few_shot_examples.append(
                     {
                         'post': exemplar_post,
                         'label': exemplar_label,
                     }
                 )
-                
+            
             prompt_template = ANXIETY_FEWSHOT_LANGCHAIN['prompt_template']
             few_shot_prefix = ANXIETY_FEWSHOT_LANGCHAIN['few_shot_prefix']
-            few_shot_suffix = ANXIETY_FEWSHOT_LANGCHAIN['few_shot_suffix'](input_post)
-            
+            few_shot_suffix = ANXIETY_FEWSHOT_LANGCHAIN['few_shot_suffix'](input_post)              
             
         elif task_type == 'comorbidity':
             if topk < 4: 
                 topk = 4
 
-            exemplars_d = mapping_depression[df_test.iloc[i][id_col]]
-            exemplar_ids_d = [i[0] for i in exemplars_d][:int(topk/4)]
-            exemplars_a = mapping_anxiety[df_test.iloc[i][id_col]]
-            exemplar_ids_a = [i[0] for i in exemplars_a][:int(topk/4)]
-            exemplars_c = mapping_comorbid[df_test.iloc[i][id_col]]
-            exemplar_ids_c = [i[0] for i in exemplars_c][:int(topk/4)]
-            exemplars_n = mapping_normal[df_test.iloc[i][id_col]]
-            exemplar_ids_n = [i[0] for i in exemplars_n][:int(topk/4)]
-            exemplar_ids = exemplar_ids_d + exemplar_ids_a + exemplar_ids_c + exemplar_ids_n
+            if use_semantic_similarity_only:
+                exemplars = mapping_semantic_similiary[df_test.iloc[i][id_col]]
+                exemplar_ids = [i[0] for i in exemplars][:int(topk)]
+
+            else:
+                exemplars_d = mapping_depression[df_test.iloc[i][id_col]]
+                exemplar_ids_d = [i[0] for i in exemplars_d][:int(topk/4)]
+                exemplars_a = mapping_anxiety[df_test.iloc[i][id_col]]
+                exemplar_ids_a = [i[0] for i in exemplars_a][:int(topk/4)]
+                exemplars_c = mapping_comorbid[df_test.iloc[i][id_col]]
+                exemplar_ids_c = [i[0] for i in exemplars_c][:int(topk/4)]
+                exemplars_n = mapping_normal[df_test.iloc[i][id_col]]
+                exemplar_ids_n = [i[0] for i in exemplars_n][:int(topk/4)]
+                exemplar_ids = exemplar_ids_d + exemplar_ids_a + exemplar_ids_c + exemplar_ids_n
 
             exemplar_df = df_corpus[df_corpus[id_col].isin(exemplar_ids)]
             exemplar_df = exemplar_df.sample(exemplar_df.shape[0])
@@ -130,36 +147,38 @@ def generate_few_shot_prompts(topk=4, task_type='depression'):
             for j, row in exemplar_df.iterrows():
                 exemplar_post = row['text']
                 exemplar_label = row['comorbidity_label']
-                
+                few_shot_labels.append(exemplar_label)
                 few_shot_examples.append(
                     {
                         'post': exemplar_post,
                         'label': exemplar_label,
                     }
                 )
-                
+
             prompt_template = COMORBIDITY_FEWSHOT_LANGCHAIN['prompt_template']
             few_shot_prefix = COMORBIDITY_FEWSHOT_LANGCHAIN['few_shot_prefix']
             few_shot_suffix = COMORBIDITY_FEWSHOT_LANGCHAIN['few_shot_suffix'](input_post)
-                
             
         few_shot_examples = ''.join(prompt_template(x['post'], x['label']) for x in few_shot_examples)
         few_shot_prompt = ''.join([few_shot_prefix, few_shot_examples, few_shot_suffix])        
         prompts.append(few_shot_prompt)
-
-    return prompts
+        exemplar_labels.append(few_shot_labels)
+        
+    return prompts, exemplar_labels
 
 
 import argparse
 
-def main(task_type, topk, outfile):
+def main(task_type, topk, outfile, use_semantic_similarity_only):
     print('-'*50)
     print(f"Task Type: {task_type}")
     print(f"Top K: {topk}")
     print(f"Output File: {outfile}")
     print('-'*50)
     
-    df_test[f'few_shot_prompt_{task_type}'] = generate_few_shot_prompts(topk, task_type)
+    prompts, exemplar_labels = generate_few_shot_prompts(topk, task_type, use_semantic_similarity_only)
+    df_test[f'few_shot_prompt_{task_type}'] = prompts
+    df_test[f'exemplar_labels_{task_type}'] = exemplar_labels
     df_test.to_csv(outfile, index=False)
 
 
@@ -168,16 +187,18 @@ if __name__ == "__main__":
     parser.add_argument("task_type", type=str, default="depression" , help="(depression | anxiety | comorbidity)")
     parser.add_argument("topk", type=int, default=4, help="Top K value.")
     parser.add_argument("outfile", type=str, help="Path to output file.")
+    parser.add_argument("use_semantic_similarity_only", type=bool, help="True or False")
 
     args = parser.parse_args()
-    main(args.task_type, args.topk, args.outfile)
+    main(args.task_type, args.topk, args.outfile, args.use_semantic_similarity_only)
     
     
 """
 Usage:
 python src/few-shot-prompting.py \
     comorbidity \
-    8 \
-    data/few_shot_prompts/comorbidity_8_ise.csv \
+    4 \
+    data/few_shot_prompts/comorbidity_ss_only_num_examples_per_label_4.csv \
+    True \
     ;
 """
