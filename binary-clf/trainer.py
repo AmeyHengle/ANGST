@@ -59,19 +59,11 @@ def free_memory():
 def load_and_preprocess_dataset(
     random_state, model_name, text_col, label_col, max_length
 ):
-    # 1. Load the given csv dataset
-    df_silver_labels = pd.read_csv(
-        "../data/silver_data/silver_labels_gpt_3.5_turbo.csv"
+    df_train = pd.read_csv("../data/silver_data/silver_labels_gpt_3.5_turbo_train.csv")
+    df_val = pd.read_csv(
+        "../data/silver_data/silver_labels_gpt_3.5_turbo_validation.csv"
     )
-
-    # Splitting data into train and validation
-    df_train, df_val = split_dataset(
-        df_silver_labels,
-        id_col="id",
-        stratify_col=label_col,
-        test_size=0.1,
-        random_state=random_state,
-    )
+    logger.debug(f"Train: {df_train.shape}\nValidation: {df_val.shape}\n")
 
     # Tokenizing and converting train and validation datasets separately
     train_dataset = _tokenize_and_convert(
@@ -169,7 +161,7 @@ def training_pipeline(
         output_dir=output_dir,
         evaluation_strategy="epoch",
         save_strategy="epoch",
-        save_total_limit = 1,
+        save_total_limit=1,
         greater_is_better=True,
         learning_rate=learning_rate,
         per_device_train_batch_size=batch_size,

@@ -57,14 +57,11 @@ def training_pipeline(
 ):
     # Data loading
 
-    df_main = pd.read_csv("../data/silver_data/silver_labels_gpt_3.5_turbo.csv")
-    df_train, df_val = split_dataset(
-        df_main,
-        id_col="id",
-        stratify_col="silver_label",
-        test_size=0.1,
-        random_state=random_state,
+    df_train = pd.read_csv("../data/silver_data/silver_labels_gpt_3.5_turbo_train.csv")
+    df_val = pd.read_csv(
+        "../data/silver_data/silver_labels_gpt_3.5_turbo_validation.csv"
     )
+    logger.debug(f"Train: {df_train.shape}\nValidation: {df_val.shape}\n")
 
     df_train["silver_label"].value_counts()
     df_train["depression"] = df_train["silver_label"].apply(
@@ -125,7 +122,7 @@ def training_pipeline(
     id2label = {idx: label for idx, label in enumerate(labels)}
     label2id = {label: idx for idx, label in enumerate(labels)}
 
-    print(f"Labels: {labels}")
+    logger.debug(f"Labels: {labels}")
 
     # ----------------------------------------------------------------------------------------- #
 
@@ -207,7 +204,7 @@ def training_pipeline(
         output_dir=output_dir,
         evaluation_strategy="epoch",
         save_strategy="epoch",
-        save_total_limit = 1,
+        save_total_limit=1,
         greater_is_better=True,
         learning_rate=learning_rate,
         per_device_train_batch_size=batch_size,
@@ -345,10 +342,10 @@ if __name__ == "__main__":
 python trainer.py \
     --model_name AIMH/mental-bert-base-cased \
     --text_col text \
-    --max_length 12 \
-    --batch_size 128 \
+    --max_length 1 \
+    --batch_size 1 \
     --learning_rate 2e-5 \
-    --num_epochs 30 \
+    --num_epochs 1 \
     --metric_name f1 \
     --random_state 42 \
 ;
