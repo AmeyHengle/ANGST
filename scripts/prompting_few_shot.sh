@@ -12,7 +12,7 @@ MODEL="gpt-3.5-turbo"
 #      'anxiety', 
 #      'comorbidity'
 # ]
-PROMPT_TYPE="depression"
+PROMPT_TYPE="comorbidity"
 
 DATA_PATH=./data/few_shot_prompts/${PROMPT_TYPE}_num_examples_ss_${NUM_EXAMPLES_PER_LABEL}.csv
 
