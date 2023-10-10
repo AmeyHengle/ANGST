@@ -269,7 +269,7 @@ Assessment:
 }
 # ----------------------------------------- DEPRESSION-ANXIETY COMORBIDITY PROMPTS -----------------------------------------
 
-DEPRESSION_ANXIETY_COMORBIDITY = """
+COMORBIDITY = """
 This person wrote this paragraph on social media. As a psychologist, read the post on social media
 and answer the following questions.
 1. Does the poster of this post have anxiety?

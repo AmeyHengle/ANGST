@@ -17,7 +17,7 @@ from prompts import (
     ANXIETY_HAMILTON,
     ANXIETY,
     ANXIETY_MENTAL_LLM,
-    DEPRESSION_ANXIETY_COMORBIDITY,
+    COMORBIDITY,
 )
 
 # API_KEY = "OPENAI_API_KEY"
@@ -52,7 +52,7 @@ def parse_config():
         '--prompt_type', 
         type=str, 
         default="depression",
-        choices=['depression_mards', 'depression_phq9', 'depression', 'depression_mental_llm', 'anxiety_bai', 'anxiety_hamilton', 'anxiety', 'anxiety_mental_llm', 'depression_anxiety_comorbidity'],
+        choices=['depression_mards', 'depression_phq9', 'depression', 'depression_mental_llm', 'anxiety_bai', 'anxiety_hamilton', 'anxiety', 'anxiety_mental_llm', 'comorbidity'],
         help='Type of prompt to use.'
     )
     parser.add_argument(
@@ -95,7 +95,7 @@ if __name__ == "__main__":
          'anxiety_hamilton': ANXIETY_HAMILTON, 
          'anxiety': ANXIETY,
          'anxiety_mental_llm': ANXIETY_MENTAL_LLM,
-         'depression_anxiety_comorbidity': DEPRESSION_ANXIETY_COMORBIDITY,
+         'comorbidity': COMORBIDITY,
     }[args.prompt_type]
     print(f"Using prompt {args.prompt_type}:\n{llm_prompt}\n\n")
     
