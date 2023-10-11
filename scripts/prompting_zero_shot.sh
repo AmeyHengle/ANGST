@@ -26,4 +26,4 @@ CUDA_VISIBLE_DEVICES=1 nohup python3 -u src/prompting_zero_shot.py \
 --model $MODEL \
 --prompt_type $PROMPT_TYPE \
 --version $VERSION \
---result_dir $RESULT_DIR > ./logs/zero_shot/zero_shot_${PROMPT_TYPE}_${MODEL}_version_${VERSION}_seed_${SEED}.log &
+--result_dir $RESULT_DIR > ./logs/zero_shot/zero_shot_${PROMPT_TYPE}_${MODEL}_version_${VERSION}_seed_${VERSION}.log &
