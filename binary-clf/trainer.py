@@ -180,7 +180,7 @@ def training_pipeline(
         compute_metrics=compute_metrics,
         callbacks=[
             EarlyStoppingCallback(
-                early_stopping_patience=3, early_stopping_threshold=0.01
+                early_stopping_patience=3
             )
         ],
     )
@@ -219,7 +219,7 @@ if __name__ == "__main__":
     parser.add_argument("--batch_size", type=int, default=16)
     parser.add_argument("--learning_rate", type=float, default=2e-5)
     parser.add_argument("--num_epochs", type=int, default=3)
-    parser.add_argument("--metric_name", type=str, default="val_loss")
+    parser.add_argument("--metric_name", type=str, default="eval_loss")
     parser.add_argument("--random_state", type=int, default=42)
 
     args = parser.parse_args()
@@ -254,8 +254,8 @@ python trainer.py \
     --model_name AIMH/mental-bert-base-cased \
     --label_col anxiety_label \
     --text_col text \
-    --max_length 12 \
-    --batch_size 128 \
+    --max_length 264 \
+    --batch_size 32 \
     --learning_rate 2e-5 \
     --num_epochs 10 \
     --metric_name f1 \

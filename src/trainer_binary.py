@@ -11,7 +11,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import OneHotEncoder
 from tqdm import tqdm
 from transformers import (AutoModelForSequenceClassification, AutoTokenizer,
-                          Trainer, TrainingArguments)
+                          Trainer, TrainingArguments, EarlyStoppingCallback)
 
 device = "cuda" if torch.cuda.is_available() else "cpu"
 ID2LABEL = {0: 0, 1: 1}
@@ -162,7 +162,7 @@ def training_pipeline(
         evaluation_strategy="epoch",
         save_strategy="epoch",
         save_total_limit=1,
-        greater_is_better=True,
+        greater_is_better=False,
         learning_rate=learning_rate,
         per_device_train_batch_size=batch_size,
         per_device_eval_batch_size=batch_size,
@@ -178,6 +178,11 @@ def training_pipeline(
         train_dataset=train_dataset,
         eval_dataset=val_dataset,
         compute_metrics=compute_metrics,
+        callbacks=[
+            EarlyStoppingCallback(
+                early_stopping_patience=3
+            )
+        ],
     )
 
     trainer.train()
@@ -214,7 +219,7 @@ if __name__ == "__main__":
     parser.add_argument("--batch_size", type=int, default=16)
     parser.add_argument("--learning_rate", type=float, default=2e-5)
     parser.add_argument("--num_epochs", type=int, default=3)
-    parser.add_argument("--metric_name", type=str, default="f1")
+    parser.add_argument("--metric_name", type=str, default="eval_loss")
     parser.add_argument("--random_state", type=int, default=42)
 
     args = parser.parse_args()
@@ -225,7 +230,7 @@ if __name__ == "__main__":
     print("Text Column:", args.text_col)
     print("Max Length:", args.max_length)
     print("Batch Size:", args.batch_size)
-    print("Learning Rate:", args.batch_size)
+    print("Learning Rate:", args.learning_rate)
     print("Number of Epochs:", args.num_epochs)
     print("Metric Name:", args.metric_name)
     print("Random State:", args.random_state)
@@ -249,10 +254,10 @@ python trainer.py \
     --model_name AIMH/mental-bert-base-cased \
     --label_col anxiety_label \
     --text_col text \
-    --max_length 12 \
-    --batch_size 128 \
+    --max_length 264 \
+    --batch_size 32 \
     --learning_rate 2e-5 \
-    --num_epochs 1 \
+    --num_epochs 10 \
     --metric_name f1 \
     --random_state 42 \
 ;
