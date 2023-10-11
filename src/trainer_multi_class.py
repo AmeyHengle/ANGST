@@ -198,7 +198,7 @@ def training_pipeline(
     model.to(device)
 
     # ----------------------------------------------------------------------------------------- #
-    output_dir = f"{model_name}_{max_length}_{num_epochs}_{batch_size}_{learning_rate}"
+    output_dir = f"{model_name}_{max_length}_{num_epochs}_{batch_size}_{learning_rate}_{random_state}"
 
     args = TrainingArguments(
         output_dir=output_dir,

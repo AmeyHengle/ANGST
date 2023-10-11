@@ -154,7 +154,7 @@ def training_pipeline(
     model.to(device)
 
     tokenizer = AutoTokenizer.from_pretrained(model_name)
-    output_dir = f"{model_name.replace('AIMH',label_col)}_{max_length}_{num_epochs}_{batch_size}_{learning_rate}"
+    output_dir = f"{model_name.replace('AIMH',label_col)}_{max_length}_{num_epochs}_{batch_size}_{learning_rate}_{random_state}"
 
     # 5. Fine-tune pretrained model using Huggingface Trainer class
     args = TrainingArguments(
@@ -254,11 +254,11 @@ python trainer.py \
     --model_name AIMH/mental-bert-base-cased \
     --label_col anxiety_label \
     --text_col text \
-    --max_length 264 \
+    --max_length 12 \
     --batch_size 32 \
     --learning_rate 2e-5 \
     --num_epochs 10 \
-    --metric_name f1 \
+    --metric_name eval_loss \
     --random_state 42 \
 ;
 """

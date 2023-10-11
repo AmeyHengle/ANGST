@@ -154,7 +154,7 @@ def training_pipeline(
     model.to(device)
 
     tokenizer = AutoTokenizer.from_pretrained(model_name)
-    output_dir = f"{model_name.replace('AIMH',label_col)}_{max_length}_{num_epochs}_{batch_size}_{learning_rate}"
+    output_dir = f"{model_name.replace('AIMH',label_col)}_{max_length}_{num_epochs}_{batch_size}_{learning_rate}_{random_state}"
 
     # 5. Fine-tune pretrained model using Huggingface Trainer class
     args = TrainingArguments(
