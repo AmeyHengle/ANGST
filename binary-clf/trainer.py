@@ -11,7 +11,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import OneHotEncoder
 from tqdm import tqdm
 from transformers import (AutoModelForSequenceClassification, AutoTokenizer,
-                          Trainer, TrainingArguments)
+                          Trainer, TrainingArguments, EarlyStoppingCallback)
 
 device = "cuda" if torch.cuda.is_available() else "cpu"
 ID2LABEL = {0: 0, 1: 1}
@@ -178,6 +178,11 @@ def training_pipeline(
         train_dataset=train_dataset,
         eval_dataset=val_dataset,
         compute_metrics=compute_metrics,
+        callbacks=[
+            EarlyStoppingCallback(
+                early_stopping_patience=3, early_stopping_threshold=0.01
+            )
+        ],
     )
 
     trainer.train()
