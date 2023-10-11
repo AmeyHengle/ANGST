@@ -162,7 +162,7 @@ def training_pipeline(
         evaluation_strategy="epoch",
         save_strategy="epoch",
         save_total_limit=1,
-        greater_is_better=True,
+        greater_is_better=False,
         learning_rate=learning_rate,
         per_device_train_batch_size=batch_size,
         per_device_eval_batch_size=batch_size,
@@ -219,7 +219,7 @@ if __name__ == "__main__":
     parser.add_argument("--batch_size", type=int, default=16)
     parser.add_argument("--learning_rate", type=float, default=2e-5)
     parser.add_argument("--num_epochs", type=int, default=3)
-    parser.add_argument("--metric_name", type=str, default="f1")
+    parser.add_argument("--metric_name", type=str, default="val_loss")
     parser.add_argument("--random_state", type=int, default=42)
 
     args = parser.parse_args()
@@ -257,7 +257,7 @@ python trainer.py \
     --max_length 12 \
     --batch_size 128 \
     --learning_rate 2e-5 \
-    --num_epochs 1 \
+    --num_epochs 10 \
     --metric_name f1 \
     --random_state 42 \
 ;
