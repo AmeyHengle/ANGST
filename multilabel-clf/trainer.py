@@ -316,7 +316,7 @@ def main():
     print("Text Column:", args.text_col)
     print("Max Length:", args.max_length)
     print("Batch Size:", args.batch_size)
-    print("Learning Rate:", args.batch_size)
+    print("Learning Rate:", args.learning_rate)
     print("Number of Epochs:", args.num_epochs)
     print("Metric Name:", args.metric_name)
     print("Random State:", args.random_state)
