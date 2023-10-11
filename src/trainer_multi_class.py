@@ -57,9 +57,9 @@ def training_pipeline(
 ):
     # Data loading
 
-    df_train = pd.read_csv("../data/silver_data/silver_labels_gpt_3.5_turbo_train.csv")
+    df_train = pd.read_csv("./data/silver_data/silver_labels_gpt_3.5_turbo_train.csv")
     df_val = pd.read_csv(
-        "../data/silver_data/silver_labels_gpt_3.5_turbo_validation.csv"
+        "./data/silver_data/silver_labels_gpt_3.5_turbo_validation.csv"
     )
     logger.debug(f"Train: {df_train.shape}\nValidation: {df_val.shape}\n")
 
@@ -83,7 +83,7 @@ def training_pipeline(
         lambda x: True if x in ["Anxiety", "Comorbid (Depression + Anxiety)"] else False
     )
 
-    df_test = pd.read_csv("../data/test/full_test.csv")
+    df_test = pd.read_csv("./data/test/full_test.csv")
     df_test["depression"] = df_test["disorder"].apply(
         lambda x: True if "depressive_disorder" in x else False
     )

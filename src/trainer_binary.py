@@ -59,9 +59,9 @@ def free_memory():
 def load_and_preprocess_dataset(
     random_state, model_name, text_col, label_col, max_length
 ):
-    df_train = pd.read_csv("../data/silver_data/silver_labels_gpt_3.5_turbo_train.csv")
+    df_train = pd.read_csv("./data/silver_data/silver_labels_gpt_3.5_turbo_train.csv")
     df_val = pd.read_csv(
-        "../data/silver_data/silver_labels_gpt_3.5_turbo_validation.csv"
+        "./data/silver_data/silver_labels_gpt_3.5_turbo_validation.csv"
     )
     logger.debug(f"Train: {df_train.shape}\nValidation: {df_val.shape}\n")
 
@@ -111,7 +111,7 @@ def inference_pipeline(texts, model, tokenizer, max_length):
 
     for i in tqdm(
         range(0, len(texts), batch_size),
-        desc=f"Running MLC CLF inference on {len(texts)} data points",
+        desc=f"Running Binary CLF inference on {len(texts)} data points",
     ):
         batch_inputs = texts[i : i + batch_size]
         tokenized_inputs = tokenizer(
@@ -193,7 +193,7 @@ def training_pipeline(
     tokenizer.save_pretrained(best_model_dir)
 
     # 7. Run inference on test set and save predictions to a CSV
-    df_test = pd.read_csv("../data/test/full_test.csv")
+    df_test = pd.read_csv("./data/test/full_test.csv")
     texts = df_test[text_col].values.tolist()
     predictions = inference_pipeline(texts, model, tokenizer, max_length)
     df_test[f"predicted_{label_col}"] = predictions
@@ -248,17 +248,3 @@ if __name__ == "__main__":
         args.learning_rate,
     )
     free_memory()
-
-"""
-python trainer.py \
-    --model_name AIMH/mental-bert-base-cased \
-    --label_col anxiety_label \
-    --text_col text \
-    --max_length 264 \
-    --batch_size 32 \
-    --learning_rate 2e-5 \
-    --num_epochs 10 \
-    --metric_name f1 \
-    --random_state 42 \
-;
-"""
