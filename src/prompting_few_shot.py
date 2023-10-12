@@ -134,7 +134,7 @@ if __name__ == "__main__":
                 temperature=0,
                 max_tokens=max_tokens,
                 api_key=API_KEY,
-                requests_per_minute=30,
+                requests_per_minute=20,
             )
         )
 

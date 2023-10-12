@@ -4,15 +4,15 @@ RESULT_DIR="./results/few_shot"
 NUM_EXAMPLES_PER_LABEL=4
 VERSION=3
 
-MODEL="gpt-3.5-turbo"
-# MODEL="gpt-4"
+# MODEL="gpt-3.5-turbo"
+MODEL="gpt-4"
 
 # PROMPT_TYPE choices=[
 #     'depression', 
 #      'anxiety', 
 #      'comorbidity'
 # ]
-PROMPT_TYPE="comorbidity"
+PROMPT_TYPE="anxiety"
 
 DATA_PATH=./data/few_shot_prompts/${PROMPT_TYPE}_num_examples_ss_${NUM_EXAMPLES_PER_LABEL}.csv
 
