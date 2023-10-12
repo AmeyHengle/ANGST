@@ -1,0 +1,18 @@
+Model Name: AIMH/mental-xlnet-base-cased
+Label Column: depression_label
+Text Column: text
+Max Length: 512
+Batch Size: 32
+Learning Rate: 2e-05
+Number of Epochs: 30
+Metric Name: eval_loss
+Random State: 2
+{'eval_loss': 0.15773092210292816, 'eval_f1': 0.9402933008723262, 'eval_runtime': 17.9967, 'eval_samples_per_second': 42.619, 'eval_steps_per_second': 1.334, 'epoch': 1.0}
+{'eval_loss': 0.17020289599895477, 'eval_f1': 0.9480161089061528, 'eval_runtime': 18.0042, 'eval_samples_per_second': 42.601, 'eval_steps_per_second': 1.333, 'epoch': 2.0}
+{'loss': 0.1723, 'learning_rate': 1.8456790123456792e-05, 'epoch': 2.31}
+{'eval_loss': 0.15323221683502197, 'eval_f1': 0.9505284163287482, 'eval_runtime': 18.0104, 'eval_samples_per_second': 42.586, 'eval_steps_per_second': 1.333, 'epoch': 3.0}
+{'eval_loss': 0.23467107117176056, 'eval_f1': 0.9505750250840491, 'eval_runtime': 18.0006, 'eval_samples_per_second': 42.61, 'eval_steps_per_second': 1.333, 'epoch': 4.0}
+{'loss': 0.0578, 'learning_rate': 1.6913580246913582e-05, 'epoch': 4.63}
+{'eval_loss': 0.3047785758972168, 'eval_f1': 0.9530256567575381, 'eval_runtime': 17.996, 'eval_samples_per_second': 42.621, 'eval_steps_per_second': 1.334, 'epoch': 5.0}
+{'eval_loss': 0.3306378126144409, 'eval_f1': 0.9556163190952951, 'eval_runtime': 18.0325, 'eval_samples_per_second': 42.534, 'eval_steps_per_second': 1.331, 'epoch': 6.0}
+{'train_runtime': 2079.9863, 'train_samples_per_second': 99.52, 'train_steps_per_second': 3.115, 'train_loss': 0.09276789831526486, 'epoch': 6.0}

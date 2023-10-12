@@ -1,0 +1,27 @@
+Model Name: AIMH/mental-roberta-large
+Label Column: depression_label
+Text Column: text
+Max Length: 512
+Batch Size: 4
+Learning Rate: 2e-05
+Number of Epochs: 30
+Metric Name: eval_loss
+Random State: 2
+{'loss': 0.4502, 'learning_rate': 1.9806763285024154e-05, 'epoch': 0.29}
+{'loss': 0.3523, 'learning_rate': 1.961352657004831e-05, 'epoch': 0.58}
+{'loss': 0.3636, 'learning_rate': 1.9420289855072467e-05, 'epoch': 0.87}
+{'eval_loss': 0.2625531852245331, 'eval_f1': 0.9440954195480766, 'eval_runtime': 20.715, 'eval_samples_per_second': 37.026, 'eval_steps_per_second': 9.269, 'epoch': 1.0}
+{'loss': 0.2828, 'learning_rate': 1.922705314009662e-05, 'epoch': 1.16}
+{'loss': 0.2519, 'learning_rate': 1.9033816425120775e-05, 'epoch': 1.45}
+{'loss': 0.2137, 'learning_rate': 1.8840579710144928e-05, 'epoch': 1.74}
+{'eval_loss': 0.4213832914829254, 'eval_f1': 0.9389409214296784, 'eval_runtime': 20.5016, 'eval_samples_per_second': 37.412, 'eval_steps_per_second': 9.365, 'epoch': 2.0}
+{'loss': 0.2283, 'learning_rate': 1.8647342995169084e-05, 'epoch': 2.03}
+{'loss': 0.1177, 'learning_rate': 1.8454106280193237e-05, 'epoch': 2.32}
+{'loss': 0.1466, 'learning_rate': 1.8260869565217393e-05, 'epoch': 2.61}
+{'loss': 0.1328, 'learning_rate': 1.806763285024155e-05, 'epoch': 2.9}
+{'eval_loss': 0.38238802552223206, 'eval_f1': 0.927353975905727, 'eval_runtime': 20.5919, 'eval_samples_per_second': 37.248, 'eval_steps_per_second': 9.324, 'epoch': 3.0}
+{'loss': 0.1297, 'learning_rate': 1.7874396135265702e-05, 'epoch': 3.19}
+{'loss': 0.0724, 'learning_rate': 1.7681159420289858e-05, 'epoch': 3.48}
+{'loss': 0.0845, 'learning_rate': 1.748792270531401e-05, 'epoch': 3.77}
+{'eval_loss': 0.46454206109046936, 'eval_f1': 0.9427359214315337, 'eval_runtime': 20.4822, 'eval_samples_per_second': 37.447, 'eval_steps_per_second': 9.374, 'epoch': 4.0}
+{'train_runtime': 2566.4803, 'train_samples_per_second': 80.655, 'train_steps_per_second': 20.164, 'train_loss': 0.21024813113005264, 'epoch': 4.0}

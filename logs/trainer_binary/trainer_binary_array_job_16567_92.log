@@ -1,0 +1,15 @@
+Model Name: AIMH/mental-xlnet-base-cased
+Label Column: depression_label
+Text Column: text
+Max Length: 512
+Batch Size: 32
+Learning Rate: 2e-05
+Number of Epochs: 30
+Metric Name: eval_loss
+Random State: 3
+{'eval_loss': 0.14718183875083923, 'eval_f1': 0.9480027130052692, 'eval_runtime': 17.9971, 'eval_samples_per_second': 42.618, 'eval_steps_per_second': 1.334, 'epoch': 1.0}
+{'eval_loss': 0.18552757799625397, 'eval_f1': 0.9402717248765654, 'eval_runtime': 18.0273, 'eval_samples_per_second': 42.547, 'eval_steps_per_second': 1.331, 'epoch': 2.0}
+{'loss': 0.1708, 'learning_rate': 1.8456790123456792e-05, 'epoch': 2.31}
+{'eval_loss': 0.18835385143756866, 'eval_f1': 0.9504159710218456, 'eval_runtime': 18.0462, 'eval_samples_per_second': 42.502, 'eval_steps_per_second': 1.33, 'epoch': 3.0}
+{'eval_loss': 0.2691138982772827, 'eval_f1': 0.9428177197967681, 'eval_runtime': 18.0596, 'eval_samples_per_second': 42.47, 'eval_steps_per_second': 1.329, 'epoch': 4.0}
+{'train_runtime': 1389.9595, 'train_samples_per_second': 148.925, 'train_steps_per_second': 4.662, 'train_loss': 0.12333337907437925, 'epoch': 4.0}

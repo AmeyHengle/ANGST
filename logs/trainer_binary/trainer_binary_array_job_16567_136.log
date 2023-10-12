@@ -1,0 +1,27 @@
+Model Name: AIMH/mental-bert-base-cased
+Label Column: anxiety_label
+Text Column: text
+Max Length: 512
+Batch Size: 32
+Learning Rate: 2e-06
+Number of Epochs: 30
+Metric Name: eval_loss
+Random State: 2
+{'eval_loss': 0.4032735228538513, 'eval_f1': 0.7772058228688338, 'eval_runtime': 5.8974, 'eval_samples_per_second': 130.057, 'eval_steps_per_second': 4.07, 'epoch': 1.0}
+{'eval_loss': 0.2829879820346832, 'eval_f1': 0.8930010329970323, 'eval_runtime': 5.9094, 'eval_samples_per_second': 129.793, 'eval_steps_per_second': 4.061, 'epoch': 2.0}
+{'loss': 0.3897, 'learning_rate': 1.8456790123456789e-06, 'epoch': 2.31}
+{'eval_loss': 0.25934430956840515, 'eval_f1': 0.8918140977629452, 'eval_runtime': 5.8915, 'eval_samples_per_second': 130.188, 'eval_steps_per_second': 4.074, 'epoch': 3.0}
+{'eval_loss': 0.2494967132806778, 'eval_f1': 0.8871355718970171, 'eval_runtime': 5.8951, 'eval_samples_per_second': 130.109, 'eval_steps_per_second': 4.071, 'epoch': 4.0}
+{'loss': 0.243, 'learning_rate': 1.6913580246913578e-06, 'epoch': 4.63}
+{'eval_loss': 0.24017715454101562, 'eval_f1': 0.8940275387966796, 'eval_runtime': 5.9055, 'eval_samples_per_second': 129.879, 'eval_steps_per_second': 4.064, 'epoch': 5.0}
+{'eval_loss': 0.23860858380794525, 'eval_f1': 0.894272777143661, 'eval_runtime': 5.9009, 'eval_samples_per_second': 129.98, 'eval_steps_per_second': 4.067, 'epoch': 6.0}
+{'loss': 0.2019, 'learning_rate': 1.537037037037037e-06, 'epoch': 6.94}
+{'eval_loss': 0.23375551402568817, 'eval_f1': 0.8933728093885619, 'eval_runtime': 5.9054, 'eval_samples_per_second': 129.881, 'eval_steps_per_second': 4.064, 'epoch': 7.0}
+{'eval_loss': 0.23976527154445648, 'eval_f1': 0.8963981113659807, 'eval_runtime': 5.9027, 'eval_samples_per_second': 129.94, 'eval_steps_per_second': 4.066, 'epoch': 8.0}
+{'eval_loss': 0.23264442384243011, 'eval_f1': 0.9050075004747811, 'eval_runtime': 5.8962, 'eval_samples_per_second': 130.085, 'eval_steps_per_second': 4.07, 'epoch': 9.0}
+{'loss': 0.1709, 'learning_rate': 1.382716049382716e-06, 'epoch': 9.26}
+{'eval_loss': 0.235375314950943, 'eval_f1': 0.912486095484409, 'eval_runtime': 5.8946, 'eval_samples_per_second': 130.12, 'eval_steps_per_second': 4.072, 'epoch': 10.0}
+{'eval_loss': 0.24839860200881958, 'eval_f1': 0.9105820068257816, 'eval_runtime': 5.8963, 'eval_samples_per_second': 130.081, 'eval_steps_per_second': 4.07, 'epoch': 11.0}
+{'loss': 0.1485, 'learning_rate': 1.228395061728395e-06, 'epoch': 11.57}
+{'eval_loss': 0.2359917014837265, 'eval_f1': 0.91370190695008, 'eval_runtime': 5.8994, 'eval_samples_per_second': 130.014, 'eval_steps_per_second': 4.068, 'epoch': 12.0}
+{'train_runtime': 1923.6466, 'train_samples_per_second': 107.608, 'train_steps_per_second': 3.369, 'train_loss': 0.22754082083702087, 'epoch': 12.0}

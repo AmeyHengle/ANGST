@@ -6,8 +6,8 @@ VERSION=2
 
 # MODEL="gpt-3.5-turbo"
 # MODEL="gpt-4"
-# MODEL="mental_flan_t5"
-MODEL="mental_alpaca"
+MODEL="mental_flan_t5"
+# MODEL="mental_alpaca"
 
 
 # choices=[
@@ -23,6 +23,8 @@ MODEL="mental_alpaca"
 # ]
 PROMPT_TYPE="depression"
 
+source activate llm_env
+
 python3 src/prompting_zero_shot.py \
 --seed $VERSION \
 --data_path $DATA_PATH \
@@ -30,6 +32,7 @@ python3 src/prompting_zero_shot.py \
 --prompt_type $PROMPT_TYPE \
 --version $VERSION \
 --result_dir $RESULT_DIR
+
 # nohup python3 -u src/prompting_zero_shot.py \
 # --seed $VERSION \
 # --data_path $DATA_PATH \

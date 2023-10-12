@@ -109,6 +109,7 @@ class LLM_Generator:
         self.tokenized_prompts = self.prompt_data.map(
             self.tokenize_function,
             batched=True,
+            # batch_size=self.batch_size,
             remove_columns=list(self.prompt_data.features.keys()),
             load_from_cache_file=False,
         )
