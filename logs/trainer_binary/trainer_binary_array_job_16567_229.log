@@ -23,3 +23,14 @@ Random State: 2
 {'loss': 0.3112, 'learning_rate': 1.78743961352657e-06, 'epoch': 3.19}
 {'loss': 0.326, 'learning_rate': 1.7681159420289855e-06, 'epoch': 3.48}
 {'loss': 0.2718, 'learning_rate': 1.748792270531401e-06, 'epoch': 3.77}
+{'eval_loss': 0.4026738405227661, 'eval_f1': 0.9169222175968873, 'eval_runtime': 91.58, 'eval_samples_per_second': 8.375, 'eval_steps_per_second': 2.097, 'epoch': 4.0}
+{'loss': 0.2917, 'learning_rate': 1.7294685990338163e-06, 'epoch': 4.06}
+{'loss': 0.2785, 'learning_rate': 1.7101449275362317e-06, 'epoch': 4.35}
+{'loss': 0.2792, 'learning_rate': 1.6908212560386471e-06, 'epoch': 4.64}
+{'loss': 0.265, 'learning_rate': 1.6714975845410628e-06, 'epoch': 4.93}
+{'eval_loss': 0.46637630462646484, 'eval_f1': 0.9057359291300873, 'eval_runtime': 91.5568, 'eval_samples_per_second': 8.377, 'eval_steps_per_second': 2.097, 'epoch': 5.0}
+{'loss': 0.2423, 'learning_rate': 1.6521739130434782e-06, 'epoch': 5.22}
+{'loss': 0.2033, 'learning_rate': 1.6328502415458936e-06, 'epoch': 5.51}
+{'loss': 0.2298, 'learning_rate': 1.6135265700483092e-06, 'epoch': 5.8}
+{'eval_loss': 0.48843657970428467, 'eval_f1': 0.9101412285440972, 'eval_runtime': 91.9014, 'eval_samples_per_second': 8.346, 'eval_steps_per_second': 2.089, 'epoch': 6.0}
+{'train_runtime': 23399.5993, 'train_samples_per_second': 8.846, 'train_steps_per_second': 2.212, 'train_loss': 0.3252996730343731, 'epoch': 6.0}

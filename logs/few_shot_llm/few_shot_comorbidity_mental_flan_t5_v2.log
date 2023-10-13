@@ -1,0 +1,63 @@
+
+[1;37m#------------------------------------------------------------#[0m
+[1;37m#                                                            #[0m
+[1;37m#             This product would be better if...:             #[0m
+[1;37m#        https://github.com/BerriAI/litellm/issues/new        #[0m
+[1;37m#                                                            #[0m
+[1;37m#------------------------------------------------------------#[0m
+
+ Thank you for using LiteLLM! - Krrish & Ishaan
+
+
+
+Using SHRUTI_OPENAI_API_KEY
+
+
+Process ID: 1012320
+
+Seed: 2
+
+Arguments:
+seed: 2
+data_path: ./data/few_shot_prompts/comorbidity_num_examples_ss_4.csv
+model: mental_flan_t5
+prompt_type: comorbidity
+num_examples_per_label: 2
+version: 2
+result_dir: ./results/few_shot
+
+
+Using data for comorbidity
+
+
+
+size of prompt data: (2872, 12)
+
+result_file: ./results/few_shot/few_shot_comorbidity_mental_flan_t5_num_examples_ss_2_v2_seed_2.csv
+
+Sample Input: {'prompt': "\nBelow are posts and their respective assessments based on the criteria for clinical depression and clinical anxiety respectively as defined in the DSM-5.\nFormat your response as a JSON object {'depression': '', 'anxiety': ''} with values either 'yes' or 'no'.\n\nPost: before anyone asks, yes, i am diagnosed with depression. ive had it for 7 years but was only diagnosed a few weeks ago. i used to cut to let the pain out. then that stopped helping so it was just to feel something. now i dont even feel anything when i do it. i just do it because i can. and idk why. i feel nuts and im just waiting to get thrown in a hospital.\nAssesement: {'depression': 'yes', 'anxiety': 'no'}\n\nPost: i self harmed tonight more times than i can count. i work in the medical field and im always trying to come up with solutions on how to end it all. all the pain and heartache. im 30 years old and nothing is getting better. i self harm because i feel like i deserve it. the scars on the outside some how feel as if they belong there because of how fucked up i feel on the inside. it isnt fair. i dont want to be here.\nAssesement: {'depression': 'yes', 'anxiety': 'no'}\n\nPost: i dont know whats been up with me, but these past few days, ive been wanting to cry at random times, ive been thinking negatively whats the point in x?, i woke up this morning just dreading going to work and not wanting to interact with anyone all day and just stay in bed and sleep all day. i just cut like 5 times on my thighs, and all i feel is numbness. both emotionally and i guess spiritually? im getting dissociative as fuck right now, which is why i say spiritually. i feel stupid as hell for cutting, for thinking it could ever help.\nAssesement: {'depression': 'yes', 'anxiety': 'no'}\n\nPost: so, ive been inactive on this account for a while, but im here to just say stuff again like i did in my other two posts or whatever. it seems like ive just started doing it because i got bored. it gives me something to focus on instead of having to think about everything happening at school and home. its also a stress relief for me. whenever im pissed or stressed ill make a scratch or two and it helps a lot. it doesnt seem like theres anything else that works as well as that. i did a dumb thing yet i dont regret it, but i still dont know why i did it. so, i cant remember the saying but its some retarded self harm thing basically meaning you only do it up the thinner part of your arm if you get what i mean if youre looking for attention. i think this made me start to do it more along my arm and a lot deeper. i cant post pictures, but i made about 6 cuts maybe 2 inches long each with a razor and it bled a lot. its scabbed up now, so thats god. anyway, the reason i did it was because my character in a roleplay game got permanently killed. yeah, thats why ive decided to scar myself. i dont know why i did that but i dont feel like i regret it at all. i feel relieved but i dont know why. is this normal? why cant i stop doing this? only two people know about my scars one of them i hate, one of them i never meet so its difficult for me to do or say anything.\nAssesement: {'depression': 'yes', 'anxiety': 'no'}\n\nBased on the above, assess the content of the following post:\nPost: I cut myself for the first time in a year today. and hated that I still loved it. The burning sensation from the blade on my arm and leg. I didnt even cut deep, I barely bled, but the feeling was still almost the same, but without the kick of seeing my own blood trail down my limbs staining the covers in my bed. I told myself that I was only going to cut a few times, but here I am with surely thirty new scars on my body. I fucking hate myself.\nAssessment:\n"}
+NEU-HAI/mental-flan-t5-xxl
+
+Loaded mental_flan_t5 for prompting...
+
+Model max length: 1024
+
+Device: cuda:3
+
+data: Dataset({
+    features: ['prompt'],
+    num_rows: 2872
+})
+
+tokenized_data: Dataset({
+    features: ['input_ids', 'attention_mask'],
+    num_rows: 2872
+})
+
+
+Preprocessed prompts...
+dataloader size: 1436
+
+
+data processed.
+

@@ -23,3 +23,10 @@ Random State: 3
 {'loss': 0.3279, 'learning_rate': 1.78743961352657e-06, 'epoch': 3.19}
 {'loss': 0.3297, 'learning_rate': 1.7681159420289855e-06, 'epoch': 3.48}
 {'loss': 0.2818, 'learning_rate': 1.748792270531401e-06, 'epoch': 3.77}
+{'eval_loss': 0.44436943531036377, 'eval_f1': 0.9127710775016049, 'eval_runtime': 92.0225, 'eval_samples_per_second': 8.335, 'eval_steps_per_second': 2.086, 'epoch': 4.0}
+{'loss': 0.302, 'learning_rate': 1.7294685990338163e-06, 'epoch': 4.06}
+{'loss': 0.2948, 'learning_rate': 1.7101449275362317e-06, 'epoch': 4.35}
+{'loss': 0.2889, 'learning_rate': 1.6908212560386471e-06, 'epoch': 4.64}
+{'loss': 0.2762, 'learning_rate': 1.6714975845410628e-06, 'epoch': 4.93}
+{'eval_loss': 0.5066950917243958, 'eval_f1': 0.905975498286554, 'eval_runtime': 92.0195, 'eval_samples_per_second': 8.335, 'eval_steps_per_second': 2.087, 'epoch': 5.0}
+{'train_runtime': 19562.5335, 'train_samples_per_second': 10.581, 'train_steps_per_second': 2.645, 'train_loss': 0.3529538729018059, 'epoch': 5.0}
