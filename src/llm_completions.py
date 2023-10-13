@@ -50,7 +50,8 @@ class LLM_Generator:
         print(self.model_name)
         self.tokenizer = AutoTokenizer.from_pretrained(
             self.model_name, 
-            padding_side="left"
+            padding_side="left",
+            use_fast=True
         )
         self.model = AutoModelForSeq2SeqLM.from_pretrained(
             self.model_name, 

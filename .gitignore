@@ -138,7 +138,24 @@ multilabel-clf/wandb
 binary-clf/depression_label
 binary-clf/anxiety_label
 binary-clf/wandb
+<<<<<<< Updated upstream
 AIMH
 wandb
 
 
+=======
+
+AIMH/*
+!AIMH/*/
+!AIMH/**/*.csv
+
+wandb
+
+depression_label/*
+!depression_label/*/
+!depression_label/**/*.csv
+
+anxiety_label/*
+!anxiety_label/*/
+!anxiety_label/**/*.csv
+>>>>>>> Stashed changes

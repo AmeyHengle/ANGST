@@ -1,0 +1,17 @@
+Model Name: AIMH/mental-bert-base-cased
+Text Column: text
+Max Length: 512
+Batch Size: 8
+Learning Rate: 2e-06
+Number of Epochs: 30
+Metric Name: eval_loss
+Random State: 3
+{'loss': 0.4808, 'learning_rate': 1.9613750482811896e-06, 'epoch': 0.58}
+{'eval_loss': 0.2780110239982605, 'eval_f1': 0.7939620135210992, 'eval_roc_auc': 0.847481405662966, 'eval_accuracy': 0.8134782608695652, 'eval_runtime': 58.8602, 'eval_samples_per_second': 117.227, 'eval_steps_per_second': 14.662, 'epoch': 1.0}
+{'loss': 0.3056, 'learning_rate': 1.9227500965623793e-06, 'epoch': 1.16}
+{'loss': 0.227, 'learning_rate': 1.8841251448435688e-06, 'epoch': 1.74}
+{'eval_loss': 0.19473561644554138, 'eval_f1': 0.8893958081926069, 'eval_roc_auc': 0.9185586618066302, 'eval_accuracy': 0.8785507246376811, 'eval_runtime': 58.8529, 'eval_samples_per_second': 117.241, 'eval_steps_per_second': 14.664, 'epoch': 2.0}
+{'loss': 0.2081, 'learning_rate': 1.8455001931247585e-06, 'epoch': 2.32}
+{'loss': 0.1983, 'learning_rate': 1.8068752414059483e-06, 'epoch': 2.9}
+{'eval_loss': 0.1738661676645279, 'eval_f1': 0.9033410281146886, 'eval_roc_auc': 0.9285583313534448, 'eval_accuracy': 0.8923188405797101, 'eval_runtime': 58.8459, 'eval_samples_per_second': 117.255, 'eval_steps_per_second': 14.665, 'epoch': 3.0}
+{'loss': 0.1911, 'learning_rate': 1.7682502896871378e-06, 'epoch': 3.48}
