@@ -7,3 +7,21 @@ Learning Rate: 2e-05
 Number of Epochs: 30
 Metric Name: eval_loss
 Random State: 1
+{'loss': 0.4562, 'learning_rate': 1.9806763285024154e-05, 'epoch': 0.29}
+{'loss': 0.3891, 'learning_rate': 1.961352657004831e-05, 'epoch': 0.58}
+{'loss': 0.3806, 'learning_rate': 1.9420289855072467e-05, 'epoch': 0.87}
+{'eval_loss': 0.351605623960495, 'eval_f1': 0.8876952723612752, 'eval_runtime': 21.0495, 'eval_samples_per_second': 36.438, 'eval_steps_per_second': 9.121, 'epoch': 1.0}
+{'loss': 0.3168, 'learning_rate': 1.922705314009662e-05, 'epoch': 1.16}
+{'loss': 0.3063, 'learning_rate': 1.9033816425120775e-05, 'epoch': 1.45}
+{'loss': 0.3018, 'learning_rate': 1.8840579710144928e-05, 'epoch': 1.74}
+{'eval_loss': 0.4700603783130646, 'eval_f1': 0.9130196689961804, 'eval_runtime': 21.0556, 'eval_samples_per_second': 36.427, 'eval_steps_per_second': 9.119, 'epoch': 2.0}
+{'loss': 0.2771, 'learning_rate': 1.8647342995169084e-05, 'epoch': 2.03}
+{'loss': 0.1779, 'learning_rate': 1.8454106280193237e-05, 'epoch': 2.32}
+{'loss': 0.1589, 'learning_rate': 1.8260869565217393e-05, 'epoch': 2.61}
+{'loss': 0.1504, 'learning_rate': 1.806763285024155e-05, 'epoch': 2.9}
+{'eval_loss': 0.41017088294029236, 'eval_f1': 0.9059117445534388, 'eval_runtime': 21.0506, 'eval_samples_per_second': 36.436, 'eval_steps_per_second': 9.121, 'epoch': 3.0}
+{'loss': 0.1509, 'learning_rate': 1.7874396135265702e-05, 'epoch': 3.19}
+{'loss': 0.0728, 'learning_rate': 1.7681159420289858e-05, 'epoch': 3.48}
+{'loss': 0.0857, 'learning_rate': 1.748792270531401e-05, 'epoch': 3.77}
+{'eval_loss': 0.6013286113739014, 'eval_f1': 0.9122439502726922, 'eval_runtime': 21.0614, 'eval_samples_per_second': 36.417, 'eval_steps_per_second': 9.116, 'epoch': 4.0}
+{'train_runtime': 2546.771, 'train_samples_per_second': 81.279, 'train_steps_per_second': 20.32, 'train_loss': 0.24032123399817426, 'epoch': 4.0}

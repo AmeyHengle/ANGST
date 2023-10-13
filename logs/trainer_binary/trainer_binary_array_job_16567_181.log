@@ -1,0 +1,32 @@
+Model Name: AIMH/mental-roberta-large
+Label Column: anxiety_label
+Text Column: text
+Max Length: 512
+Batch Size: 4
+Learning Rate: 2e-06
+Number of Epochs: 30
+Metric Name: eval_loss
+Random State: 2
+{'loss': 0.5087, 'learning_rate': 1.980676328502415e-06, 'epoch': 0.29}
+{'loss': 0.4004, 'learning_rate': 1.9613526570048307e-06, 'epoch': 0.58}
+{'loss': 0.3815, 'learning_rate': 1.9420289855072463e-06, 'epoch': 0.87}
+{'eval_loss': 0.4265379011631012, 'eval_f1': 0.9169222175968873, 'eval_runtime': 20.6424, 'eval_samples_per_second': 37.156, 'eval_steps_per_second': 9.301, 'epoch': 1.0}
+{'loss': 0.3112, 'learning_rate': 1.922705314009662e-06, 'epoch': 1.16}
+{'loss': 0.3073, 'learning_rate': 1.9033816425120771e-06, 'epoch': 1.45}
+{'loss': 0.3194, 'learning_rate': 1.8840579710144925e-06, 'epoch': 1.74}
+{'eval_loss': 0.33812275528907776, 'eval_f1': 0.9326302800351685, 'eval_runtime': 20.6465, 'eval_samples_per_second': 37.149, 'eval_steps_per_second': 9.299, 'epoch': 2.0}
+{'loss': 0.2844, 'learning_rate': 1.8647342995169081e-06, 'epoch': 2.03}
+{'loss': 0.233, 'learning_rate': 1.8454106280193235e-06, 'epoch': 2.32}
+{'loss': 0.2397, 'learning_rate': 1.826086956521739e-06, 'epoch': 2.61}
+{'loss': 0.2312, 'learning_rate': 1.8067632850241545e-06, 'epoch': 2.9}
+{'eval_loss': 0.3576911687850952, 'eval_f1': 0.9335313472705855, 'eval_runtime': 20.6754, 'eval_samples_per_second': 37.097, 'eval_steps_per_second': 9.286, 'epoch': 3.0}
+{'loss': 0.2052, 'learning_rate': 1.78743961352657e-06, 'epoch': 3.19}
+{'loss': 0.1676, 'learning_rate': 1.7681159420289855e-06, 'epoch': 3.48}
+{'loss': 0.1466, 'learning_rate': 1.748792270531401e-06, 'epoch': 3.77}
+{'eval_loss': 0.440655380487442, 'eval_f1': 0.9361900933797621, 'eval_runtime': 20.6848, 'eval_samples_per_second': 37.08, 'eval_steps_per_second': 9.282, 'epoch': 4.0}
+{'loss': 0.1592, 'learning_rate': 1.7294685990338163e-06, 'epoch': 4.06}
+{'loss': 0.1059, 'learning_rate': 1.7101449275362317e-06, 'epoch': 4.35}
+{'loss': 0.1291, 'learning_rate': 1.6908212560386471e-06, 'epoch': 4.64}
+{'loss': 0.1099, 'learning_rate': 1.6714975845410628e-06, 'epoch': 4.93}
+{'eval_loss': 0.5063747763633728, 'eval_f1': 0.9312235336999753, 'eval_runtime': 20.5933, 'eval_samples_per_second': 37.245, 'eval_steps_per_second': 9.323, 'epoch': 5.0}
+{'train_runtime': 3233.3926, 'train_samples_per_second': 64.019, 'train_steps_per_second': 16.005, 'train_loss': 0.24708816705233808, 'epoch': 5.0}

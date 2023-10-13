@@ -1,0 +1,17 @@
+Model Name: AIMH/mental-bert-large-cased
+Label Column: anxiety_label
+Text Column: text
+Max Length: 512
+Batch Size: 16
+Learning Rate: 2e-05
+Number of Epochs: 30
+Metric Name: eval_loss
+Random State: 2
+{'eval_loss': 0.24239298701286316, 'eval_f1': 0.9063691794142901, 'eval_runtime': 19.7464, 'eval_samples_per_second': 38.843, 'eval_steps_per_second': 2.431, 'epoch': 1.0}
+{'loss': 0.2708, 'learning_rate': 1.9228395061728397e-05, 'epoch': 1.16}
+{'eval_loss': 0.30866679549217224, 'eval_f1': 0.9146982475108496, 'eval_runtime': 19.7496, 'eval_samples_per_second': 38.836, 'eval_steps_per_second': 2.43, 'epoch': 2.0}
+{'loss': 0.1508, 'learning_rate': 1.8456790123456792e-05, 'epoch': 2.31}
+{'eval_loss': 0.29819849133491516, 'eval_f1': 0.920642538884587, 'eval_runtime': 19.7569, 'eval_samples_per_second': 38.822, 'eval_steps_per_second': 2.43, 'epoch': 3.0}
+{'loss': 0.0858, 'learning_rate': 1.7685185185185187e-05, 'epoch': 3.47}
+{'eval_loss': 0.49117398262023926, 'eval_f1': 0.9229888129811853, 'eval_runtime': 19.7496, 'eval_samples_per_second': 38.836, 'eval_steps_per_second': 2.43, 'epoch': 4.0}
+{'train_runtime': 2129.5421, 'train_samples_per_second': 97.204, 'train_steps_per_second': 6.086, 'train_loss': 0.1533363229698605, 'epoch': 4.0}

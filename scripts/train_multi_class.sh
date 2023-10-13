@@ -1,0 +1,15 @@
+#!/bin/bash
+
+#SBATCH --job-name=hp_exp
+#SBATCH --partition=babel-shared-long
+#SBATCH --array=1-120%8
+#SBATCH --mem=40GB
+#SBATCH --time=2-23:00:00
+#SBATCH --gres gpu:A6000:1
+#SBATCH --output=logs/trainer_multi_class/trainer_multi_class_array_job_%A_%a.log
+#SBATCH --error=errors/trainer_multi_class/trainer_multi_class_array_job_%A_%a.err
+
+source activate llm_env
+
+params=$(tail -n+${SLURM_ARRAY_TASK_ID} hparams_files/trainer_erm_multi_class.txt | head -n1)   
+$params

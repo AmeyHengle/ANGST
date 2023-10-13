@@ -47,6 +47,7 @@ class LLM_Generator:
         self.batch_size = batch_size
         
         self.validate_model_name(model_name)
+        print(self.model_name)
         self.tokenizer = AutoTokenizer.from_pretrained(
             self.model_name, 
             padding_side="left"
@@ -57,8 +58,8 @@ class LLM_Generator:
             device_map="balanced_low_0"
         )
         self.device = f"cuda:{self.model.hf_device_map['lm_head']}"
-        # self.max_length = self.tokenizer.model_max_length
-        self.max_length = 256
+        self.max_length = self.tokenizer.model_max_length
+        # self.max_length = 256
         stop_word_list = ["}"]
         stop_words_ids = self.tokenizer(stop_word_list).input_ids
         self.stopping_criteria = StoppingCriteriaList(

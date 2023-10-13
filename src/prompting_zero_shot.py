@@ -178,9 +178,5 @@ if __name__ == "__main__":
     else:
         print(f"\n\n Model {args.model} not supported...")
 
-
-    print(f"\n\n{type(predictions)}")
-    print(f"{len(predictions)}")
-    print(f"{predictions}")
     prompt_data[f"results_{args.prompt_type}_{args.model}"] = predictions
     prompt_data.to_csv(result_file, index=False)

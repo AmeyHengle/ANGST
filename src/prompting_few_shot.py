@@ -8,6 +8,7 @@ from openai_completions import (
     generate_from_openai_completion,
     generate_from_openai_chat_completion
 )
+from llm_completions import LLM_Generator
 from prompts import CHAT_MODEL_ROLE
    
 
@@ -36,7 +37,7 @@ def parse_config():
         '--model', 
         type=str, 
         default="gpt-3.5-turbo",
-        choices=["gpt-3.5-turbo", "gpt-4", "flan-t5", "flan-alpaca", "llama2"],
+        choices=["gpt-3.5-turbo", "gpt-4", "flan_t5", "mental_flan_t5", "alpaca", "mental_alpaca"],
         help="type of model to use for prompting."
     )
     parser.add_argument(
@@ -137,6 +138,22 @@ if __name__ == "__main__":
                 requests_per_minute=20,
             )
         )
+        
+    elif args.model in ['flan_t5', 'mental_flan_t5', 'alpaca', 'mental_alpaca']:
+
+        input = [{'prompt': text} for text in prompt_data[f'few_shot_prompt_{args.prompt_type}'].tolist()]
+        print(f"\nSample Input: {input[0]}")
+
+        generator = LLM_Generator(model_name=args.model, messages_list=input, batch_size=2)
+
+        predictions, _, _ = generator.text_completion(
+            temperature=1,
+            max_tokens=max_tokens,
+            top_p=1,
+        )
+        
+    else:
+        print(f"\n\n Model {args.model} not supported...")
 
     prompt_data[f"results_{args.prompt_type}_{args.model}"] = predictions
     prompt_data.to_csv(result_file, index=False)
