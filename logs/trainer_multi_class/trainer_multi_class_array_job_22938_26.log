@@ -1,0 +1,15 @@
+Model Name: AIMH/mental-bert-large-cased
+Text Column: text
+Max Length: 512
+Batch Size: 8
+Learning Rate: 2e-05
+Number of Epochs: 30
+Metric Name: eval_loss
+Random State: 1
+{'loss': 0.2818, 'learning_rate': 1.96137504828119e-05, 'epoch': 0.58}
+{'eval_loss': 0.13644911348819733, 'eval_f1': 0.9246452138231502, 'eval_roc_auc': 0.9426729635837666, 'eval_accuracy': 0.9150724637681159, 'eval_runtime': 179.687, 'eval_samples_per_second': 38.4, 'eval_steps_per_second': 4.803, 'epoch': 1.0}
+{'loss': 0.22, 'learning_rate': 1.9227500965623796e-05, 'epoch': 1.16}
+{'loss': 0.1654, 'learning_rate': 1.884125144843569e-05, 'epoch': 1.74}
+{'eval_loss': 0.10438323765993118, 'eval_f1': 0.9499601084530802, 'eval_roc_auc': 0.9628742461638827, 'eval_accuracy': 0.9397101449275362, 'eval_runtime': 179.7798, 'eval_samples_per_second': 38.38, 'eval_steps_per_second': 4.8, 'epoch': 2.0}
+{'loss': 0.1303, 'learning_rate': 1.8455001931247587e-05, 'epoch': 2.32}
+{'loss': 0.1082, 'learning_rate': 1.8068752414059484e-05, 'epoch': 2.9}

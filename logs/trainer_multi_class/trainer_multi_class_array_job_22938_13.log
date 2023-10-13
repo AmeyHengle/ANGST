@@ -138,3 +138,5 @@ Random State: 2
 {'loss': 0.0212, 'learning_rate': 4.830917874396135e-08, 'epoch': 29.28}
 {'loss': 0.0141, 'learning_rate': 2.898550724637681e-08, 'epoch': 29.57}
 {'loss': 0.0223, 'learning_rate': 9.661835748792269e-09, 'epoch': 29.86}
+{'eval_loss': 0.012232223525643349, 'eval_f1': 0.9966907547399397, 'eval_roc_auc': 0.9969591591134062, 'eval_accuracy': 0.9959420289855072, 'eval_runtime': 61.2088, 'eval_samples_per_second': 112.729, 'eval_steps_per_second': 28.182, 'epoch': 30.0}
+{'train_runtime': 7843.6502, 'train_samples_per_second': 26.391, 'train_steps_per_second': 6.598, 'train_loss': 0.09578581693437364, 'epoch': 30.0}
