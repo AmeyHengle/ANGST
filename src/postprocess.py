@@ -36,6 +36,6 @@ if __name__ == "__main__":
     
 """
 python src/postprocess.py ./anxiety_label/ ./predictions/binaryCLF/anxiety
-python src/postprocess.py ./depression_label ./predictions/binaryCLF/anxiety
+python src/postprocess.py ./depression_label ./predictions/binaryCLF/depression
 python src/postprocess.py ./AIMH ./predictions/multilabelCLF/finetuned/
 """
