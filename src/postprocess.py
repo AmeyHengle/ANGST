@@ -7,6 +7,7 @@ def main(source_folder, output_folder):
     for root, dirs, files in os.walk(source_folder):
         # Check if 'best_model' is in the current path
         if 'best_model' in root.split(os.sep):
+            match = False
             # Loop through the files in the 'best_model' folder
             for file in files:
                 # If the file ends with .csv
@@ -19,6 +20,9 @@ def main(source_folder, output_folder):
                     destination = os.path.join(output_folder, new_file_name)
                     # Copy the file to the output directory
                     shutil.copy2(os.path.join(root, file), destination)
+                    match = True
+            if not match:
+                print(root.split(os.sep)[-2], root)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Copy .csv files from best_model directories.')
@@ -35,7 +39,7 @@ if __name__ == "__main__":
     
     
 """
-python src/postprocess.py ./anxiety_label/ ./predictions/binaryCLF/anxiety
+python src/postprocess.py ./binary-clf/anxiety_label/ ./predictions/binaryCLF/anxiety
 python src/postprocess.py ./depression_label ./predictions/binaryCLF/depression
 python src/postprocess.py ./AIMH ./predictions/multilabelCLF/finetuned/
 """

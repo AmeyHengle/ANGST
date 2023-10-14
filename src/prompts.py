@@ -327,3 +327,18 @@ Post: {post}
 Assessment:
 '''
 }
+
+# ---------------------------------------------------------------------------------------------------------------- #
+
+SILVER_LABEL_PROMPT = (
+lambda post: f"""
+Reddit Post: "{post}"
+
+Does the language of the given Reddit post indicate any cues relating to some kind of mental health disorder? Refer to DSM5 to justify your response. 
+
+Strictly follow the following response format:
+Mental Health Disorder: (Yes/No)
+Name of Mental Health Disorder: 
+DSM5 Rationale:
+""".strip()
+)
