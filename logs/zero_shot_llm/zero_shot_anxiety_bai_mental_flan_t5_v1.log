@@ -1,0 +1,93 @@
+
+[1;37m#------------------------------------------------------------#[0m
+[1;37m#                                                            #[0m
+[1;37m#             This product would be better if...:             #[0m
+[1;37m#        https://github.com/BerriAI/litellm/issues/new        #[0m
+[1;37m#                                                            #[0m
+[1;37m#------------------------------------------------------------#[0m
+
+ Thank you for using LiteLLM! - Krrish & Ishaan
+
+
+
+Using SHRUTI_OPENAI_API_KEY
+
+
+Process ID: 1939578
+
+Seed: 1
+
+Arguments:
+seed: 1
+data_path: ./data/test/full_test.csv
+model: mental_flan_t5
+prompt_type: anxiety_bai
+version: 1
+result_dir: ./results/zero_shot
+
+
+Using prompt anxiety_bai:
+
+Below are  21 common symptoms of anxiety according to the Beck Anxiety Inventory (BAI).
+As a psychologist, read the social media post and evaluate the severity score of each symptom on a scale of 0 to 4. 
+The social media post is delimited with triple backticks.
+Format your response as a JSON object with serial number of the 21 symptoms as keys.
+
+1. Numbness or tingling
+2. Feeling hot
+3. Wobbliness in legs
+4. Unable to relax
+5. Fear of the worst happening
+6. Dizzy or lightheaded
+7. Heart pounding/racing
+8. Unsteady
+9. Terrified or afraid
+10. Nervous
+11. Feeling of choking
+12. Hands trembling
+13. Shaky/unsteady
+14. Fear of losing control
+15. Difficulty in breathing
+16. Fear of dying
+17. Feeling scared
+18. Indigestion
+19. Faint/lightheaded
+20. Face flushed
+21. Hot/cold sweats
+
+Post:
+```
+
+
+
+
+size of prompt data: (2872, 9)
+
+result_file: ./results/zero_shot/zero_shot_anxiety_bai_mental_flan_t5_seed_1_v1.csv
+
+Sample Input: {'prompt': '\nBelow are  21 common symptoms of anxiety according to the Beck Anxiety Inventory (BAI).\nAs a psychologist, read the social media post and evaluate the severity score of each symptom on a scale of 0 to 4. \nThe social media post is delimited with triple backticks.\nFormat your response as a JSON object with serial number of the 21 symptoms as keys.\n\n1. Numbness or tingling\n2. Feeling hot\n3. Wobbliness in legs\n4. Unable to relax\n5. Fear of the worst happening\n6. Dizzy or lightheaded\n7. Heart pounding/racing\n8. Unsteady\n9. Terrified or afraid\n10. Nervous\n11. Feeling of choking\n12. Hands trembling\n13. Shaky/unsteady\n14. Fear of losing control\n15. Difficulty in breathing\n16. Fear of dying\n17. Feeling scared\n18. Indigestion\n19. Faint/lightheaded\n20. Face flushed\n21. Hot/cold sweats\n\nPost:\n```\nI cut myself for the first time in a year today. and hated that I still loved it. The burning sensation from the blade on my arm and leg. I didnt even cut deep, I barely bled, but the feeling was still almost the same, but without the kick of seeing my own blood trail down my limbs staining the covers in my bed. I told myself that I was only going to cut a few times, but here I am with surely thirty new scars on my body. I fucking hate myself.```'}
+NEU-HAI/mental-flan-t5-xxl
+
+Loaded mental_flan_t5 for prompting...
+
+Model max length: 1024
+
+Device: cuda:3
+
+data: Dataset({
+    features: ['prompt'],
+    num_rows: 2872
+})
+
+tokenized_data: Dataset({
+    features: ['input_ids', 'attention_mask'],
+    num_rows: 2872
+})
+
+
+Preprocessed prompts...
+dataloader size: 1436
+
+
+data processed.
+

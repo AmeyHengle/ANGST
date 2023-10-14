@@ -1,0 +1,8 @@
+Model Name: AIMH/mental-bert-large-cased
+Text Column: text
+Max Length: 512
+Batch Size: 32
+Learning Rate: 2e-06
+Number of Epochs: 30
+Metric Name: eval_loss
+Random State: 3
