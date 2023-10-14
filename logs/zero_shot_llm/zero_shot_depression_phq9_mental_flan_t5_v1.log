@@ -1,0 +1,83 @@
+
+[1;37m#------------------------------------------------------------#[0m
+[1;37m#                                                            #[0m
+[1;37m#             This product would be better if...:             #[0m
+[1;37m#        https://github.com/BerriAI/litellm/issues/new        #[0m
+[1;37m#                                                            #[0m
+[1;37m#------------------------------------------------------------#[0m
+
+ Thank you for using LiteLLM! - Krrish & Ishaan
+
+
+
+Using SHRUTI_OPENAI_API_KEY
+
+
+Process ID: 1936741
+
+Seed: 1
+
+Arguments:
+seed: 1
+data_path: ./data/test/full_test.csv
+model: mental_flan_t5
+prompt_type: depression_phq9
+version: 1
+result_dir: ./results/zero_shot
+
+
+Using prompt depression_phq9:
+
+Below are the 9 symptoms of depression according to the the Patient Health Questionnaire (PHQ-9)
+As a psychologist, read the social media post and determine which of the 9 symptoms observed in the post.
+The social media post is delimited with triple backticks.
+Format your response as a JSON object with serial number of the 9 symptoms as keys and "yes" or "no" as values.
+Do not return anything else apart from the json object.
+
+Symptoms:
+1.Little interest or pleasure in doing things
+2.Feeling down, depressed, or hopeless.
+3.Trouble falling or staying asleep, or sleeping too much.
+4.Feeling tired or having little energy.
+5.Poor appetite or overeating.
+6.Feeling bad about yourself – or that you are a failure or have let yourself or your family down
+7.Trouble concentrating on things, such as reading the newspaper or watching television.
+8.Moving or speaking so slowly that other people could have noticed. Or the opposite – being so fidgety or restless that you have been moving around a lot more than usual.
+9.Thoughts that you would be better off dead, or of hurting yourself in some way.
+
+Post:
+```
+
+
+
+
+size of prompt data: (2872, 9)
+
+result_file: ./results/zero_shot/zero_shot_depression_phq9_mental_flan_t5_seed_1_v1.csv
+
+Sample Input: {'prompt': '\nBelow are the 9 symptoms of depression according to the the Patient Health Questionnaire (PHQ-9)\nAs a psychologist, read the social media post and determine which of the 9 symptoms observed in the post.\nThe social media post is delimited with triple backticks.\nFormat your response as a JSON object with serial number of the 9 symptoms as keys and "yes" or "no" as values.\nDo not return anything else apart from the json object.\n\nSymptoms:\n1.Little interest or pleasure in doing things\n2.Feeling down, depressed, or hopeless.\n3.Trouble falling or staying asleep, or sleeping too much.\n4.Feeling tired or having little energy.\n5.Poor appetite or overeating.\n6.Feeling bad about yourself – or that you are a failure or have let yourself or your family down\n7.Trouble concentrating on things, such as reading the newspaper or watching television.\n8.Moving or speaking so slowly that other people could have noticed. Or the opposite – being so fidgety or restless that you have been moving around a lot more than usual.\n9.Thoughts that you would be better off dead, or of hurting yourself in some way.\n\nPost:\n```\nI cut myself for the first time in a year today. and hated that I still loved it. The burning sensation from the blade on my arm and leg. I didnt even cut deep, I barely bled, but the feeling was still almost the same, but without the kick of seeing my own blood trail down my limbs staining the covers in my bed. I told myself that I was only going to cut a few times, but here I am with surely thirty new scars on my body. I fucking hate myself.```'}
+NEU-HAI/mental-flan-t5-xxl
+
+Loaded mental_flan_t5 for prompting...
+
+Model max length: 1024
+
+Device: cuda:3
+
+data: Dataset({
+    features: ['prompt'],
+    num_rows: 2872
+})
+
+tokenized_data: Dataset({
+    features: ['input_ids', 'attention_mask'],
+    num_rows: 2872
+})
+
+
+Preprocessed prompts...
+dataloader size: 1436
+
+
+data processed.
+
