@@ -160,7 +160,7 @@ def generate_few_shot_prompts(topk=4, task_type='depression', use_semantic_simil
             few_shot_suffix = COMORBIDITY_FEWSHOT_LANGCHAIN['few_shot_suffix'](input_post)
             
         few_shot_examples = ''.join(prompt_template(x['post'], x['label']) for x in few_shot_examples)
-        few_shot_prompt = ''.join([few_shot_prefix, few_shot_examples, few_shot_suffix])        
+        few_shot_prompt = ''.join([few_shot_prefix, few_shot_examples, few_shot_suffix])     
         prompts.append(few_shot_prompt)
         exemplar_labels.append(few_shot_labels)
         
@@ -196,9 +196,8 @@ if __name__ == "__main__":
 """
 Usage:
 python src/few-shot-prompting.py \
-    comorbidity \
-    4 \
-    data/few_shot_prompts/comorbidity_ss_only_num_examples_per_label_4.csv \
-    True \
-    ;
+    anxiety \
+    2 \
+    data/few_shot_prompts/flanT5_anxiety_ss_only_num_examples_per_label_2.csv \
+    True
 """
