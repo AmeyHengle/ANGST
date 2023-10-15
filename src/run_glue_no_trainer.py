@@ -68,6 +68,12 @@ def parse_args():
         choices=list(task_to_keys.keys()),
     )
     parser.add_argument(
+        "--label",
+        type=str,
+        default='label',
+        help="The label to choose",
+    )
+    parser.add_argument(
         "--train_file", type=str, default=None, help="A csv or a json file containing the training data."
     )
     parser.add_argument(
@@ -225,19 +231,20 @@ def main():
     if args.task_name is not None:
         is_regression = args.task_name == "stsb"
         if not is_regression:
-            label_list = raw_datasets["train"].features["label"].names
+            label_list = raw_datasets["train"].features[args.label].names
             num_labels = len(label_list)
         else:
             num_labels = 1
     else:
         # Trying to have good defaults here, don't hesitate to tweak to your needs.
-        is_regression = raw_datasets["train"].features["label"].dtype in ["float32", "float64"]
+        
+        is_regression = raw_datasets["train"].features[args.label].dtype in ["float32", "float64"]
         if is_regression:
             num_labels = 1
         else:
             # A useful fast method:
             # https://huggingface.co/docs/datasets/package_reference/main_classes.html#datasets.Dataset.unique
-            label_list = raw_datasets["train"].unique("label")
+            label_list = raw_datasets["train"].unique(args.label)
             label_list.sort()  # Let's sort it for determinism
             num_labels = len(label_list)
 
@@ -302,13 +309,13 @@ def main():
         )
         result = tokenizer(*texts, padding=padding, max_length=args.max_length, truncation=True)
 
-        if "label" in examples:
+        if args.label in examples:
             if label_to_id is not None:
                 # Map labels to IDs (not necessary for GLUE tasks)
-                result["labels"] = [label_to_id[l] for l in examples["label"]]
+                result["labels"] = [label_to_id[l] for l in examples[args.label]]
             else:
                 # In all cases, rename the column to labels because the model will expect that.
-                result["labels"] = examples["label"]
+                result["labels"] = examples[args.label]
         return result
 
     processed_datasets = raw_datasets.map(
