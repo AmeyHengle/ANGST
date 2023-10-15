@@ -106,7 +106,8 @@ if __name__ == "__main__":
         if args.model in ['gpt-3.5-turbo', 'gpt-4']:
             prompting_function = generate_from_openai_chat_completion
             input = []
-            for text in prompt_data[f'few_shot_prompt_{args.prompt_type}'].tolist():
+            for text in prompt_data['prompt'].tolist():
+            # for text in prompt_data[f'few_shot_prompt_{args.prompt_type}'].tolist():
                 input.append(
                     [
                         {"role": "system", "content": CHAT_MODEL_ROLE},
@@ -155,5 +156,6 @@ if __name__ == "__main__":
     else:
         print(f"\n\n Model {args.model} not supported...")
 
-    prompt_data[f"results_{args.prompt_type}_{args.model}"] = predictions
-    prompt_data.to_csv(result_file, index=False)
+    # prompt_data[f"results_{args.prompt_type}_{args.model}"] = predictions
+    prompt_data[f"silver_label"] = predictions
+    prompt_data.to_csv(os.path.join(args.result_dir, 'full_test_silver_label.csv'), index=False)
