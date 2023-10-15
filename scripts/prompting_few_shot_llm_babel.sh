@@ -3,7 +3,7 @@
 #SBATCH --partition=babel-shared-long
 #SBATCH --cpus-per-task=2
 #SBATCH --gres gpu:4
-#SBATCH --mem-per-gpu=40GB
+#SBATCH --mem-per-gpu=45GB
 #SBATCH --output=logs/few_shot_llm/few_shot_depression_mental_flan_t5_v1_babel.log
 #SBATCH --error=errors/few_shot_llm/few_shot_depression_mental_flan_t5_v1_babel.err
 
