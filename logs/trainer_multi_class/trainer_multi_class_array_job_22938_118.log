@@ -1,0 +1,26 @@
+Model Name: AIMH/mental-longformer-base-4096
+Text Column: text
+Max Length: 1024
+Batch Size: 8
+Learning Rate: 2e-06
+Number of Epochs: 30
+Metric Name: eval_loss
+Random State: 3
+{'loss': 0.5017, 'learning_rate': 1.9613750482811896e-06, 'epoch': 0.58}
+{'eval_loss': 0.2233184427022934, 'eval_f1': 0.865617045543708, 'eval_roc_auc': 0.8975517057119883, 'eval_accuracy': 0.8592753623188406, 'eval_runtime': 212.7961, 'eval_samples_per_second': 32.425, 'eval_steps_per_second': 4.056, 'epoch': 1.0}
+{'loss': 0.2579, 'learning_rate': 1.9227500965623793e-06, 'epoch': 1.16}
+{'loss': 0.2156, 'learning_rate': 1.8841251448435688e-06, 'epoch': 1.74}
+{'eval_loss': 0.1982172131538391, 'eval_f1': 0.8892228684872397, 'eval_roc_auc': 0.922764473658578, 'eval_accuracy': 0.873768115942029, 'eval_runtime': 212.2945, 'eval_samples_per_second': 32.502, 'eval_steps_per_second': 4.065, 'epoch': 2.0}
+{'loss': 0.1992, 'learning_rate': 1.8455001931247585e-06, 'epoch': 2.32}
+{'loss': 0.1911, 'learning_rate': 1.8068752414059483e-06, 'epoch': 2.9}
+{'eval_loss': 0.16459235548973083, 'eval_f1': 0.9130963834534364, 'eval_roc_auc': 0.9398387651770372, 'eval_accuracy': 0.9005797101449275, 'eval_runtime': 212.2088, 'eval_samples_per_second': 32.515, 'eval_steps_per_second': 4.067, 'epoch': 3.0}
+{'loss': 0.1885, 'learning_rate': 1.7682502896871378e-06, 'epoch': 3.48}
+{'eval_loss': 0.14298920333385468, 'eval_f1': 0.9240128636452463, 'eval_roc_auc': 0.9431097710576485, 'eval_accuracy': 0.9155072463768116, 'eval_runtime': 212.2937, 'eval_samples_per_second': 32.502, 'eval_steps_per_second': 4.065, 'epoch': 4.0}
+{'loss': 0.1607, 'learning_rate': 1.7296253379683275e-06, 'epoch': 4.06}
+{'loss': 0.162, 'learning_rate': 1.691000386249517e-06, 'epoch': 4.63}
+{'eval_loss': 0.12832652032375336, 'eval_f1': 0.9346803972300167, 'eval_roc_auc': 0.9521511845017858, 'eval_accuracy': 0.9265217391304348, 'eval_runtime': 212.1818, 'eval_samples_per_second': 32.519, 'eval_steps_per_second': 4.067, 'epoch': 5.0}
+{'loss': 0.148, 'learning_rate': 1.6523754345307069e-06, 'epoch': 5.21}
+{'loss': 0.1516, 'learning_rate': 1.6137504828118964e-06, 'epoch': 5.79}
+{'eval_loss': 0.11576568335294724, 'eval_f1': 0.9449087623708011, 'eval_roc_auc': 0.9631727215345026, 'eval_accuracy': 0.9357971014492754, 'eval_runtime': 211.6997, 'eval_samples_per_second': 32.593, 'eval_steps_per_second': 4.077, 'epoch': 6.0}
+{'loss': 0.1372, 'learning_rate': 1.5751255310930859e-06, 'epoch': 6.37}
+{'loss': 0.1347, 'learning_rate': 1.5365005793742758e-06, 'epoch': 6.95}

@@ -88,7 +88,7 @@ if __name__ == "__main__":
     max_tokens = 64
     prompt_data = pd.read_csv(args.data_path)
         
-    old_result_file = os.path.join(args.result_dir, f"few_shot_{args.prompt_type}_{args.model}_num_examples_ss_{args.num_examples_per_label}_v{args.version}_seed_{args.seed}_old.csv")
+    old_result_file = os.path.join(args.result_dir, f"few_shot_{args.prompt_type}_{args.model}_num_examples_ss_{args.num_examples_per_label}_v{args.version}_seed_{args.seed}_older.csv")
     if os.path.isfile(old_result_file):
         print("Found existing results")
         result_data = pd.read_csv(old_result_file)
@@ -141,11 +141,10 @@ if __name__ == "__main__":
         )
         
     elif args.model in ['flan_t5', 'mental_flan_t5', 'alpaca', 'mental_alpaca']:
-
         input = [{'prompt': text} for text in prompt_data[f'few_shot_prompt_{args.prompt_type}'].tolist()]
         print(f"\nSample Input: {input[0]}")
 
-        generator = LLM_Generator(model_name=args.model, messages_list=input, batch_size=2)
+        generator = LLM_Generator(model_name=args.model, messages_list=input, batch_size=4)
 
         predictions, _, _ = generator.text_completion(
             temperature=1,

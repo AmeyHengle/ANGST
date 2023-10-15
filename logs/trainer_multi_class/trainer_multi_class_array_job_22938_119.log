@@ -1,0 +1,20 @@
+Model Name: AIMH/mental-longformer-base-4096
+Text Column: text
+Max Length: 1024
+Batch Size: 16
+Learning Rate: 2e-06
+Number of Epochs: 30
+Metric Name: eval_loss
+Random State: 3
+{'eval_loss': 0.35395723581314087, 'eval_f1': 0.6241473529006076, 'eval_roc_auc': 0.7661996672009278, 'eval_accuracy': 0.756231884057971, 'eval_runtime': 203.6245, 'eval_samples_per_second': 33.886, 'eval_steps_per_second': 2.122, 'epoch': 1.0}
+{'loss': 0.4784, 'learning_rate': 1.9228395061728396e-06, 'epoch': 1.16}
+{'eval_loss': 0.2166144698858261, 'eval_f1': 0.884917918924252, 'eval_roc_auc': 0.9200338943821997, 'eval_accuracy': 0.8682608695652174, 'eval_runtime': 203.5986, 'eval_samples_per_second': 33.89, 'eval_steps_per_second': 2.122, 'epoch': 2.0}
+{'loss': 0.2477, 'learning_rate': 1.8456790123456789e-06, 'epoch': 2.31}
+{'eval_loss': 0.1790352612733841, 'eval_f1': 0.8998736602598647, 'eval_roc_auc': 0.9305031838045399, 'eval_accuracy': 0.8856521739130435, 'eval_runtime': 203.6336, 'eval_samples_per_second': 33.884, 'eval_steps_per_second': 2.121, 'epoch': 3.0}
+{'loss': 0.2026, 'learning_rate': 1.7685185185185186e-06, 'epoch': 3.47}
+{'eval_loss': 0.15993602573871613, 'eval_f1': 0.9116300529680219, 'eval_roc_auc': 0.9392959506999259, 'eval_accuracy': 0.8992753623188405, 'eval_runtime': 203.5945, 'eval_samples_per_second': 33.891, 'eval_steps_per_second': 2.122, 'epoch': 4.0}
+{'loss': 0.1756, 'learning_rate': 1.6913580246913578e-06, 'epoch': 4.63}
+{'eval_loss': 0.14047837257385254, 'eval_f1': 0.9229393675781407, 'eval_roc_auc': 0.9439101023026754, 'eval_accuracy': 0.912608695652174, 'eval_runtime': 203.5312, 'eval_samples_per_second': 33.901, 'eval_steps_per_second': 2.123, 'epoch': 5.0}
+{'loss': 0.1552, 'learning_rate': 1.6141975308641975e-06, 'epoch': 5.79}
+{'eval_loss': 0.13347533345222473, 'eval_f1': 0.930619891838002, 'eval_roc_auc': 0.9552866709498293, 'eval_accuracy': 0.9172463768115942, 'eval_runtime': 203.4903, 'eval_samples_per_second': 33.908, 'eval_steps_per_second': 2.123, 'epoch': 6.0}
+{'loss': 0.1446, 'learning_rate': 1.537037037037037e-06, 'epoch': 6.94}
