@@ -1,18 +1,18 @@
 #!/bin/bash
 
-#SBATCH --job-name=inference_exp
-#SBATCH --cpus-per-task=4
-#SBATCH --gres gpu:2080Ti:8
-#SBATCH --time=2-23:00:00
-#SBATCH --output=logs/few_shot_llm/few_shot_depression_mental_flan_t5_v1.log
-#SBATCH --error=errors/few_shot_llm/few_shot_depression_mental_flan_t5_v1.err
+#SBATCH --partition=babel-shared-long
+#SBATCH --cpus-per-task=2
+#SBATCH --gres gpu:4
+#SBATCH --mem-per-gpu=40GB
+#SBATCH --output=logs/few_shot_llm/few_shot_depression_mental_flan_t5_v1_babel.log
+#SBATCH --error=errors/few_shot_llm/few_shot_depression_mental_flan_t5_v1_babel.err
 
-# source activate llm_env
+source activate llm_env
 
 RESULT_DIR="./results/few_shot"
 NUM_EXAMPLES_PER_LABEL=2
 VERSION=1
-
+x
 PROMPT_TYPE="depression"
 # PROMPT_TYPE="anxiety"
 # PROMPT_TYPE="comorbidity"

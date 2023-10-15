@@ -1,0 +1,37 @@
+
+[1;37m#------------------------------------------------------------#[0m
+[1;37m#                                                            #[0m
+[1;37m#             This product would be better if...:             #[0m
+[1;37m#        https://github.com/BerriAI/litellm/issues/new        #[0m
+[1;37m#                                                            #[0m
+[1;37m#------------------------------------------------------------#[0m
+
+ Thank you for using LiteLLM! - Krrish & Ishaan
+
+
+
+Using SHRUTI_OPENAI_API_KEY
+
+
+Process ID: 492978
+
+Seed: 1
+
+Arguments:
+seed: 1
+data_path: ./data/few_shot_prompts/mental_flan_t5_depression_ss_only_num_examples_per_label_2.csv
+model: mental_flan_t5
+prompt_type: depression
+num_examples_per_label: 2
+version: 1
+result_dir: ./results/few_shot
+
+
+Using data for depression
+
+
+Found existing results
+
+size of prompt data: (0, 12)
+
+result_file: ./results/few_shot/few_shot_depression_mental_flan_t5_num_examples_ss_2_v1_seed_1_new.csv

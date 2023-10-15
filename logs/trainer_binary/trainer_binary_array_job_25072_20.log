@@ -1,0 +1,19 @@
+Model Name: AIMH/mental-longformer-base-4096
+Label Column: anxiety_label
+Text Column: text
+Max Length: 1024
+Batch Size: 16
+Learning Rate: 2e-05
+Number of Epochs: 30
+Metric Name: eval_loss
+Random State: 2
+{'eval_loss': 0.27720901370048523, 'eval_f1': 0.8941208406011077, 'eval_runtime': 22.6913, 'eval_samples_per_second': 33.801, 'eval_steps_per_second': 2.115, 'epoch': 1.0}
+{'loss': 0.2908, 'learning_rate': 1.9228395061728397e-05, 'epoch': 1.16}
+{'eval_loss': 0.21905994415283203, 'eval_f1': 0.9241273772559585, 'eval_runtime': 22.7157, 'eval_samples_per_second': 33.765, 'eval_steps_per_second': 2.113, 'epoch': 2.0}
+{'loss': 0.1771, 'learning_rate': 1.8456790123456792e-05, 'epoch': 2.31}
+{'eval_loss': 0.25146540999412537, 'eval_f1': 0.9275253818493111, 'eval_runtime': 22.715, 'eval_samples_per_second': 33.766, 'eval_steps_per_second': 2.113, 'epoch': 3.0}
+{'loss': 0.112, 'learning_rate': 1.7685185185185187e-05, 'epoch': 3.47}
+{'eval_loss': 0.3886524438858032, 'eval_f1': 0.9076670332420989, 'eval_runtime': 22.7399, 'eval_samples_per_second': 33.729, 'eval_steps_per_second': 2.111, 'epoch': 4.0}
+{'loss': 0.0598, 'learning_rate': 1.6913580246913582e-05, 'epoch': 4.63}
+{'eval_loss': 0.43649742007255554, 'eval_f1': 0.92471942859295, 'eval_runtime': 22.7064, 'eval_samples_per_second': 33.779, 'eval_steps_per_second': 2.114, 'epoch': 5.0}
+{'train_runtime': 4772.8457, 'train_samples_per_second': 43.37, 'train_steps_per_second': 2.715, 'train_loss': 0.15152952008777196, 'epoch': 5.0}
