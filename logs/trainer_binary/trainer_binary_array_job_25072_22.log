@@ -1,0 +1,26 @@
+Model Name: AIMH/mental-longformer-base-4096
+Label Column: anxiety_label
+Text Column: text
+Max Length: 1024
+Batch Size: 8
+Learning Rate: 2e-06
+Number of Epochs: 30
+Metric Name: eval_loss
+Random State: 2
+{'loss': 0.5046, 'learning_rate': 1.9613750482811896e-06, 'epoch': 0.58}
+{'eval_loss': 0.3356047570705414, 'eval_f1': 0.8910161950733043, 'eval_runtime': 23.4685, 'eval_samples_per_second': 32.682, 'eval_steps_per_second': 4.091, 'epoch': 1.0}
+{'loss': 0.3149, 'learning_rate': 1.9227500965623793e-06, 'epoch': 1.16}
+{'loss': 0.3151, 'learning_rate': 1.8841251448435688e-06, 'epoch': 1.74}
+{'eval_loss': 0.30799761414527893, 'eval_f1': 0.9079475288554473, 'eval_runtime': 23.3872, 'eval_samples_per_second': 32.796, 'eval_steps_per_second': 4.105, 'epoch': 2.0}
+{'loss': 0.2826, 'learning_rate': 1.8455001931247585e-06, 'epoch': 2.32}
+{'loss': 0.2805, 'learning_rate': 1.8068752414059483e-06, 'epoch': 2.9}
+{'eval_loss': 0.29298117756843567, 'eval_f1': 0.9102848615595156, 'eval_runtime': 23.3931, 'eval_samples_per_second': 32.787, 'eval_steps_per_second': 4.104, 'epoch': 3.0}
+{'loss': 0.268, 'learning_rate': 1.7682502896871378e-06, 'epoch': 3.48}
+{'eval_loss': 0.3636012375354767, 'eval_f1': 0.90124900314747, 'eval_runtime': 23.3908, 'eval_samples_per_second': 32.791, 'eval_steps_per_second': 4.104, 'epoch': 4.0}
+{'loss': 0.2382, 'learning_rate': 1.7296253379683275e-06, 'epoch': 4.06}
+{'loss': 0.2393, 'learning_rate': 1.691000386249517e-06, 'epoch': 4.63}
+{'eval_loss': 0.37160661816596985, 'eval_f1': 0.9093668879802775, 'eval_runtime': 23.3627, 'eval_samples_per_second': 32.83, 'eval_steps_per_second': 4.109, 'epoch': 5.0}
+{'loss': 0.2343, 'learning_rate': 1.6523754345307069e-06, 'epoch': 5.21}
+{'loss': 0.2036, 'learning_rate': 1.6137504828118964e-06, 'epoch': 5.79}
+{'eval_loss': 0.3704421818256378, 'eval_f1': 0.9135075002497185, 'eval_runtime': 23.4655, 'eval_samples_per_second': 32.686, 'eval_steps_per_second': 4.091, 'epoch': 6.0}
+{'train_runtime': 5865.1487, 'train_samples_per_second': 35.293, 'train_steps_per_second': 4.414, 'train_loss': 0.28640260987412564, 'epoch': 6.0}
