@@ -183,6 +183,12 @@ def find_annotation_artefacts(data_fn, model, tokenizer, input_key='sentence1', 
 
 if __name__ == "__main__":
     parser.add_argument('--dataset', help='dataset to be used.', required=True, type=str, default='civilcomments', choices=['civilcomments', 'davidson'])
+    parser.add_argument(
+        "--label",
+        type=str,
+        default='label',
+        help="The label to choose",
+    )
     parser.add_argument('--dataset_dir', help='dataset directory', required=True, type=str)
     parser.add_argument('--model_dir', help='model directory', required=True, type=str)
     parser.add_argument('--transform_type', help='which transformation to use', required=True, type=str)
