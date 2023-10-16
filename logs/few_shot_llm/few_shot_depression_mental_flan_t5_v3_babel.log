@@ -1,0 +1,63 @@
+
+[1;37m#------------------------------------------------------------#[0m
+[1;37m#                                                            #[0m
+[1;37m#               A feature I really want is...:                #[0m
+[1;37m#        https://github.com/BerriAI/litellm/issues/new        #[0m
+[1;37m#                                                            #[0m
+[1;37m#------------------------------------------------------------#[0m
+
+ Thank you for using LiteLLM! - Krrish & Ishaan
+
+
+
+Using SHRUTI_OPENAI_API_KEY
+
+
+Process ID: 499872
+
+Seed: 3
+
+Arguments:
+seed: 3
+data_path: ./data/few_shot_prompts/mental_flan_t5_depression_ss_only_num_examples_per_label_2.csv
+model: mental_flan_t5
+prompt_type: depression
+num_examples_per_label: 2
+version: 3
+result_dir: ./results/few_shot
+
+
+Using data for depression
+
+
+
+size of prompt data: (2872, 12)
+
+result_file: ./results/few_shot/few_shot_depression_mental_flan_t5_num_examples_ss_2_v3_seed_3.csv
+
+Sample Input: {'prompt': "Below are posts and their respective assessments based on the criteria for clinical depression as defined in the DSM-5.\nFormat your response as a JSON object 'depression': '' with values either 'yes' or 'no'.\n\nPost: i self harmed tonight more times than i can count. i work in the medical field and im always trying to come up with solutions on how to end it all. all the pain and heartache. im 30 years old and nothing is getting better. i self harm because i feel like i deserve it. the scars on the outside some how feel as if they belong there because of how fucked up i feel on the inside. it isnt fair. i dont want to be here.\n'depression': 'yes'\n\nPost: so, ive been inactive on this account for a while, but im here to just say stuff again like i did in my other two posts or whatever. it seems like ive just started doing it because i got bored. it gives me something to focus on instead of having to think about everything happening at school and home. its also a stress relief for me. whenever im pissed or stressed ill make a scratch or two and it helps a lot. it doesnt seem like theres anything else that works as well as that. i did a dumb thing yet i dont regret it, but i still dont know why i did it. so, i cant remember the saying but its some retarded self harm thing basically meaning you only do it up the thinner part of your arm if you get what i mean if youre looking for attention. i think this made me start to do it more along my arm and a lot deeper. i cant post pictures, but i made about 6 cuts maybe 2 inches long each with a razor and it bled a lot. its scabbed up now, so thats god. anyway, the reason i did it was because my character in a roleplay game got permanently killed. yeah, thats why ive decided to scar myself. i dont know why i did that but i dont feel like i regret it at all. i feel relieved but i dont know why. is this normal? why cant i stop doing this? only two people know about my scars one of them i hate, one of them i never meet so its difficult for me to do or say anything.\n'depression': 'yes'\n\nBased on the above, assess the content of the following post:\nPost: I cut myself for the first time in a year today. and hated that I still loved it. The burning sensation from the blade on my arm and leg. I didnt even cut deep, I barely bled, but the feeling was still almost the same, but without the kick of seeing my own blood trail down my limbs staining the covers in my bed. I told myself that I was only going to cut a few times, but here I am with surely thirty new scars on my body. I fucking hate myself."}
+NEU-HAI/mental-flan-t5-xxl
+
+Loaded mental_flan_t5 for prompting...
+
+Model max length: 1024
+
+Device: cuda:3
+
+data: Dataset({
+    features: ['prompt'],
+    num_rows: 2872
+})
+
+tokenized_data: Dataset({
+    features: ['input_ids', 'attention_mask'],
+    num_rows: 2872
+})
+
+
+Preprocessed prompts...
+dataloader size: 718
+
+
+data processed.
+

@@ -4,15 +4,15 @@
 #SBATCH --cpus-per-task=2
 #SBATCH --gres gpu:4
 #SBATCH --mem-per-gpu=45GB
-#SBATCH --output=logs/few_shot_llm/few_shot_depression_mental_flan_t5_v1_babel.log
-#SBATCH --error=errors/few_shot_llm/few_shot_depression_mental_flan_t5_v1_babel.err
+#SBATCH --output=logs/few_shot_llm/few_shot_depression_mental_flan_t5_v3_babel.log
+#SBATCH --error=errors/few_shot_llm/few_shot_depression_mental_flan_t5_v3_babel.err
 
 source activate llm_env
 
 RESULT_DIR="./results/few_shot"
 NUM_EXAMPLES_PER_LABEL=2
-VERSION=1
-x
+VERSION=3
+
 PROMPT_TYPE="depression"
 # PROMPT_TYPE="anxiety"
 # PROMPT_TYPE="comorbidity"

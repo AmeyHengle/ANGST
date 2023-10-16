@@ -60,7 +60,6 @@ class LLM_Generator:
         )
         self.device = f"cuda:{self.model.hf_device_map['lm_head']}"
         self.max_length = self.tokenizer.model_max_length
-        # self.max_length = 256
         stop_word_list = ["}"]
         stop_words_ids = self.tokenizer(stop_word_list).input_ids
         self.stopping_criteria = StoppingCriteriaList(
@@ -69,6 +68,7 @@ class LLM_Generator:
         print(f"\nLoaded {model_name} for prompting...")
         print(f"\nModel max length: {self.max_length}")
         print(f"\nDevice: {self.device}")
+        print(f"max length: {self.max_length}")
         
         self.prompt_data = hf_dataset.from_list(messages_list)
         print(f"\ndata: {self.prompt_data}")

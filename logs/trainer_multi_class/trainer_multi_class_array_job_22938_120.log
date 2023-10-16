@@ -1,0 +1,15 @@
+Model Name: AIMH/mental-longformer-base-4096
+Text Column: text
+Max Length: 512
+Batch Size: 32
+Learning Rate: 2e-06
+Number of Epochs: 30
+Metric Name: eval_loss
+Random State: 3
+{'eval_loss': 0.4054972231388092, 'eval_f1': 0.5734078470212172, 'eval_roc_auc': 0.7469415672403249, 'eval_accuracy': 0.7398550724637681, 'eval_runtime': 101.6507, 'eval_samples_per_second': 67.879, 'eval_steps_per_second': 2.125, 'epoch': 1.0}
+{'eval_loss': 0.2274876981973648, 'eval_f1': 0.8721932052875174, 'eval_roc_auc': 0.9037454885132522, 'eval_accuracy': 0.8618840579710145, 'eval_runtime': 102.1782, 'eval_samples_per_second': 67.529, 'eval_steps_per_second': 2.114, 'epoch': 2.0}
+{'loss': 0.4114, 'learning_rate': 1.8456790123456789e-06, 'epoch': 2.31}
+{'eval_loss': 0.1890311986207962, 'eval_f1': 0.8956329374405337, 'eval_roc_auc': 0.9226198187931823, 'eval_accuracy': 0.8823188405797101, 'eval_runtime': 101.7306, 'eval_samples_per_second': 67.826, 'eval_steps_per_second': 2.123, 'epoch': 3.0}
+{'eval_loss': 0.17616133391857147, 'eval_f1': 0.9048911688003256, 'eval_roc_auc': 0.9334691611052824, 'eval_accuracy': 0.8898550724637682, 'eval_runtime': 101.4304, 'eval_samples_per_second': 68.027, 'eval_steps_per_second': 2.13, 'epoch': 4.0}
+{'loss': 0.2059, 'learning_rate': 1.6913580246913578e-06, 'epoch': 4.63}
+{'eval_loss': 0.15805481374263763, 'eval_f1': 0.9144000236577137, 'eval_roc_auc': 0.937647914134242, 'eval_accuracy': 0.9020289855072464, 'eval_runtime': 101.3679, 'eval_samples_per_second': 68.069, 'eval_steps_per_second': 2.131, 'epoch': 5.0}
