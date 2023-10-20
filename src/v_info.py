@@ -46,11 +46,12 @@ def v_entropy(data_fn, model, tokenizer, input_key='sentence1', batch_size=100):
         predictions = classifier(batch[input_key].tolist())
 
         for i in range(len(batch)):
-            prob = next(d for d in predictions[i] if d['label'] == batch.iloc[i]['label'])['score']
+            # prob = next(d for d in predictions[i] if d[args.label] == batch.iloc[i][args.label])['score']
+            prob = next(d for d in predictions[i] if d['label'] == batch.iloc[i][args.label])['score']
             entropies.append(-1 * np.log2(prob))
             predicted_label = max(predictions[i], key=lambda x: x['score'])['label'] 
             predicted_labels.append(predicted_label)
-            correct.append(predicted_label == batch.iloc[i]['label'])
+            correct.append(predicted_label == batch.iloc[i][args.label])
 
     torch.cuda.empty_cache()
 
@@ -87,7 +88,7 @@ def v_info(data_fn, model, null_data_fn, null_model, tokenizer, out_fn="", input
     data['PVI'] = data['H_yb'] - data['H_yx']
 
     if out_fn:
-        data.to_csv(out_fn)
+        data.to_csv(out_fn, index=False)
 
     return data
 
@@ -114,7 +115,7 @@ def find_annotation_artefacts(data_fn, model, tokenizer, input_key='sentence1', 
         entry is empty.
     """
     data = pd.read_csv(data_fn)
-    labels = [ l for l in data['label'].unique().tolist() if l >= 0 ] # assume labels are numbers
+    labels = [ l for l in data[args.label].unique().tolist() if l >= 0 ] # assume labels are numbers
     token_entropy_deltas = { l : {} for l in labels }
     all_tokens = set([])
 
@@ -137,7 +138,7 @@ def find_annotation_artefacts(data_fn, model, tokenizer, input_key='sentence1', 
         example = data.iloc[i]
 
 	    # mislabelled examples; ignore these
-        if example['label'] < 0:
+        if example[args.label] < 0:
             continue
 
         if pre_tokenize:
@@ -162,9 +163,10 @@ def find_annotation_artefacts(data_fn, model, tokenizer, input_key='sentence1', 
             predictions.extend(classifier(batch[input_key][k:k+100].tolist()))
         
         for j in range(len(tokens)):
-            prob = next(d for d in predictions[j] if d['label'] == example['label'])['score']
+            # prob = next(d for d in predictions[j] if d[args.label] == example[args.label])['score']
+            prob = next(d for d in predictions[j] if d['label'] == example[args.label])['score']
             entropy_delta = (-1 * np.log2(prob)) - entropies[i]
-            token_entropy_deltas[example['label']][tokens[j]].append(entropy_delta)
+            token_entropy_deltas[example[args.label]][tokens[j]].append(entropy_delta)
 
     torch.cuda.empty_cache()
 
@@ -182,26 +184,24 @@ def find_annotation_artefacts(data_fn, model, tokenizer, input_key='sentence1', 
 
 
 if __name__ == "__main__":
-    parser.add_argument('--dataset', help='dataset to be used.', required=True, type=str, default='civilcomments', choices=['civilcomments', 'davidson'])
-    parser.add_argument(
-        "--label",
-        type=str,
-        default='label',
-        help="The label to choose",
-    )
+    parser.add_argument('--dataset', help='dataset to be used.', required=True, type=str, default='MHCD', choices=['MHCD', 'DATD', 'dreddit', 'dep_reddit', 'SDCNL'])
+    parser.add_argument("--label", type=str, default='label', help="The label to choose")
     parser.add_argument('--dataset_dir', help='dataset directory', required=True, type=str)
     parser.add_argument('--model_dir', help='model directory', required=True, type=str)
-    parser.add_argument('--transform_type', help='which transformation to use', required=True, type=str)
     args = parser.parse_args()
 
-    if args.dataset == 'civilcomments':
-        print("\n\nCalculating vinfo...\n\n")
-        v_info(
-            f"{args.dataset_dir}/{args.dataset}/civilcomments_std.csv",
-            f"{args.model_dir}/bert-base-cased-civilcomments-std",
-            f"{args.dataset_dir}/{args.dataset}/civilcomments_{args.transform_type}.csv",
-            f"{args.model_dir}/bert-base-cased-civilcomments-{args.transform_type}",
-            'bert-base-cased',
-            out_fn=f"{args.dataset_dir}/{args.dataset}/civilcomments_std_{args.transform_type}_vinfo.csv"
-        )
-        print("\n\nDone!\n\n")
+    for key, val in vars(args).items():
+        print(f"{key}: {val}")
+        
+    label = '' if args.label == 'label' else f'-{args.label}'
+    print(label)
+    print("\n\nCalculating vinfo...\n\n")
+    v_info(
+        f"{args.dataset_dir}/{args.dataset}_std.csv",
+        f"{args.model_dir}/mental-bert-base-cased-{args.dataset}-std{label}",
+        f"{args.dataset_dir}/{args.dataset}_null.csv",
+        f"{args.model_dir}/mental-bert-base-cased-{args.dataset}-null{label}",
+        'AIMH/mental-bert-base-cased',
+        out_fn=f"{args.dataset_dir}/{args.dataset}_std_null_vinfo{label}.csv",
+    )
+    print("\n\nDone!\n\n")
