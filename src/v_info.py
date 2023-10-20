@@ -34,7 +34,7 @@ def v_entropy(data_fn, model, tokenizer, input_key='sentence1', batch_size=100):
         tokenizer.pad_token = tokenizer.eos_token
         model = AutoModelForSequenceClassification.from_pretrained(model, pad_token_id=tokenizer.eos_token_id)
 
-    classifier = pipeline('text-classification', model=model, tokenizer=tokenizer, return_all_scores=True, device=0)
+    classifier = pipeline('text-classification', model=model, tokenizer=tokenizer, return_all_scores=True, device=0, padding=True, truncation=True)
     data = pd.read_csv(data_fn)
     
     entropies = []
@@ -185,6 +185,7 @@ def find_annotation_artefacts(data_fn, model, tokenizer, input_key='sentence1', 
 
 if __name__ == "__main__":
     parser.add_argument('--dataset', help='dataset to be used.', required=True, type=str, default='MHCD', choices=['MHCD', 'DATD', 'dreddit', 'dep_reddit', 'SDCNL'])
+    parser.add_argument("--model", type=str, default='roberta-base', help="the model to use")
     parser.add_argument("--label", type=str, default='label', help="The label to choose")
     parser.add_argument('--dataset_dir', help='dataset directory', required=True, type=str)
     parser.add_argument('--model_dir', help='model directory', required=True, type=str)
@@ -198,10 +199,10 @@ if __name__ == "__main__":
     print("\n\nCalculating vinfo...\n\n")
     v_info(
         f"{args.dataset_dir}/{args.dataset}_std.csv",
-        f"{args.model_dir}/mental-bert-base-cased-{args.dataset}-std{label}",
+        f"{args.model_dir}/{args.model}-{args.dataset}-std{label}",
         f"{args.dataset_dir}/{args.dataset}_null.csv",
-        f"{args.model_dir}/mental-bert-base-cased-{args.dataset}-null{label}",
-        'AIMH/mental-bert-base-cased',
-        out_fn=f"{args.dataset_dir}/{args.dataset}_std_null_vinfo{label}.csv",
+        f"{args.model_dir}/{args.model}-{args.dataset}-null{label}",
+        args.model,
+        out_fn=f"{args.dataset_dir}/{args.dataset}_{args.model}_std_null_vinfo{label}.csv",
     )
     print("\n\nDone!\n\n")
