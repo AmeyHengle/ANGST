@@ -1,0 +1,44 @@
+from __gin__ import dynamic_registration
+import __main__ as inference_script
+import src
+import src.utils.data as data_utils
+import transformers
+
+# MODE is either "tests" or "deployment"
+MODE="tests"
+MODEL_DIR = %gin.required
+OUTPUT_DIR = %MODEL_DIR
+BATCH_SIZE = %gin.required
+RESULT_FILE = ""
+EVALUATE_METRICS = ["bleu"]
+GEN_KWARGS = {'do_sample': False}  # For a full range of generation kwargs, see transformers.generation_utils.GenerationMixin.generate
+
+data_utils.get_data:
+    mode = %MODE
+    split = "custom_dataset_test"
+
+transformers.Seq2SeqTrainingArguments:
+    output_dir= %MODEL_DIR
+    per_device_eval_batch_size=%BATCH_SIZE
+    generation_max_length=512
+    generation_num_beams=4
+    predict_with_generate=True  # generation in evaluation
+    prediction_loss_only=False  # generation in evaluation
+
+src.ExplainModel:
+    t5_model_name = %MODEL_DIR
+    from_local=True
+
+src.ExplainModel.predict:
+    dataset = @data_utils.get_data()
+    args = @transformers.Seq2SeqTrainingArguments()
+    gen_kwargs = %GEN_KWARGS
+
+inference_script.evaluate:
+    reference_dict = @data_utils.get_data()
+    metric_names = %EVALUATE_METRICS
+    result_dump_path = %RESULT_FILE
+
+inference_script.predict:
+    model = @src.ExplainModel()
+    output_dir= %OUTPUT_DIR
