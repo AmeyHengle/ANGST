@@ -1,0 +1,75 @@
+10/15/2023 19:59:43 - INFO - __main__ - Distributed environment: DistributedType.NO
+Num processes: 1
+Process index: 0
+Local process index: 0
+Device: cuda
+
+Mixed precision type: no
+
+Downloading data files:   0%|          | 0/1 [00:00<?, ?it/s]Downloading data files: 100%|██████████| 1/1 [00:00<00:00, 17189.77it/s]
+Extracting data files:   0%|          | 0/1 [00:00<?, ?it/s]Extracting data files: 100%|██████████| 1/1 [00:00<00:00, 558.27it/s]
+Generating train split: 0 examples [00:00, ? examples/s]Generating train split: 900 examples [00:00, 124913.09 examples/s]
+loading file vocab.json from cache at /home/atharvak/.cache/huggingface/hub/models--AIMH--mental-roberta-large/snapshots/29ad3d29c98f318aacc321c6807792d393e2c0dd/vocab.json
+loading file merges.txt from cache at /home/atharvak/.cache/huggingface/hub/models--AIMH--mental-roberta-large/snapshots/29ad3d29c98f318aacc321c6807792d393e2c0dd/merges.txt
+loading file tokenizer.json from cache at /home/atharvak/.cache/huggingface/hub/models--AIMH--mental-roberta-large/snapshots/29ad3d29c98f318aacc321c6807792d393e2c0dd/tokenizer.json
+loading file added_tokens.json from cache at None
+loading file special_tokens_map.json from cache at /home/atharvak/.cache/huggingface/hub/models--AIMH--mental-roberta-large/snapshots/29ad3d29c98f318aacc321c6807792d393e2c0dd/special_tokens_map.json
+loading file tokenizer_config.json from cache at /home/atharvak/.cache/huggingface/hub/models--AIMH--mental-roberta-large/snapshots/29ad3d29c98f318aacc321c6807792d393e2c0dd/tokenizer_config.json
+loading configuration file config.json from cache at /home/atharvak/.cache/huggingface/hub/models--AIMH--mental-roberta-large/snapshots/29ad3d29c98f318aacc321c6807792d393e2c0dd/config.json
+Model config RobertaConfig {
+  "_name_or_path": "AIMH/mental-roberta-large",
+  "architectures": [
+    "RobertaForMaskedLM"
+  ],
+  "attention_probs_dropout_prob": 0.1,
+  "bos_token_id": 0,
+  "classifier_dropout": null,
+  "eos_token_id": 2,
+  "gradient_checkpointing": false,
+  "hidden_act": "gelu",
+  "hidden_dropout_prob": 0.1,
+  "hidden_size": 1024,
+  "initializer_range": 0.02,
+  "intermediate_size": 4096,
+  "layer_norm_eps": 1e-05,
+  "max_position_embeddings": 514,
+  "model_type": "roberta",
+  "num_attention_heads": 16,
+  "num_hidden_layers": 24,
+  "pad_token_id": 1,
+  "position_embedding_type": "absolute",
+  "torch_dtype": "float32",
+  "transformers_version": "4.32.1",
+  "type_vocab_size": 1,
+  "use_cache": true,
+  "vocab_size": 50265
+}
+
+loading weights file pytorch_model.bin from cache at /home/atharvak/.cache/huggingface/hub/models--AIMH--mental-roberta-large/snapshots/29ad3d29c98f318aacc321c6807792d393e2c0dd/pytorch_model.bin
+Some weights of the model checkpoint at AIMH/mental-roberta-large were not used when initializing RobertaForSequenceClassification: ['lm_head.layer_norm.bias', 'lm_head.bias', 'lm_head.layer_norm.weight', 'lm_head.dense.bias', 'lm_head.dense.weight']
+- This IS expected if you are initializing RobertaForSequenceClassification from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing RobertaForSequenceClassification from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+Some weights of RobertaForSequenceClassification were not initialized from the model checkpoint at AIMH/mental-roberta-large and are newly initialized: ['classifier.dense.weight', 'classifier.out_proj.weight', 'classifier.dense.bias', 'classifier.out_proj.bias']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+Running tokenizer on dataset:   0%|          | 0/900 [00:00<?, ? examples/s]Running tokenizer on dataset: 100%|██████████| 900/900 [00:00<00:00, 37655.73 examples/s]
+10/15/2023 19:59:48 - INFO - __main__ - Sample 864 of the training set: {'input_ids': [0, 10643, 768, 47, 197, 422, 6331, 293, 19, 3878, 4, 370, 197, 13473, 960, 19, 3591, 4, 2], 'attention_mask': [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], 'labels': 0}.
+10/15/2023 19:59:48 - INFO - __main__ - Sample 394 of the training set: {'input_ids': [0, 118, 437, 15, 127, 78, 2341, 184, 8, 939, 21, 98, 13473, 53, 960, 34, 1613, 1256, 157, 98, 444, 8, 939, 437, 2602, 9, 2185, 2], 'attention_mask': [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], 'labels': 0}.
+10/15/2023 19:59:48 - INFO - __main__ - Sample 776 of the training set: {'input_ids': [0, 100, 213, 149, 10, 1086, 1289, 9, 6882, 137, 38, 1394, 13, 10, 2007, 68, 245, 2], 'attention_mask': [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], 'labels': 0}.
+/home/atharvak/miniconda3/envs/llm_env/lib/python3.11/site-packages/accelerate/accelerator.py:523: FutureWarning: The `use_fp16` property is deprecated and will be removed in version 1.0 of Accelerate use `Accelerator.mixed_precision == 'fp16'` instead.
+  warnings.warn(
+/home/atharvak/miniconda3/envs/llm_env/lib/python3.11/site-packages/transformers/optimization.py:411: FutureWarning: This implementation of AdamW is deprecated and will be removed in a future version. Use the PyTorch implementation torch.optim.AdamW instead, or set `no_deprecation_warning=True` to disable this warning
+  warnings.warn(
+/data/tir/projects/tir4/users/atharvak/mental-health-comorbitidy-classification/src/run_glue_no_trainer.py:395: FutureWarning: load_metric is deprecated and will be removed in the next major version of datasets. Use 'evaluate.load' instead, from the new library 🤗 Evaluate: https://huggingface.co/docs/evaluate
+  metric = load_metric("accuracy")
+10/15/2023 19:59:49 - INFO - __main__ - ***** Running training *****
+10/15/2023 19:59:49 - INFO - __main__ -   Num examples = 900
+10/15/2023 19:59:49 - INFO - __main__ -   Num Epochs = 1
+10/15/2023 19:59:49 - INFO - __main__ -   Instantaneous batch size per device = 16
+10/15/2023 19:59:49 - INFO - __main__ -   Total train batch size (w. parallel, distributed & accumulation) = 16
+10/15/2023 19:59:49 - INFO - __main__ -   Gradient Accumulation steps = 1
+10/15/2023 19:59:49 - INFO - __main__ -   Total optimization steps = 57
+  0%|          | 0/57 [00:00<?, ?it/s]You're using a RobertaTokenizerFast tokenizer. Please note that with a fast tokenizer, using the `__call__` method is faster than using a method to encode the text followed by a call to the `pad` method to get a padded encoding.
+  2%|▏         | 1/57 [00:00<00:25,  2.17it/s]  4%|▎         | 2/57 [00:00<00:14,  3.78it/s]  5%|▌         | 3/57 [00:00<00:10,  5.01it/s]  7%|▋         | 4/57 [00:00<00:08,  5.92it/s]  9%|▉         | 5/57 [00:00<00:07,  6.63it/s] 11%|█         | 6/57 [00:01<00:07,  7.08it/s] 12%|█▏        | 7/57 [00:01<00:06,  7.40it/s] 14%|█▍        | 8/57 [00:01<00:06,  7.90it/s] 16%|█▌        | 9/57 [00:01<00:06,  7.94it/s] 18%|█▊        | 10/57 [00:01<00:05,  7.91it/s] 19%|█▉        | 11/57 [00:01<00:05,  7.71it/s] 21%|██        | 12/57 [00:01<00:06,  7.07it/s] 23%|██▎       | 13/57 [00:01<00:06,  7.27it/s] 25%|██▍       | 14/57 [00:02<00:05,  7.53it/s] 26%|██▋       | 15/57 [00:02<00:05,  7.73it/s] 28%|██▊       | 16/57 [00:02<00:05,  7.94it/s] 30%|██▉       | 17/57 [00:02<00:05,  7.93it/s] 32%|███▏      | 18/57 [00:02<00:04,  7.98it/s] 33%|███▎      | 19/57 [00:02<00:04,  8.05it/s] 35%|███▌      | 20/57 [00:02<00:04,  8.14it/s] 37%|███▋      | 21/57 [00:02<00:04,  8.13it/s] 39%|███▊      | 22/57 [00:03<00:04,  8.12it/s] 40%|████      | 23/57 [00:03<00:04,  8.15it/s] 42%|████▏     | 24/57 [00:03<00:04,  8.08it/s] 44%|████▍     | 25/57 [00:03<00:03,  8.11it/s] 46%|████▌     | 26/57 [00:03<00:04,  7.61it/s] 47%|████▋     | 27/57 [00:03<00:03,  7.51it/s] 49%|████▉     | 28/57 [00:03<00:03,  7.92it/s] 51%|█████     | 29/57 [00:03<00:03,  7.70it/s] 53%|█████▎    | 30/57 [00:04<00:03,  7.83it/s] 54%|█████▍    | 31/57 [00:04<00:03,  7.06it/s] 56%|█████▌    | 32/57 [00:04<00:03,  7.43it/s] 58%|█████▊    | 33/57 [00:04<00:03,  7.65it/s] 60%|█████▉    | 34/57 [00:04<00:02,  7.80it/s] 61%|██████▏   | 35/57 [00:04<00:02,  7.91it/s] 63%|██████▎   | 36/57 [00:04<00:02,  8.05it/s] 65%|██████▍   | 37/57 [00:05<00:02,  8.16it/s] 67%|██████▋   | 38/57 [00:05<00:02,  8.16it/s] 68%|██████▊   | 39/57 [00:05<00:02,  8.16it/s] 70%|███████   | 40/57 [00:05<00:02,  8.23it/s] 72%|███████▏  | 41/57 [00:05<00:01,  8.48it/s] 74%|███████▎  | 42/57 [00:05<00:01,  8.46it/s] 75%|███████▌  | 43/57 [00:05<00:01,  8.46it/s] 77%|███████▋  | 44/57 [00:05<00:01,  8.35it/s] 79%|███████▉  | 45/57 [00:05<00:01,  8.37it/s] 81%|████████  | 46/57 [00:06<00:01,  8.20it/s] 82%|████████▏ | 47/57 [00:06<00:01,  8.17it/s] 84%|████████▍ | 48/57 [00:06<00:01,  8.21it/s] 86%|████████▌ | 49/57 [00:06<00:01,  7.28it/s] 88%|████████▊ | 50/57 [00:06<00:00,  7.26it/s] 89%|████████▉ | 51/57 [00:06<00:00,  7.49it/s] 91%|█████████ | 52/57 [00:06<00:00,  7.66it/s] 93%|█████████▎| 53/57 [00:07<00:00,  7.79it/s] 95%|█████████▍| 54/57 [00:07<00:00,  8.14it/s] 96%|█████████▋| 55/57 [00:07<00:00,  8.08it/s] 98%|█████████▊| 56/57 [00:07<00:00,  8.13it/s]100%|██████████| 57/57 [00:07<00:00,  7.37it/s]10/15/2023 19:59:59 - INFO - __main__ - epoch 0: {'accuracy': 0.7177777777777777}
+Configuration saved in models/v_info/mental-roberta-large-DATD-std-/config.json
+Model weights saved in models/v_info/mental-roberta-large-DATD-std-/pytorch_model.bin
+100%|██████████| 57/57 [00:12<00:00,  4.47it/s]

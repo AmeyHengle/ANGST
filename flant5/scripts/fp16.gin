@@ -1,6 +1,0 @@
-import src
-from gin.torch import external_configurables
-
-src.ExplainModel:
-    torch_dtype = %torch.float16
-    model_parallelize_for_larger_models = False
