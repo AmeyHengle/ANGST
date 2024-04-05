@@ -1,12 +1,10 @@
 import os
+import random
 import argparse
 import pandas as pd
 import asyncio
 from utils import set_random_seed
-from openai_completions import (
-    generate_from_openai_completion,
-    generate_from_openai_chat_completion
-)
+from openai_completions import generate_from_openai_chat_completion
 from llm_completions import LLM_Generator
 from prompts import (
     CHAT_MODEL_ROLE,
@@ -20,6 +18,7 @@ from prompts import (
     ANXIETY_MENTAL_LLM,
     COMORBIDITY,
 )
+
 
 
 def parse_config():
@@ -112,44 +111,38 @@ if __name__ == "__main__":
     print(f"\nsize of prompt data: {prompt_data.shape}")
     print(f"\nresult_file: {result_file}")
     
-    if args.model in ['gpt-3.5-turbo', 'gpt-4', 'text-davinci-003', 'text-davinci-002', 'code-davinci-002']:
+    # OPENAI Chat Models
+    if args.model in ['gpt-3.5-turbo', 'gpt-4']:
         
-        # OPENAI Chat Models
-        if args.model in ['gpt-3.5-turbo', 'gpt-4']:
-            prompting_function = generate_from_openai_chat_completion
-            input = []
-            for text in prompt_data["text"].tolist():
-                if "mental_llm" in args.prompt_type:
-                        input.append(
-                        [
-                            {"role": "system", "content": CHAT_MODEL_ROLE},
-                            {"role": "user", "content": text + llm_prompt},
-                        ]
-                    )
-                else:
+        input = []
+        for text in prompt_data["text"].tolist():
+            if "mental_llm" in args.prompt_type:
                     input.append(
-                        [
-                            {"role": "system", "content": CHAT_MODEL_ROLE},
-                            {"role": "user", "content": llm_prompt + text + "```"},
-                        ]
-                    )
-
-        # OPENAI Completion Models
-        else:
-            prompting_function = generate_from_openai_completion
-            input = []
-            for text in prompt_data["text"].tolist():
-                input.append(llm_prompt + text + "```")
-        print(f"\nSample Input: {input[0]}")
-        
+                    [
+                        {"role": "system", "content": CHAT_MODEL_ROLE},
+                        {"role": "user", "content": text + llm_prompt},
+                    ]
+                )
+            else:
+                input.append(
+                    [
+                        {"role": "system", "content": CHAT_MODEL_ROLE},
+                        {"role": "user", "content": llm_prompt + text + "```"},
+                    ]
+                )
+        index = random.randint(0, len(input))
+        print(f"\nSample Input: {input[index]}")
+                
         print(f"\n\nQuerying OpenAI {args.model}:\n")
         predictions = asyncio.run(
-            prompting_function(
-                messages_list=input,
+            generate_from_openai_chat_completion(
+                messages_list=input[:2],
                 model=args.model,
                 temperature=0,
+                top_p=0.95,
                 max_tokens=max_tokens,
-                api_key=API_KEY,
+                api_key="OPENAI_API_KEY",
+                # org_key="OPENAI_ORG_KEY",
                 requests_per_minute=30,
             )
         )
@@ -172,5 +165,5 @@ if __name__ == "__main__":
     else:
         print(f"\n\n Model {args.model} not supported...")
 
-    prompt_data[f"results_{args.prompt_type}_{args.model}"] = predictions
-    prompt_data.to_csv(result_file, index=False)
+    # prompt_data[f"results_{args.prompt_type}_{args.model}"] = predictions
+    # prompt_data.to_csv(result_file, index=False)

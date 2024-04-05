@@ -21,20 +21,20 @@ MODEL="gpt-3.5-turbo"
 #      'anxiety_mental_llm', 
 #      'comorbidity'
 # ]
-PROMPT_TYPE="depression_mards"
+PROMPT_TYPE="depression"
 
-# python3 src/prompting_zero_shot.py \
-# --seed $VERSION \
-# --data_path $DATA_PATH \
-# --model $MODEL \
-# --prompt_type $PROMPT_TYPE \
-# --version $VERSION \
-# --result_dir $RESULT_DIR
-
-nohup python3 -u src/prompting_zero_shot.py \
+python3 src/prompting_zero_shot.py \
 --seed $VERSION \
 --data_path $DATA_PATH \
 --model $MODEL \
 --prompt_type $PROMPT_TYPE \
 --version $VERSION \
---result_dir $RESULT_DIR > ./logs/zero_shot/zero_shot_${PROMPT_TYPE}_${MODEL}_version_${VERSION}_seed_${VERSION}.log &
+--result_dir $RESULT_DIR
+
+# nohup python3 -u src/prompting_zero_shot.py \
+# --seed $VERSION \
+# --data_path $DATA_PATH \
+# --model $MODEL \
+# --prompt_type $PROMPT_TYPE \
+# --version $VERSION \
+# --result_dir $RESULT_DIR > ./logs/zero_shot/zero_shot_${PROMPT_TYPE}_${MODEL}_version_${VERSION}_seed_${VERSION}.log &

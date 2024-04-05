@@ -4,21 +4,12 @@ import pandas as pd
 import random
 import asyncio
 from utils import set_random_seed
-from openai_completions import (
-    generate_from_openai_completion,
-    generate_from_openai_chat_completion
-)
+from openai_completions import generate_from_openai_chat_completion
 from llm_completions import LLM_Generator
 from prompts import CHAT_MODEL_ROLE
    
-
-# API_KEY = "OPENAI_API_KEY"
-API_KEY = "SHRUTI_OPENAI_API_KEY"
-# API_KEY = "ANDY_OPENAI_API_KEY"
-# API_KEY = "JOEL_OPENAI_API_KEY"
-print(f"\nUsing {API_KEY}\n")
-
-
+   
+   
 def parse_config():
     parser = argparse.ArgumentParser()
     parser.add_argument(
@@ -100,37 +91,23 @@ if __name__ == "__main__":
     print(f"\nsize of prompt data: {prompt_data.shape}")
     print(f"\nresult_file: {result_file}")
     
-    if args.model in ['gpt-3.5-turbo', 'gpt-4', 'text-davinci-003', 'text-davinci-002', 'code-davinci-002']:
+    if args.model in ['gpt-3.5-turbo', 'gpt-4']:
         
-        # OPENAI Chat Models
-        if args.model in ['gpt-3.5-turbo', 'gpt-4']:
-            prompting_function = generate_from_openai_chat_completion
-            input = []
-            for text in prompt_data['prompt'].tolist():
-            # for text in prompt_data[f'few_shot_prompt_{args.prompt_type}'].tolist():
-                input.append(
-                    [
-                        {"role": "system", "content": CHAT_MODEL_ROLE},
-                        {"role": "user", "content": text},
-                    ]
-                )
-
-        # OPENAI Completion Models
-        else:
-            prompting_function = generate_from_openai_completion
-            input = []
-            for text in prompt_data[f'few_shot_prompt_{args.prompt_type}'].tolist():
-                if "mental_llm" in args.prompt_type:
-                    input.append(text + llm_prompt)
-                else:
-                    input.append(llm_prompt + text + "```")
-
+        input = []
+        for text in prompt_data['prompt'].tolist():
+        # for text in prompt_data[f'few_shot_prompt_{args.prompt_type}'].tolist():
+            input.append(
+                [
+                    {"role": "system", "content": CHAT_MODEL_ROLE},
+                    {"role": "user", "content": text},
+                ]
+            )
         index = random.randint(0, len(input))
         print(f"\nSample Input: {input[index]}")
         
         print("\n\nQuerying OpenAI:\n")
         predictions = asyncio.run(
-            prompting_function(
+            generate_from_openai_chat_completion(
                 messages_list=input,
                 model=args.model,
                 temperature=0,
