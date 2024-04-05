@@ -21,12 +21,6 @@ from prompts import (
     COMORBIDITY,
 )
 
-API_KEY = "OPENAI_API_KEY"
-# API_KEY = "SHRUTI_OPENAI_API_KEY"
-# API_KEY = "ANDY_OPENAI_API_KEY"
-# API_KEY = "JOEL_OPENAI_API_KEY"
-print(f"\nUsing {API_KEY}\n")
-
 
 def parse_config():
     parser = argparse.ArgumentParser()
