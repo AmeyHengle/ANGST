@@ -72,7 +72,14 @@ class LLM_Generator:
         else:
             raise ValueError(f'Model {self.model_name_or_path} is not adapted for the sequence generation task')
 
-        self.device = f"cuda:{self.model.hf_device_map['lm_head']}"
+        print(f"\ncurrent device: {torch.cuda.current_device()}\n")
+        device_mapping = self.model.hf_device_map
+        print(device_mapping)
+        if len(device_mapping.keys()) < 2:
+            self.device = f"cuda:{list(device_mapping.values())[0]}"
+        else:
+            self.device = f"cuda:{device_mapping['lm_head']}"
+            
         self.max_length = self.tokenizer.model_max_length
         stop_word_list = ["}"]
         stop_words_ids = self.tokenizer(stop_word_list).input_ids
@@ -169,7 +176,7 @@ class LLM_Generator:
                 early_stopping=False,
                 return_dict_in_generate=True, 
                 output_scores=False,
-                stopping_criteria=self.stopping_criteria,
+                # stopping_criteria=self.stopping_criteria,
             )
             input_length = 1 if self.model.config.is_encoder_decoder else model_inputs['input_ids'].shape[1]
             sequences = [self.tokenizer.decode(sequence, skip_special_tokens=True) for sequence in outputs.sequences[:, input_length:].detach().cpu()]

@@ -94,7 +94,7 @@ if __name__ == "__main__":
     if args.prompt_type in ['depression_mards', 'depression_phq9', 'anxiety_bai', 'anxiety_hamilton']:
         max_tokens = 1024
     else:
-        max_tokens = 64
+        max_tokens = 16
     prompt_data = pd.read_csv(args.data_path)
     
     old_result_file = os.path.join(args.result_dir, f"zero_shot_{args.prompt_type}_{args.model}_seed_{args.seed}_v{args.version}_old.csv")
@@ -158,10 +158,10 @@ if __name__ == "__main__":
         index = random.randint(0, len(input))
         print(f"\nSample Input: {input[index]['prompt']}")
               
-        generator = LLM_Generator(model_name=args.model, messages_list=input, batch_size=2)
+        generator = LLM_Generator(model_name=args.model, messages_list=input[:20], batch_size=16)
 
         predictions = generator.text_completion(
-            temperature=0,
+            temperature=1,
             max_tokens=max_tokens,
             top_p=0.95,
         )
