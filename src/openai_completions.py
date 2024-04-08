@@ -18,7 +18,6 @@ ERROR_ERRORS_TO_MESSAGES = {
 }
 
 
-
 async def _throttled_openai_chat_completion_acreate(
     model: str,
     messages: list,

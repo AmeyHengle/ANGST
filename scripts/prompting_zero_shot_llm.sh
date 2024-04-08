@@ -1,22 +1,20 @@
 #!/bin/bash
 
-#SBATCH --job-name=inference_exp
-#SBATCH --partition=babel-shared-long
-#SBATCH --cpus-per-task=2
-#SBATCH --gres gpu:4
+#SBATCH --job-name=llm_inference_exp
+#SBATCH --partition=general
+#SBATCH --time=1-23:58:00
+#SBATCH --gres gpu:A6000:2
+#SBATCH --cpus-per-task=4
 #SBATCH --mem-per-gpu=40GB
-#SBATCH --time=2-23:00:00
-#SBATCH --output=logs/zero_shot_llm/zero_shot_anxiety_hamilton_mental_flan_t5_v1.log
-#SBATCH --error=errors/zero_shot_llm/zero_shot_anxiety_hamilton_mental_flan_t5_v1.err
-
-source activate llm_env
+#SBATCH --output=logs/zero_shot_llm/depression_mental_llama_chat_7b.log
+#SBATCH --error=errors/zero_shot_llm/depression_mental_llama_chat_7b.err
 
 DATA_PATH="./data/test/full_test.csv"
 RESULT_DIR="./results/zero_shot"
 VERSION=1
 
-MODEL="mental_flan_t5"
-# MODEL="mental_alpaca"
+MODEL="mental_llama_chat_7b"
+# MODEL="mental_llama_chat_13b"
 
 # choices=[
 #     'depression_mards', 
@@ -29,9 +27,7 @@ MODEL="mental_flan_t5"
 #      'anxiety_mental_llm', 
 #      'comorbidity'
 # ]
-# PROMPT_TYPE="depression"
-# PROMPT_TYPE="anxiety"
-PROMPT_TYPE="anxiety_hamilton"
+PROMPT_TYPE="depression"
 
 python3 src/prompting_zero_shot.py \
 --seed $VERSION \

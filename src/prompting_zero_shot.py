@@ -2,10 +2,7 @@ import os
 import random
 import argparse
 import pandas as pd
-import asyncio
 from utils import set_random_seed
-from openai_completions import generate_from_openai_chat_completion
-from llm_completions import LLM_Generator
 from prompts import (
     CHAT_MODEL_ROLE,
     DEPRESSION_MARDS,
@@ -18,7 +15,8 @@ from prompts import (
     ANXIETY_MENTAL_LLM,
     COMORBIDITY,
 )
-
+import pprint
+pp = pprint.PrettyPrinter(indent=4)
 
 
 def parse_config():
@@ -39,7 +37,7 @@ def parse_config():
         '--model', 
         type=str, 
         default="gpt-3.5-turbo",
-        choices=["gpt-3.5-turbo", "gpt-4", "flan_t5", "mental_flan_t5", "alpaca", "mental_alpaca"],
+        choices=["gpt-3.5-turbo", "gpt-4", "mental_llama_chat_7b", "mental_llama_chat_13b"],
         help="type of model to use for prompting."
     )
     parser.add_argument(
@@ -114,6 +112,9 @@ if __name__ == "__main__":
     # OPENAI Chat Models
     if args.model in ['gpt-3.5-turbo', 'gpt-4']:
         
+        import asyncio
+        from openai_completions import generate_from_openai_chat_completion
+
         input = []
         for text in prompt_data["text"].tolist():
             if "mental_llm" in args.prompt_type:
@@ -131,12 +132,12 @@ if __name__ == "__main__":
                     ]
                 )
         index = random.randint(0, len(input))
-        print(f"\nSample Input: {input[index]}")
+        pp.pprint(f"\nSample Input: {input[index]}")
                 
         print(f"\n\nQuerying OpenAI {args.model}:\n")
         predictions = asyncio.run(
             generate_from_openai_chat_completion(
-                messages_list=input[:2],
+                messages_list=input,
                 model=args.model,
                 temperature=0,
                 top_p=0.95,
@@ -147,19 +148,22 @@ if __name__ == "__main__":
             )
         )
     
-    elif args.model in ['flan_t5', 'mental_flan_t5', 'alpaca', 'mental_alpaca']:
+    elif args.model in ['mental_llama_chat_7b', 'mental_llama_chat_13b']:
+        from llm_completions import LLM_Generator
 
         input = []
         for text in prompt_data["text"].tolist():
             input.append({'prompt': llm_prompt + text + "```"})
-        print(f"\nSample Input: {input[0]}")
-
+        
+        index = random.randint(0, len(input))
+        print(f"\nSample Input: {input[index]['prompt']}")
+              
         generator = LLM_Generator(model_name=args.model, messages_list=input, batch_size=2)
 
-        predictions, _, _ = generator.text_completion(
-            temperature=1,
+        predictions = generator.text_completion(
+            temperature=0,
             max_tokens=max_tokens,
-            top_p=1,
+            top_p=0.95,
         )
         
     else:
