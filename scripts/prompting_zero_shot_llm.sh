@@ -3,7 +3,7 @@
 #SBATCH --job-name=llm_inference_exp
 #SBATCH --partition=general
 #SBATCH --time=1-23:58:00
-#SBATCH --gres gpu:A6000:2
+#SBATCH --gres gpu:A6000:1
 #SBATCH --cpus-per-task=4
 #SBATCH --mem-per-gpu=40GB
 #SBATCH --output=logs/zero_shot_llm/depression_mental_llama_chat_7b.log
