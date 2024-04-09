@@ -6,8 +6,8 @@
 #SBATCH --gres gpu:A6000:1
 #SBATCH --cpus-per-task=4
 #SBATCH --mem-per-gpu=40GB
-#SBATCH --output=logs/zero_shot_llm/depression_mental_llama_chat_7b.log
-#SBATCH --error=errors/zero_shot_llm/depression_mental_llama_chat_7b.err
+#SBATCH --output=logs/zero_shot_llm/anxiety_mental_llama_chat_7b.log
+#SBATCH --error=errors/zero_shot_llm/anxiety_mental_llama_chat_7b.err
 
 DATA_PATH="./data/test/full_test.csv"
 RESULT_DIR="./results/zero_shot"
@@ -27,7 +27,7 @@ MODEL="mental_llama_chat_7b"
 #      'anxiety_mental_llm', 
 #      'comorbidity'
 # ]
-PROMPT_TYPE="depression"
+PROMPT_TYPE="anxiety_llama"
 
 python3 src/prompting_zero_shot.py \
 --seed $VERSION \

@@ -9,10 +9,12 @@ from prompts import (
     DEPRESSION_PHQ9,
     DEPRESSION,
     DEPRESSION_MENTAL_LLM,
+    DEPRESSION_ZEROSHOT_LLAMA,
     ANXIETY_BAI,
     ANXIETY_HAMILTON,
     ANXIETY,
     ANXIETY_MENTAL_LLM,
+    ANXIETY_ZEROSHOT_LLAMA,
     COMORBIDITY,
 )
 import pprint
@@ -44,7 +46,7 @@ def parse_config():
         '--prompt_type', 
         type=str, 
         default="depression",
-        choices=['depression_mards', 'depression_phq9', 'depression', 'depression_mental_llm', 'anxiety_bai', 'anxiety_hamilton', 'anxiety', 'anxiety_mental_llm', 'comorbidity'],
+        choices=['depression_mards', 'depression_phq9', 'depression', 'depression_mental_llm', 'depression_llama', 'anxiety_bai', 'anxiety_hamilton', 'anxiety', 'anxiety_mental_llm', 'anxiety_llama', 'comorbidity'],
         help='Type of prompt to use.'
     )
     parser.add_argument(
@@ -83,10 +85,12 @@ if __name__ == "__main__":
          'depression_phq9': DEPRESSION_PHQ9, 
          'depression': DEPRESSION, 
          'depression_mental_llm': DEPRESSION_MENTAL_LLM, 
+         'depression_llama': DEPRESSION_ZEROSHOT_LLAMA,
          'anxiety_bai': ANXIETY_BAI, 
          'anxiety_hamilton': ANXIETY_HAMILTON, 
          'anxiety': ANXIETY,
          'anxiety_mental_llm': ANXIETY_MENTAL_LLM,
+         'anxiety_llama': ANXIETY_ZEROSHOT_LLAMA,
          'comorbidity': COMORBIDITY,
     }[args.prompt_type]
     print(f"Using prompt {args.prompt_type}:\n{llm_prompt}\n\n")
@@ -153,12 +157,13 @@ if __name__ == "__main__":
 
         input = []
         for text in prompt_data["text"].tolist():
-            input.append({'prompt': llm_prompt + text + "```"})
+            input.append({'prompt': "Post: " + text + f"\n{llm_prompt}"})
+            # input.append({'prompt': llm_prompt + text + "```"})
         
         index = random.randint(0, len(input))
         print(f"\nSample Input: {input[index]['prompt']}")
               
-        generator = LLM_Generator(model_name=args.model, messages_list=input[:20], batch_size=16)
+        generator = LLM_Generator(model_name=args.model, messages_list=input, batch_size=2)
 
         predictions = generator.text_completion(
             temperature=1,
@@ -169,7 +174,7 @@ if __name__ == "__main__":
     else:
         print(f"\n\n Model {args.model} not supported...")
 
-    for prediction in predictions:
-        print(f"{predictions}\n")
+    # for prediction in predictions:
+    #     print(f"{prediction}\n")
     prompt_data[f"results_{args.prompt_type}_{args.model}"] = predictions
     prompt_data.to_csv(result_file, index=False)

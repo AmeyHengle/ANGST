@@ -180,6 +180,7 @@ class LLM_Generator:
             )
             input_length = 1 if self.model.config.is_encoder_decoder else model_inputs['input_ids'].shape[1]
             sequences = [self.tokenizer.decode(sequence, skip_special_tokens=True) for sequence in outputs.sequences[:, input_length:].detach().cpu()]
-            # gc.collect()
-            # torch.cuda.empty_cache()
-        return sequences
+            responses.extend(sequences)
+            gc.collect()
+            torch.cuda.empty_cache()
+        return responses

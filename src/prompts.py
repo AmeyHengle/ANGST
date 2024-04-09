@@ -85,6 +85,10 @@ Post: {post}
 Assesement:
 '''
 
+DEPRESSION_ZEROSHOT_LLAMA = '''
+Does the poster suffer from depression?
+'''
+
 DEPRESSION_FEWSHOT = '''
 Below are posts and their respective assessments based on the criteria for clinical depression as defined in the DSM-5.
 Format your response as a JSON object {'depression':''} with values either 'yes' or 'no'.
@@ -233,6 +237,9 @@ Format your response as a JSON object {'anxiety':''} with values either 'yes' or
 
 Post: {post}
 Assesement: 
+'''
+ANXIETY_ZEROSHOT_LLAMA = '''
+Does the poster suffer from anxiety?
 '''
 
 ANXIETY_FEWSHOT = '''
