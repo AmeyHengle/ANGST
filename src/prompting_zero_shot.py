@@ -9,13 +9,14 @@ from prompts import (
     DEPRESSION_PHQ9,
     DEPRESSION,
     DEPRESSION_MENTAL_LLM,
-    DEPRESSION_ZEROSHOT_LLAMA,
+    DEPRESSION_LLAMA,
     ANXIETY_BAI,
     ANXIETY_HAMILTON,
     ANXIETY,
     ANXIETY_MENTAL_LLM,
-    ANXIETY_ZEROSHOT_LLAMA,
+    ANXIETY_LLAMA,
     COMORBIDITY,
+    COMORBIDITY_LLAMA,
 )
 import pprint
 pp = pprint.PrettyPrinter(indent=4)
@@ -46,7 +47,7 @@ def parse_config():
         '--prompt_type', 
         type=str, 
         default="depression",
-        choices=['depression_mards', 'depression_phq9', 'depression', 'depression_mental_llm', 'depression_llama', 'anxiety_bai', 'anxiety_hamilton', 'anxiety', 'anxiety_mental_llm', 'anxiety_llama', 'comorbidity'],
+        choices=['depression_mards', 'depression_phq9', 'depression', 'depression_mental_llm', 'depression_llama', 'anxiety_bai', 'anxiety_hamilton', 'anxiety', 'anxiety_mental_llm', 'anxiety_llama', 'comorbidity', 'comorbidity_llama'],
         help='Type of prompt to use.'
     )
     parser.add_argument(
@@ -85,13 +86,14 @@ if __name__ == "__main__":
          'depression_phq9': DEPRESSION_PHQ9, 
          'depression': DEPRESSION, 
          'depression_mental_llm': DEPRESSION_MENTAL_LLM, 
-         'depression_llama': DEPRESSION_ZEROSHOT_LLAMA,
+         'depression_llama': DEPRESSION_LLAMA,
          'anxiety_bai': ANXIETY_BAI, 
          'anxiety_hamilton': ANXIETY_HAMILTON, 
          'anxiety': ANXIETY,
          'anxiety_mental_llm': ANXIETY_MENTAL_LLM,
-         'anxiety_llama': ANXIETY_ZEROSHOT_LLAMA,
+         'anxiety_llama': ANXIETY_LLAMA,
          'comorbidity': COMORBIDITY,
+         'comorbidity_llama': COMORBIDITY_LLAMA
     }[args.prompt_type]
     print(f"Using prompt {args.prompt_type}:\n{llm_prompt}\n\n")
     

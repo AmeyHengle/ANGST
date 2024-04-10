@@ -2,12 +2,7 @@ import os
 import argparse
 import pandas as pd
 import random
-import asyncio
 from utils import set_random_seed
-from openai_completions import generate_from_openai_chat_completion
-from llm_completions import LLM_Generator
-from prompts import CHAT_MODEL_ROLE
-   
    
    
 def parse_config():
@@ -28,7 +23,7 @@ def parse_config():
         '--model', 
         type=str, 
         default="gpt-3.5-turbo",
-        choices=["gpt-3.5-turbo", "gpt-4", "flan_t5", "mental_flan_t5", "alpaca", "mental_alpaca"],
+        choices=["gpt-3.5-turbo", "gpt-4", "mental_llama_chat_7b", "mental_llama_chat_13b"],
         help="type of model to use for prompting."
     )
     parser.add_argument(
@@ -76,7 +71,7 @@ if __name__ == "__main__":
     print("\n")
     print(f"Using data for {args.prompt_type}\n\n")
     
-    max_tokens = 64
+    max_tokens = 24
     prompt_data = pd.read_csv(args.data_path)
         
     old_result_file = os.path.join(args.result_dir, f"few_shot_{args.prompt_type}_{args.model}_num_examples_ss_{args.num_examples_per_label}_v{args.version}_seed_{args.seed}_older.csv")
@@ -93,6 +88,10 @@ if __name__ == "__main__":
     
     if args.model in ['gpt-3.5-turbo', 'gpt-4']:
         
+        import asyncio
+        from openai_completions import generate_from_openai_chat_completion
+        from prompts import CHAT_MODEL_ROLE
+
         input = []
         for text in prompt_data['prompt'].tolist():
         # for text in prompt_data[f'few_shot_prompt_{args.prompt_type}'].tolist():
@@ -111,27 +110,31 @@ if __name__ == "__main__":
                 messages_list=input,
                 model=args.model,
                 temperature=0,
+                top_p=0.95,
                 max_tokens=max_tokens,
-                api_key=API_KEY,
-                requests_per_minute=20,
+                api_key="OPENAI_API_KEY",
+                # org_key="OPENAI_ORG_KEY",
+                requests_per_minute=30,
             )
         )
         
-    elif args.model in ['flan_t5', 'mental_flan_t5', 'alpaca', 'mental_alpaca']:
+    elif args.model in ['mental_llama_chat_7b', 'mental_llama_chat_13b']:
+        from llm_completions import LLM_Generator
+
         input = [{'prompt': text} for text in prompt_data[f'few_shot_prompt_{args.prompt_type}'].tolist()]
-        print(f"\nSample Input: {input[0]}")
+        index = random.randint(0, len(input))
+        print(f"\nSample Input: {input[index]['prompt']}")
 
         generator = LLM_Generator(model_name=args.model, messages_list=input, batch_size=4)
 
-        predictions, _, _ = generator.text_completion(
+        predictions = generator.text_completion(
             temperature=1,
             max_tokens=max_tokens,
-            top_p=1,
+            top_p=0.95,
         )
         
     else:
         print(f"\n\n Model {args.model} not supported...")
 
-    # prompt_data[f"results_{args.prompt_type}_{args.model}"] = predictions
-    prompt_data[f"silver_label"] = predictions
-    prompt_data.to_csv(os.path.join(args.result_dir, 'full_test_silver_label.csv'), index=False)
+    prompt_data[f"results_{args.prompt_type}_{args.model}"] = predictions
+    prompt_data.to_csv(result_file, index=False)

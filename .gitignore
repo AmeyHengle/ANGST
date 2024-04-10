@@ -108,6 +108,7 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+.err
 
 # Spyder project settings
 .spyderproject
@@ -138,12 +139,10 @@ multilabel-clf/wandb
 binary-clf/depression_label
 binary-clf/anxiety_label
 binary-clf/wandb
-<<<<<<< Updated upstream
 AIMH
 wandb
 
 
-=======
 
 AIMH/*
 !AIMH/*/
@@ -158,4 +157,3 @@ depression_label/*
 anxiety_label/*
 !anxiety_label/*/
 !anxiety_label/**/*.csv
->>>>>>> Stashed changes

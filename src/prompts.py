@@ -296,6 +296,10 @@ Format your response as a JSON object {'depression':'' 'anxiety': } with values 
 Do not return anything else apart from the json object.
 """
 
+COMORBIDITY_LLAMA = '''
+Does the poster suffer from anxiety, depression, both or None?
+'''
+
 
 COMORBIDITY_FEWSHOT_1 = """
 Below are posts and their respective assessments based on the criteria for clinical depression and clinical anxiety respectively as defined in the DSM-5.
