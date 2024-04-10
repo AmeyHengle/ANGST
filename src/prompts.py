@@ -38,7 +38,6 @@ Post:
 ```
 '''
 
-
 DEPRESSION_PHQ9 = '''
 Below are the 9 symptoms of depression according to the the Patient Health Questionnaire (PHQ-9)
 As a psychologist, read the social media post and determine which of the 9 symptoms observed in the post.
@@ -77,15 +76,7 @@ and answer the question.
 Determine if the poster of this post is depressed.
 '''
 
-DEPRESSION_ZEROSHOT = '''
-Given the below post, assess whether its content aligns with the criteria for clinical depression as defined in the DSM-5.
-Format your response as a JSON object {'depression':''} with values either 'yes' or 'no'.
-
-Post: {post}
-Assesement:
-'''
-
-DEPRESSION_ZEROSHOT_LLAMA = '''
+DEPRESSION_LLAMA = '''
 Does the poster suffer from depression?
 '''
 
@@ -122,6 +113,22 @@ Assessment:
 '''
 }
 
+DEPRESSION_FEWSHOT_LLAMA_LANGCHAIN = {
+"few_shot_prefix": '''
+You will be presented with a post and an assigned label to identify whether the poster shows symptoms of depression. Here are two examples:
+'''
+,
+"prompt_template": lambda post, label: f'''
+Post: {post}
+Response: {label}
+'''
+,
+"few_shot_suffix": lambda post: f'''
+Post: {post}
+Response:
+'''
+}
+
 # ----------------------------------------- ANXIETY PROMPTS -----------------------------------------
 
 ANXIETY_BAI = '''
@@ -155,8 +162,6 @@ Format your response as a JSON object with serial number of the 21 symptoms as k
 Post:
 ```
 '''
-
-
 
 ANXIETY_HAMILTON = '''
 Below are the 14 symptoms of anxiety and their definitions according to the Hamilton Anxiety Rating Scale.
@@ -212,8 +217,6 @@ Post:
 ```
 '''
 
-
-
 ANXIETY = '''
 Assess whether the content of the post delimited by triple backticks aligns with the criteria for clinical anxiety as defined in DSM-5:
 Format your response as a JSON object {'anxiety':''} with values strictly either 'yes' or 'no'.
@@ -223,22 +226,13 @@ Post:
 ```
 '''
 
-
-
 ANXIETY_MENTAL_LLM = '''
 This person wrote this paragraph on social media. As a psychologist, read the post on social media
 and answer the question.
 Determine if the poster of this post has anxiety.
 '''
 
-ANXIETY_ZEROSHOT = '''
-Given the below post, assess whether its content aligns with the criteria for clinical anxiety as defined in the DSM-5.
-Format your response as a JSON object {'anxiety':''} with values either 'yes' or 'no'.
-
-Post: {post}
-Assesement: 
-'''
-ANXIETY_ZEROSHOT_LLAMA = '''
+ANXIETY_LLAMA = '''
 Does the poster suffer from anxiety?
 '''
 
@@ -274,6 +268,23 @@ Post: {post}
 Assessment:
 '''
 }
+
+ANXIETY_FEWSHOT_LLAMA_LANGCHAIN = {
+"few_shot_prefix": '''
+You will be presented with a post and an assigned label to identify whether the poster shows symptoms of anxiety. Here are two examples:
+'''
+,
+"prompt_template": lambda post, label: f'''
+Post: {post}
+Response: {label}
+'''
+,
+"few_shot_suffix": lambda post: f'''
+Post: {post}
+Response:
+'''
+}
+
 # ----------------------------------------- DEPRESSION-ANXIETY COMORBIDITY PROMPTS -----------------------------------------
 
 COMORBIDITY = """
@@ -332,6 +343,22 @@ Assesement: {label}
 Based on the above, assess the content of the following post:
 Post: {post}
 Assessment:
+'''
+}
+
+COMORBIDITY_FEWSHOT_LLAMA_LANGCHAIN = {
+"few_shot_prefix": '''
+You will be presented with a post and an assigned label to identify whether the poster shows symptoms of both anxiety and depression. Here are two examples:
+'''
+,
+"prompt_template": lambda post, label: f'''
+Post: {post}
+Response: {label}
+'''
+,
+"few_shot_suffix": lambda post: f'''
+Post: {post}
+Response:
 '''
 }
 
