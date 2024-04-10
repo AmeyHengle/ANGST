@@ -1,0 +1,59 @@
+
+Process ID: 3016886
+
+Seed: 3
+
+Arguments:
+seed: 3
+data_path: ./data/test/full_test.csv
+model: mental_llama_chat_7b
+prompt_type: comorbidity_llama
+version: 3
+result_dir: ./results/zero_shot
+
+
+Using prompt comorbidity_llama:
+
+Does the poster suffer from anxiety, depression, both or None?
+
+
+
+
+size of prompt data: (2872, 9)
+
+result_file: ./results/zero_shot/zero_shot_comorbidity_llama_mental_llama_chat_7b_seed_3_v3.csv
+
+Sample Input: Post: How do you stick to good habits when youre depressed. I have a bad habit of dropping good habits I start when I am having a bad day. When Im having a good day depression is tolerable, I eat healthy, exercise, socialize etc. However, when I get extremely depressed, all of my progress goes out the window. I tend to isolate myself, binge on junk food, and waste the day watching porn and playing video games. I was going to the gym nearly everyday about a year ago, and I made some incredible gains. My depression wasnt that bad at that point though. Im sure consistently exercising had something to do with it. However, come summertime, I quit working out and isolated myself in my house. I spent the whole summer wasting away, and my anxiety and depression got that much worse. I know that deep inside of me, I want to be productive. I want to be healthy. I want to go out and meet new people. Whenever I try to implement good lifestyle habits into my routine, the voice at the back of my head tells me that Ill just fall back into a relapse in a couple of days. For some background info, I am 17, and I have been diagnosed with severe depression and am on an antidepressant which has helped tremendously. Right now I am being assessed for possible bipolar disorder, but we are not completely sure yet. Im just sick and tired of starting something productive, then never continuing it in the long run. Any advice or personal stories would be greatly appreciated. If you got this far, thanks for reading. Have a great day!
+
+Does the poster suffer from anxiety, depression, both or None?
+
+klyang/MentaLLaMA-chat-7B-hf
+
+current device: 0
+
+{'': 0}
+
+Loaded mental_llama_chat_7b for prompting...
+
+Model max length: 2048
+
+Device: cuda:0
+max length: 2048
+
+data: Dataset({
+    features: ['prompt'],
+    num_rows: 2872
+})
+
+tokenized_data: Dataset({
+    features: ['input_ids', 'attention_mask'],
+    num_rows: 2872
+})
+
+
+Preprocessed prompts...
+dataloader size: 1436
+
+
+data processed.
+

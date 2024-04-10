@@ -1,0 +1,65 @@
+
+Process ID: 37933
+
+Seed: 1
+
+Arguments:
+seed: 1
+data_path: ./data/few_shot_prompts/anxiety_llama_num_examples_ss_2.csv
+model: mental_llama_chat_7b
+prompt_type: anxiety
+num_examples_per_label: 2
+version: 1
+result_dir: ./results/few_shot
+
+
+Using data for anxiety
+
+
+
+size of prompt data: (2872, 12)
+
+result_file: ./results/few_shot/few_shot_anxiety_mental_llama_chat_7b_num_examples_ss_2_v1_seed_1.csv
+
+Sample Input: 
+You will be presented with a post and an assigned label to identify whether the poster shows symptoms of anxiety. Here are two examples:
+
+Post: hi everyone! i have recently attempted suicide and not many people know about it. i am always alone and when i am alone is when i get depressed the most. i havent had any suicidal thoughts since december up until as recent as valentines day as i have no one to celebrate it with. my dad is also dying from terminal lukemia and we dont exactly know how long he has left. i am on anti depressants and i am going to see my dr tomorrow as i dont think they are working at all. i have been on them since the 1st january and i dont feel any different. i am ok around people but when i am alone is when i get depressed. i cant sleep without the help of medication, i tried earlier this week to sleep without my triazolam and quetiapine but if i dont have them i dont get a wink of sleep and it sucks. i wish i had the luxury of friends my only two friends i have both live in aus and im in nz. i am so close to these 2 that i was andrews best man at his wedding last year in thailand. andrew knows what i have been through recently and josh doesnt as he has alot on his plate currently and i dont want to pile on to his plate. i enjoy gaming, cars,technology and cooking but as of recently with all of this going on i have found myself not enjoying gaming as much as i use too.
+Response: no
+
+Post: hi everyone! i recently attempted suicide by pills obviously failed i am at home with nobody to really talk to or do anything with anybody. im 27 into gaming, cooking, movies and tv and cars. my family does not know about the attempts and i would like to keep it that way for now. i am flatting and my flatmates dont even know. i was also diagnosed with depression recently but i feel it has been going on for years as i cannot recall a time where i was actually happy.
+Response: no
+
+Post: I am always alone. Hi everyone! i have recently attempted suicide and not many people know about it. I am always alone and when I am alone is when I get depressed the most. I havent had any suicidal thoughts since december up until as recent as valentines day as I have no one to celebrate it with. My dad is also dying from Terminal Lukemia and we dont exactly know how long he has left. I am on anti depressants and I am going to see my DR tomorrow as I dont think they are working at all. I have been on them since the 1st January and I dont feel any different. I am ok around people but when I am alone is when I get depressed. I cant sleep without the help of medication, I tried earlier this week to sleep without my triazolam and quetiapine but if I dont have them I dont get a wink of sleep and it sucks. I wish I had the luxury of friends my only two friends I have both live in Aus and im in NZ. I am so close to these 2 that I was Andrews best man at his wedding last year in Thailand. Andrew knows what I have been through recently and Josh doesnt as he has alot on his plate currently and I dont want to pile on to his plate. I enjoy gaming, cars,technology and cooking but as of recently with all of this going on I have found myself not enjoying gaming as much as I use too.
+Response:
+
+klyang/MentaLLaMA-chat-7B-hf
+
+current device: 0
+
+{'': 0}
+
+Loaded mental_llama_chat_7b for prompting...
+
+Model max length: 2048
+
+Device: cuda:0
+max length: 2048
+
+data: Dataset({
+    features: ['prompt'],
+    num_rows: 2872
+})
+
+tokenized_data: Dataset({
+    features: ['input_ids', 'attention_mask'],
+    num_rows: 2872
+})
+
+
+Preprocessed prompts...
+dataloader size: 718
+
+
+data processed.
+
