@@ -116,20 +116,26 @@ class LLM_Generator:
         examples['prompt'] = [
             line for line in examples['prompt'] if len(line) > 0 and not line.isspace()
         ]
-        return self.tokenizer(
+        
+        tokenized_examples = self.tokenizer(
             examples['prompt'],
-            padding=True,
-            truncation=True,
-            add_special_tokens=False,
-            return_tensors="pt"
+            max_length=int(self.max_length*0.95),
+            stride=int(self.max_length*0.05),
+            padding="max_length",
+            truncation="only_second",
+            return_overflowing_tokens=True,
+            return_offsets_mapping=True,
         )
+        sample_mapping = tokenized_examples.pop("overflow_to_sample_mapping")
+        offset_mapping = tokenized_examples.pop("offset_mapping")
+        return tokenized_examples
+    
         
-        
+
     def preprocess_data(self):
         self.tokenized_prompts = self.prompt_data.map(
             self.tokenize_function,
             batched=True,
-            # batch_size=self.batch_size,
             remove_columns=list(self.prompt_data.features.keys()),
             load_from_cache_file=False,
         )
@@ -184,3 +190,11 @@ class LLM_Generator:
             gc.collect()
             torch.cuda.empty_cache()
         return responses
+
+    
+
+# tokenizer = AutoTokenizer.from_pretrained(
+#     "klyang/MentaLLaMA-chat-7B-hf", 
+#     padding_side="left",
+#     trust_remote_code=True
+# )

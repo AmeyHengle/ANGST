@@ -89,6 +89,11 @@ def generate_few_shot_prompts(
                 
                 if "llama" in model:
                     exemplar_label = row['depression_label']['depression']
+                    exemplar_label = {
+                        "yes": "Yes, the poster suffers from depression. Reasoning: The language of the post and the symptoms mentioned are indicative of depression as per DSM-5.",
+                        "no": "No, the poster does not suffer from depression. Reasoning: The language of the post and the symptoms mentioned are NOT indicative of depression as per DSM-5."
+                    }[exemplar_label.lower()]
+                
                 else:
                     exemplar_label = row['depression_label']
                     
@@ -120,6 +125,10 @@ def generate_few_shot_prompts(
                 
                 if "llama" in model:
                     exemplar_label = row['anxiety_label']['anxiety']
+                    exemplar_label = {
+                        "yes": "Yes, the poster suffers from anxiety. Reasoning: The language of the post and the symptoms mentioned are indicative of anxiety as per DSM-5.",
+                        "no": "No, the poster does not suffer from anxiety. Reasoning: The language of the post and the symptoms mentioned are NOT indicative of anxiety as per DSM-5."
+                    }[exemplar_label.lower()]
                 else:
                     exemplar_label = row['anxiety_label']
                     

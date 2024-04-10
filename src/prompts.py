@@ -115,7 +115,7 @@ Assessment:
 
 DEPRESSION_FEWSHOT_LLAMA_LANGCHAIN = {
 "few_shot_prefix": '''
-You will be presented with a post and an assigned label to identify whether the poster shows symptoms of depression. Here are two examples:
+You will be presented with a post and an assigned label to identify whether the poster shows symptoms of depression. Consider this post to explain the reasoning of the label step by step. Here are two examples:
 '''
 ,
 "prompt_template": lambda post, label: f'''
@@ -271,7 +271,7 @@ Assessment:
 
 ANXIETY_FEWSHOT_LLAMA_LANGCHAIN = {
 "few_shot_prefix": '''
-You will be presented with a post and an assigned label to identify whether the poster shows symptoms of anxiety. Here are two examples:
+You will be presented with a post and an assigned label to identify whether the poster shows symptoms of anxiety. Consider this post to explain the reasoning of the label step by step. Here are two examples:
 '''
 ,
 "prompt_template": lambda post, label: f'''
