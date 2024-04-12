@@ -55,6 +55,11 @@ def parse_config():
         help='Type of prompt to use.'
     )
     parser.add_argument(
+        '--chat_input', 
+        action="store_true", 
+        help="whether to format input as a chat"
+    )
+    parser.add_argument(
         '--version', 
         type=int, 
         default=1,
@@ -107,15 +112,20 @@ if __name__ == "__main__":
         max_tokens = 16
     prompt_data = pd.read_csv(args.data_path)
     
-    old_result_file = os.path.join(args.result_dir, f"zero_shot_{args.prompt_type}_{args.model}_seed_{args.seed}_v{args.version}_old.csv")
+    if args.chat_input:
+        filename = f"zero_shot_{args.prompt_type}_{args.model}_chat_input_seed_{args.seed}_v{args.version}"  
+    else:
+        filename = f"zero_shot_{args.prompt_type}_{args.model}_seed_{args.seed}_v{args.version}"
+        
+    old_result_file = os.path.join(args.result_dir, f"{filename}_old.csv")
     if os.path.isfile(old_result_file):
         print("Found existing results")
         result_data = pd.read_csv(old_result_file)
         ids = result_data[result_data[f'results_{args.prompt_type}_{args.model}'].isnull()]['id'].tolist()
         prompt_data = prompt_data[prompt_data['id'].isin(ids)].reset_index(drop=True)
-        result_file = os.path.join(args.result_dir, f"zero_shot_{args.prompt_type}_{args.model}_seed_{args.seed}_v{args.version}_new.csv")
+        result_file = os.path.join(args.result_dir, f"{filename}_new.csv")
     else:
-        result_file = os.path.join(args.result_dir, f"zero_shot_{args.prompt_type}_{args.model}_seed_{args.seed}_v{args.version}.csv")
+        result_file = os.path.join(args.result_dir, f"{filename}.csv")
         
     # prompt_data = prompt_data[:20]
     print(f"\nsize of prompt data: {prompt_data.shape}")
@@ -129,20 +139,12 @@ if __name__ == "__main__":
 
         input = []
         for text in prompt_data["text"].tolist():
-            if "mental_llm" in args.prompt_type:
-                    input.append(
-                    [
-                        {"role": "system", "content": CHAT_MODEL_ROLE},
-                        {"role": "user", "content": text + llm_prompt},
-                    ]
-                )
-            else:
-                input.append(
-                    [
-                        {"role": "system", "content": CHAT_MODEL_ROLE},
-                        {"role": "user", "content": llm_prompt + text + "```"},
-                    ]
-                )
+            input.append(
+                [
+                    {"role": "system", "content": CHAT_MODEL_ROLE},
+                    {"role": "user", "content": llm_prompt + text + "```"},
+                ]
+            )
         index = random.randint(0, len(input))
         pp.pprint(f"\nSample Input: {input[index]}")
                 
@@ -165,13 +167,26 @@ if __name__ == "__main__":
 
         input = []
         for text in prompt_data["text"].tolist():
-            input.append({'prompt': "Post: " + text + f"\n{llm_prompt}"})
-            # input.append({'prompt': llm_prompt + text + "```"})
+            if args.chat_input:
+                input.append({
+                    'prompt': [
+                        {"role": "system", "content": CHAT_MODEL_ROLE},
+                        {"role": "user", "content": f"Post: {text}\n{llm_prompt}"},
+                        {"role": "assistant", "content": ""},
+                    ]
+                })
+
+            else:
+                input.append({'prompt': f"Post: {text}\n{llm_prompt}"})
         
         index = random.randint(0, len(input))
-        print(f"\nSample Input: {input[index]['prompt']}")
+        if args.chat_input:
+            print("Sample Input: ")
+            pp.pprint(input[index]['prompt'])
+        else:
+            print(f"\nSample Input: {input[index]['prompt']}")
               
-        generator = LLM_Generator(model_name=args.model, messages_list=input, batch_size=2)
+        generator = LLM_Generator(model_name=args.model, chat_input=args.chat_input, messages_list=input, batch_size=2)
 
         predictions = generator.text_completion(
             temperature=1,

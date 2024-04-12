@@ -1,5 +1,5 @@
 
-Process ID: 2638996
+Process ID: 472897
 
 Seed: 2
 
@@ -35,10 +35,7 @@ current device: 0
 
 Loaded llama_chat_7b for prompting...
 
-Model max length: 2048
-
 Device: cuda:0
-max length: 2048
 
 data: Dataset({
     features: ['prompt'],

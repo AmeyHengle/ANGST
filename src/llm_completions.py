@@ -9,28 +9,18 @@ from transformers import (
     AutoTokenizer,
     AutoModelForCausalLM,
     AutoModelForSeq2SeqLM,
-    StoppingCriteria,
-    StoppingCriteriaList,
     default_data_collator
 )
 from datasets import Dataset as hf_dataset
 
 
-class CustomStoppingCriteria(StoppingCriteria):
-    def __init__(self, stops = []):
-        StoppingCriteria.__init__(self), 
-
-    def __call__(self, input_ids: torch.LongTensor, scores: torch.FloatTensor, stops = []):
-        self.stops = stops
-        for i in range(len(stops)):
-            self.stops = self.stops[i]
- 
   
 class LLM_Generator:
        
     def __init__(
         self,
         model_name: str,
+        chat_input: bool,
         messages_list: list,
         batch_size: int
     ):
@@ -39,13 +29,20 @@ class LLM_Generator:
         Args:
             messages_list: List of full contexts to generate from.
             model_name: Model type.
+            chat_input: Whether to use chat input or not.
             temperature: Temperature to use.
             max_tokens: Maximum number of tokens to generate.
             top_p: P value for nucleus sampling.
             batch_size: Length of context to use.
         """
         self.batch_size = batch_size
-        
+        if chat_input:
+            self.data_type = "chat"
+            self.tokenize_function = self.tokenize_chat
+        else:
+            sel.data_type = "text"
+            self.tokenize_function = self.tokenize_text
+
         self.validate_model_name(model_name)
         print(self.model_name)
         
@@ -62,15 +59,14 @@ class LLM_Generator:
             self.model = AutoModelForCausalLM.from_pretrained(
                 self.model_name, 
                 trust_remote_code=True,
-                device_map="balanced_low_0",
-                token=self.token,
+                device_map="auto",
             )
             
         elif any([("Seq2SeqLM" in architecture) or ("ConditionalGeneration" in architecture) for architecture in config.architectures]):
             self.model = AutoModelForSeq2SeqLM.from_pretrained(
                 self.model_name, 
                 trust_remote_code=True,
-                device_map="balanced_low_0"
+                device_map="auto"
             )
                         
         else:
@@ -84,17 +80,8 @@ class LLM_Generator:
         else:
             self.device = f"cuda:{device_mapping['lm_head']}"
             
-        # self.max_length = self.tokenizer.model_max_length
-        self.max_length = 2048 if self.tokenizer.model_max_length > 2048 else self.tokenizer.model_max_length
-        stop_word_list = ["}"]
-        stop_words_ids = self.tokenizer(stop_word_list).input_ids
-        self.stopping_criteria = StoppingCriteriaList(
-            [CustomStoppingCriteria(stops = stop_words_ids)]
-        )
         print(f"\nLoaded {model_name} for prompting...")
-        print(f"\nModel max length: {self.max_length}")
         print(f"\nDevice: {self.device}")
-        print(f"max length: {self.max_length}")
         
         self.prompt_data = hf_dataset.from_list(messages_list)
         print(f"\ndata: {self.prompt_data}")
@@ -115,14 +102,10 @@ class LLM_Generator:
         }
         assert model_type in model_dict, f"\n\nmodel_type not available... List of available models: {list(model_dict)}\n\n"
         self.model_name = model_dict[model_type]
-        
-        if "meta" in self.model_name:
-            self.token = "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"
-        else:
-            self.token = None
+
 
         
-    def tokenize_function(
+    def tokenize_text(
         self,
         examples
     ):
@@ -131,25 +114,32 @@ class LLM_Generator:
         ]
         tokenized_examples = self.tokenizer(
             examples['prompt'],
-            max_length=int(self.max_length*0.95),
-            stride=int(self.max_length*0.05),
-            padding="max_length",
-            truncation="only_second",
-            return_overflowing_tokens=True,
-            return_offsets_mapping=True,
+            padding=True,
+            truncation=True,
         )
-        sample_mapping = tokenized_examples.pop("overflow_to_sample_mapping")
-        offset_mapping = tokenized_examples.pop("offset_mapping")
         return tokenized_examples
     
-        
+    
+    def tokenize_chat(
+        self,
+        examples
+    ):
+        tokenized_examples = self.tokenizer.apply_chat_template(
+            examples['prompt'], 
+            tokenize=True, 
+            add_generation_prompt=True, 
+        )
+        return tokenized_examples
+
+
 
     def preprocess_data(self):
         self.tokenized_prompts = self.prompt_data.map(
             self.tokenize_function,
             batched=True,
             remove_columns=list(self.prompt_data.features.keys()),
-            load_from_cache_file=False,
+            load_from_cache_file=True,
+            desc=f"Tokenizing {self.data_type} data"
         )
         print(f"\ntokenized_data: {self.tokenized_prompts}\n")
         self.dataloader = DataLoader(
@@ -159,6 +149,7 @@ class LLM_Generator:
             batch_size=self.batch_size
         )
         print(f"\nPreprocessed prompts...\ndataloader size: {len(self.dataloader)}\n")
+        
         
         
     def text_completion(
@@ -194,7 +185,6 @@ class LLM_Generator:
                 early_stopping=False,
                 return_dict_in_generate=True, 
                 output_scores=False,
-                # stopping_criteria=self.stopping_criteria,
             )
             input_length = 1 if self.model.config.is_encoder_decoder else model_inputs['input_ids'].shape[1]
             sequences = [self.tokenizer.decode(sequence, skip_special_tokens=True) for sequence in outputs.sequences[:, input_length:].detach().cpu()]
