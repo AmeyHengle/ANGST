@@ -77,7 +77,7 @@ Determine if the poster of this post is depressed.
 '''
 
 DEPRESSION_LLAMA = '''
-Does the poster suffer from depression?
+Does the poster suffer from depression? Strictly answers as 'Yes' or 'No'.
 '''
 
 DEPRESSION_FEWSHOT = '''
@@ -115,17 +115,17 @@ Assessment:
 
 DEPRESSION_FEWSHOT_LLAMA_LANGCHAIN = {
 "few_shot_prefix": '''
-You will be presented with a post and an assigned label to identify whether the poster shows symptoms of depression. Consider this post to explain the reasoning of the label step by step. Here are two examples:
+You will be presented with a post and an assigned label to identify whether the poster shows symptoms of depression. Strictly answer as 'Yes' or 'No' only. Here are two examples:
 '''
 ,
 "prompt_template": lambda post, label: f'''
-Post: {post}
-Response: {label}
+Post: {post}\nQuestion: Does the poster suffer from depression?
+Answer: {label}
 '''
 ,
 "few_shot_suffix": lambda post: f'''
-Post: {post}
-Response:
+Post: {post}\nQuestion: Does the poster suffer from depression?
+Answer:
 '''
 }
 
@@ -233,7 +233,7 @@ Determine if the poster of this post has anxiety.
 '''
 
 ANXIETY_LLAMA = '''
-Does the poster suffer from anxiety?
+Does the poster suffer from anxiety? Strictly answers as 'Yes' or 'No'.
 '''
 
 ANXIETY_FEWSHOT = '''

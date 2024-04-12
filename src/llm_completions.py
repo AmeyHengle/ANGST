@@ -24,8 +24,8 @@ class CustomStoppingCriteria(StoppingCriteria):
         self.stops = stops
         for i in range(len(stops)):
             self.stops = self.stops[i]
-            
-               
+ 
+  
 class LLM_Generator:
        
     def __init__(
@@ -48,22 +48,26 @@ class LLM_Generator:
         
         self.validate_model_name(model_name)
         print(self.model_name)
+        
         config = AutoConfig.from_pretrained(self.model_name, trust_remote_code=True)
         self.tokenizer = AutoTokenizer.from_pretrained(
             self.model_name, 
             padding_side="left",
-            trust_remote_code=True
         )
+        if self.tokenizer.pad_token is None:
+            self.tokenizer.pad_token = self.tokenizer.eos_token
+            
         # Configure the model
         if any(["CausalLM" in architecture for architecture in config.architectures]):
-            self.model = self.model = AutoModelForCausalLM.from_pretrained(
+            self.model = AutoModelForCausalLM.from_pretrained(
                 self.model_name, 
                 trust_remote_code=True,
-                device_map="balanced_low_0"
+                device_map="balanced_low_0",
+                token=self.token,
             )
             
         elif any([("Seq2SeqLM" in architecture) or ("ConditionalGeneration" in architecture) for architecture in config.architectures]):
-            self.model = self.model = AutoModelForSeq2SeqLM.from_pretrained(
+            self.model = AutoModelForSeq2SeqLM.from_pretrained(
                 self.model_name, 
                 trust_remote_code=True,
                 device_map="balanced_low_0"
@@ -80,7 +84,8 @@ class LLM_Generator:
         else:
             self.device = f"cuda:{device_mapping['lm_head']}"
             
-        self.max_length = self.tokenizer.model_max_length
+        # self.max_length = self.tokenizer.model_max_length
+        self.max_length = 2048 if self.tokenizer.model_max_length > 2048 else self.tokenizer.model_max_length
         stop_word_list = ["}"]
         stop_words_ids = self.tokenizer(stop_word_list).input_ids
         self.stopping_criteria = StoppingCriteriaList(
@@ -104,10 +109,18 @@ class LLM_Generator:
         model_dict = {
             'mental_llama_chat_7b': 'klyang/MentaLLaMA-chat-7B-hf', 
             'mental_llama_chat_13b': 'klyang/MentaLLaMA-chat-13B', 
+            'llama_chat_7b': '/data/models/huggingface/meta-llama/Llama-2-7b-chat-hf', 
+            'llama_chat_13b': '/data/models/huggingface/meta-llama/Llama-2-13b-chat-hf', 
+            'llama_chat_70b': '/data/models/huggingface/meta-llama/Llama-2-70b-chat-hf'
         }
         assert model_type in model_dict, f"\n\nmodel_type not available... List of available models: {list(model_dict)}\n\n"
         self.model_name = model_dict[model_type]
         
+        if "meta" in self.model_name:
+            self.token = "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"
+        else:
+            self.token = None
+
         
     def tokenize_function(
         self,
@@ -116,7 +129,6 @@ class LLM_Generator:
         examples['prompt'] = [
             line for line in examples['prompt'] if len(line) > 0 and not line.isspace()
         ]
-        
         tokenized_examples = self.tokenizer(
             examples['prompt'],
             max_length=int(self.max_length*0.95),
@@ -190,11 +202,9 @@ class LLM_Generator:
             gc.collect()
             torch.cuda.empty_cache()
         return responses
-
     
-
-# tokenizer = AutoTokenizer.from_pretrained(
-#     "klyang/MentaLLaMA-chat-7B-hf", 
-#     padding_side="left",
-#     trust_remote_code=True
-# )
+    
+    # tokenizer = AutoTokenizer.from_pretrained(
+    #     model_name, 
+    #     padding_side="left",
+    # )

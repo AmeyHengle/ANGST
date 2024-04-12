@@ -89,9 +89,13 @@ def generate_few_shot_prompts(
                 
                 if "llama" in model:
                     exemplar_label = row['depression_label']['depression']
+                    # exemplar_label = {
+                    #     "yes": "Yes, the poster suffers from depression. Reasoning: The language of the post and the symptoms mentioned are indicative of depression as per DSM-5.",
+                    #     "no": "No, the poster does not suffer from depression. Reasoning: The language of the post and the symptoms mentioned are NOT indicative of depression as per DSM-5."
+                    # }[exemplar_label.lower()]
                     exemplar_label = {
-                        "yes": "Yes, the poster suffers from depression. Reasoning: The language of the post and the symptoms mentioned are indicative of depression as per DSM-5.",
-                        "no": "No, the poster does not suffer from depression. Reasoning: The language of the post and the symptoms mentioned are NOT indicative of depression as per DSM-5."
+                        "yes": "Yes, the poster suffers from depression.",
+                        "no": "No, the poster does not suffer from depression."
                     }[exemplar_label.lower()]
                 
                 else:
