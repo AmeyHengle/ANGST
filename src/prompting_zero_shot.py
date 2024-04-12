@@ -8,12 +8,10 @@ from prompts import (
     DEPRESSION_MARDS,
     DEPRESSION_PHQ9,
     DEPRESSION,
-    DEPRESSION_MENTAL_LLM,
     DEPRESSION_LLAMA,
     ANXIETY_BAI,
     ANXIETY_HAMILTON,
     ANXIETY,
-    ANXIETY_MENTAL_LLM,
     ANXIETY_LLAMA,
     COMORBIDITY,
     COMORBIDITY_LLAMA,
@@ -55,11 +53,6 @@ def parse_config():
         help='Type of prompt to use.'
     )
     parser.add_argument(
-        '--chat_input', 
-        action="store_true", 
-        help="whether to format input as a chat"
-    )
-    parser.add_argument(
         '--version', 
         type=int, 
         default=1,
@@ -94,12 +87,10 @@ if __name__ == "__main__":
         'depression_mards': DEPRESSION_MARDS, 
          'depression_phq9': DEPRESSION_PHQ9, 
          'depression': DEPRESSION, 
-         'depression_mental_llm': DEPRESSION_MENTAL_LLM, 
          'depression_llama': DEPRESSION_LLAMA,
          'anxiety_bai': ANXIETY_BAI, 
          'anxiety_hamilton': ANXIETY_HAMILTON, 
          'anxiety': ANXIETY,
-         'anxiety_mental_llm': ANXIETY_MENTAL_LLM,
          'anxiety_llama': ANXIETY_LLAMA,
          'comorbidity': COMORBIDITY,
          'comorbidity_llama': COMORBIDITY_LLAMA
@@ -112,17 +103,13 @@ if __name__ == "__main__":
         max_tokens = 16
     prompt_data = pd.read_csv(args.data_path)
     
-    if args.chat_input:
-        filename = f"zero_shot_{args.prompt_type}_{args.model}_chat_input_seed_{args.seed}_v{args.version}"  
-    else:
-        filename = f"zero_shot_{args.prompt_type}_{args.model}_seed_{args.seed}_v{args.version}"
-        
+    filename = f"zero_shot_{args.prompt_type}_{args.model}_seed_{args.seed}_v{args.version}"
     old_result_file = os.path.join(args.result_dir, f"{filename}_old.csv")
     if os.path.isfile(old_result_file):
         print("Found existing results")
-        result_data = pd.read_csv(old_result_file)
-        ids = result_data[result_data[f'results_{args.prompt_type}_{args.model}'].isnull()]['id'].tolist()
-        prompt_data = prompt_data[prompt_data['id'].isin(ids)].reset_index(drop=True)
+        # result_data = pd.read_csv(old_result_file)
+        # ids = result_data[result_data[f'results_{args.prompt_type}_{args.model}'].isnull()]['id'].tolist()
+        # prompt_data = prompt_data[prompt_data['id'].isin(ids)].reset_index(drop=True)
         result_file = os.path.join(args.result_dir, f"{filename}_new.csv")
     else:
         result_file = os.path.join(args.result_dir, f"{filename}.csv")
@@ -167,26 +154,12 @@ if __name__ == "__main__":
 
         input = []
         for text in prompt_data["text"].tolist():
-            if args.chat_input:
-                input.append({
-                    'prompt': [
-                        {"role": "system", "content": CHAT_MODEL_ROLE},
-                        {"role": "user", "content": f"Post: {text}\n{llm_prompt}"},
-                        {"role": "assistant", "content": ""},
-                    ]
-                })
-
-            else:
-                input.append({'prompt': f"Post: {text}\n{llm_prompt}"})
+            input.append({'prompt': f"Post: {text}\nQuestion: {llm_prompt}\nAnswer: "})
         
         index = random.randint(0, len(input))
-        if args.chat_input:
-            print("Sample Input: ")
-            pp.pprint(input[index]['prompt'])
-        else:
-            print(f"\nSample Input: {input[index]['prompt']}")
+        print(f"\nSample Input: {input[index]['prompt']}")
               
-        generator = LLM_Generator(model_name=args.model, chat_input=args.chat_input, messages_list=input, batch_size=2)
+        generator = LLM_Generator(model_name=args.model, messages_list=input, batch_size=2)
 
         predictions = generator.text_completion(
             temperature=1,

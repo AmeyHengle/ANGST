@@ -3,9 +3,9 @@
 DATA_PATH="./data/test/full_test.csv"
 RESULT_DIR="./results/zero_shot"
 
-MODEL="mental_llama_chat_7b"
-DATA_TYPE="depression"
-# DATA_TYPE="anxiety"
+MODEL="llama_chat_7b"
+# DATA_TYPE="depression"
+DATA_TYPE="anxiety"
 # DATA_TYPE="comorbidity"
 OUTFILE=./data/few_shot_prompts/${DATA_TYPE}_llama_num_examples_ss_2.csv
 

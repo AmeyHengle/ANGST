@@ -20,28 +20,23 @@ class LLM_Generator:
     def __init__(
         self,
         model_name: str,
-        chat_input: bool,
         messages_list: list,
         batch_size: int
     ):
-        """Generate from Flan-T5 / Alpaca models.
-
+        """
+        Get results from Llama style models. 
+        
         Args:
             messages_list: List of full contexts to generate from.
             model_name: Model type.
-            chat_input: Whether to use chat input or not.
             temperature: Temperature to use.
             max_tokens: Maximum number of tokens to generate.
             top_p: P value for nucleus sampling.
             batch_size: Length of context to use.
         """
         self.batch_size = batch_size
-        if chat_input:
-            self.data_type = "chat"
-            self.tokenize_function = self.tokenize_chat
-        else:
-            sel.data_type = "text"
-            self.tokenize_function = self.tokenize_text
+        self.data_type = "text"
+        self.tokenize_function = self.tokenize_text
 
         self.validate_model_name(model_name)
         print(self.model_name)

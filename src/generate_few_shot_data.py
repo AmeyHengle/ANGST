@@ -255,7 +255,7 @@ if __name__ == "__main__":
         '--model', 
         type=str, 
         default="gpt-3.5-turbo",
-        choices=["gpt-3.5-turbo", "gpt-4", "mental_llama_chat_7b", "mental_llama_chat_13b"],
+        choices=["gpt-3.5-turbo", "gpt-4", "mental_llama_chat_7b", "mental_llama_chat_13b", "llama_chat_7b", "llama_chat_13b", "llama_chat_70b"],
         help="type of model to use for prompting later."
     )
     parser.add_argument(

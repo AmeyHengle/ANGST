@@ -69,30 +69,8 @@ Post:
 ```
 '''
 
-# Add Text before prompt
-DEPRESSION_MENTAL_LLM = '''
-This person wrote this paragraph on social media. As a psychologist, read the post on social media
-and answer the question.
-Determine if the poster of this post is depressed.
-'''
-
 DEPRESSION_LLAMA = '''
 Does the poster suffer from depression? Strictly answers as 'Yes' or 'No'.
-'''
-
-DEPRESSION_FEWSHOT = '''
-Below are posts and their respective assessments based on the criteria for clinical depression as defined in the DSM-5.
-Format your response as a JSON object {'depression':''} with values either 'yes' or 'no'.
-
-Post: "Every night I lay in bed with intense fear and dread, and these feelings have persisted for a year."
-Assessment: {'depression': 'yes'}
-
-Post: "I have a cat named Whiskers and he loves playing with yarn."
-Assessment: {'depression': 'no'}
-
-Based on the above, assess the content of the following post:
-Post: "sample post"
-Assessment:
 '''
 
 DEPRESSION_FEWSHOT_LANGCHAIN = {
@@ -114,17 +92,15 @@ Assessment:
 }
 
 DEPRESSION_FEWSHOT_LLAMA_LANGCHAIN = {
-"few_shot_prefix": '''
-You will be presented with a post and an assigned label to identify whether the poster shows symptoms of depression. Strictly answer as 'Yes' or 'No' only. Here are two examples:
-'''
+"few_shot_prefix": ""
 ,
 "prompt_template": lambda post, label: f'''
-Post: {post}\nQuestion: Does the poster suffer from depression?
+Post: {post}\nQuestion: Does the poster suffer from depression? Strictly answers as 'Yes' or 'No'.
 Answer: {label}
 '''
 ,
 "few_shot_suffix": lambda post: f'''
-Post: {post}\nQuestion: Does the poster suffer from depression?
+Post: {post}\nQuestion: Does the poster suffer from depression? Strictly answers as 'Yes' or 'No'.
 Answer:
 '''
 }
@@ -224,12 +200,6 @@ Do not return anything else apart from the json object.
 
 Post:
 ```
-'''
-
-ANXIETY_MENTAL_LLM = '''
-This person wrote this paragraph on social media. As a psychologist, read the post on social media
-and answer the question.
-Determine if the poster of this post has anxiety.
 '''
 
 ANXIETY_LLAMA = '''
