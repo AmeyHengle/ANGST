@@ -1,5 +1,5 @@
 
-Process ID: 4068690
+Process ID: 2900046
 
 Seed: 1
 
@@ -18,7 +18,7 @@ This person wrote this paragraph on social media. As a psychologist, read the po
 and answer the following questions.
 1. Does the poster of this post have anxiety?
 2. Does the poster of this post have depression?
-Format your response as a JSON object {'depression':'' 'anxiety': } with values strictly either 'yes' or 'no'.
+Format your response as a JSON object {'depression':'', 'anxiety': ''} with values strictly either 'yes' or 'no'.
 Do not return anything else apart from the json object.
 
 
@@ -34,7 +34,7 @@ This person wrote this paragraph on social media. As a psychologist, read the po
 and answer the following questions.
 1. Does the poster of this post have anxiety?
 2. Does the poster of this post have depression?
-Format your response as a JSON object {'depression':'' 'anxiety': } with values strictly either 'yes' or 'no'.
+Format your response as a JSON object {'depression':'', 'anxiety': ''} with values strictly either 'yes' or 'no'.
 Do not return anything else apart from the json object.
 
 Answer: 
