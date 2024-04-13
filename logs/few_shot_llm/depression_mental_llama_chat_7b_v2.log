@@ -1,5 +1,5 @@
 
-Process ID: 36487
+Process ID: 3579653
 
 Seed: 2
 
@@ -17,21 +17,24 @@ Using data for depression
 
 
 
-size of prompt data: (2872, 12)
+size of prompt data: (20, 12)
 
 result_file: ./results/few_shot/few_shot_depression_mental_llama_chat_7b_num_examples_ss_2_v2_seed_2.csv
 
 Sample Input: 
-You will be presented with a post and an assigned label to identify whether the poster shows symptoms of depression. Here are two examples:
+You will be presented with a post and an assigned label to identify whether the poster shows symptoms of depression. Strictly answer as 'Yes' or 'No' only. Here are two examples:
 
-Post: i dont want to look for a job anymore i dont want to talk to family i dont want to talk to.my friends i dont want to visit my family i want to get up anymore i dont want to eat i dont want to clean i just want to fucking die i want someone to put me out of my misery. but im to lazy to kill myself so ill just waste away for the rest of my life, not something to enjoy but just a matter of fact for me.
-Response: yes
+Post: i just have to accept that im depressed and that ill live with it for the rest of my life. sometimes it feels better than other days but itll never go away. when ppl tell me that despite depression u live for the days that are good im tired of the constant back and forth. i dont care that there are good days because there are still bad ones. im so tired of pulling myself back out of a rut. the only thing that changes every year is my indifference to everything.
+Question: Does the poster suffer from depression?
+Answer: Yes, the poster suffers from depression.
 
-Post: i dont want to be happy, i dont want money, or more friends or anything else. i literally only want to die, thats all i want. truly, genuinely, i want to die. because i know for a fact the only thing i ever wanted in life doesnt exist. im never going to fall in love with a girl like i always dreamed of, ill never get a wholesome romance, my life has shown ill be alone always. as a 24m what i hear most is that im young and i have plenty of time. but if you were on fire would you be ok with someone telling you to wait before jumping into a pool of water? i live in emotional agony and it becomes harder to escape every day. my only relief is death, verily. i only want to die. edit i deeply appreciate the comments on this post, they gave me plenty to think about.
-Response: yes
+Post: i live in small town south dakota and i absolutely hate it. i think this largely contributes to my depression. i already dont wanna go do anything but then whens its below 0 half the year it makes it even harder. also even if i feel like doing something there is hardly anything to do with friends other than movies. it is even harder to stay here especially after visiting la this summer and absolutely loving it. i am in no position to move either being i am 16 living with my parents. anyone else think where they live contributes to their depression.
+Question: Does the poster suffer from depression?
+Answer: Yes, the poster suffers from depression.
 
-Post: Hate death but despise life more. Depression ptsd bpd They all drag me down with the people i love Im a leech, hurts like shit if you rip it off but slowly killing in the long run Wish for death every second terrified of all these people in the world with the same mental capacity and suffering If she exists hate hate hate god Cant take care of my cat anymore cant do anything Lying in bed takes up too much energy Stopped doing things i love reading drawing gaming socialising drinking eating Less sad but more empty Cant wash brush teeth get dressed eat healthy Self harm still bleeding, been 2 days Wasting time Wasting money Wasting love Wasting life Wasting Frustrated because i am held down in life by loved ones Cant study because of medical condition Want to go in a coma and spend an infinite amount of time in my head Nightmares are painful but bearable compared to real life Shutting down not talking My body only makes sound when farting, no voices Want to fade away Anger bitterness sadness disgust towards ptsd Hyperventilation in a very slight amount always gasping for air all the time Feels like Im hungover even though i didnt drink Look at others, look at me, see how much of a failure i am Never doing productive work Has tons of ideas of the perfect suicide My blanket is choking me Shut the fuck up clocks No more tic tic bullshit Im never going to get better I prefer to die Please
-Response:
+Post: Anybody hate springsummer. And even so, when depression is not too severe? Right now we are having some sunny days here in my country of Denmark, and very mild, almost spring weather, and I hate i.The thought that springsummer is on the way makes me depressed and anxious.I wish I could enjoy it but I dont.Everybody around me is going on and on about how nice the weather is and how it makes your mood better., and I either have to fake agreement or simply shut up when folks around me start talking about the weather. My mood gets worse in sunny springsummer weather.I am most stable depressionwise when it is cloudy and more grey.probably makes no sense. Anybody else?
+Question: Does the poster suffer from depression?
+Answer:
 
 klyang/MentaLLaMA-chat-7B-hf
 
@@ -48,17 +51,17 @@ max length: 2048
 
 data: Dataset({
     features: ['prompt'],
-    num_rows: 2872
+    num_rows: 20
 })
 
 tokenized_data: Dataset({
     features: ['input_ids', 'attention_mask'],
-    num_rows: 2872
+    num_rows: 20
 })
 
 
 Preprocessed prompts...
-dataloader size: 718
+dataloader size: 20
 
 
 data processed.
