@@ -1,0 +1,64 @@
+
+Process ID: 95533
+
+Seed: 3
+
+Arguments:
+seed: 3
+data_path: ./data/few_shot_prompts/comorbidity_num_examples_ss_2.csv
+model: llama_chat_7b
+prompt_type: comorbidity
+num_examples_per_label: 2
+version: 3
+result_dir: ./results/few_shot
+
+
+Using data for comorbidity
+
+
+
+size of prompt data: (2872, 12)
+
+result_file: ./results/few_shot/few_shot_comorbidity_llama_chat_7b_num_examples_ss_2_v3_seed_3.csv
+
+Sample Input: 
+Below are posts and their respective assessments based on the criteria for clinical depression and clinical anxiety as defined in the DSM-5.
+Format your response as a JSON object {'depression': '', 'anxiety': ''} with values either 'yes' or 'no'.
+
+Post: so i recently had a mental breakdown due to work and now im slowly recovering. ive been to therapy before and i went back again after months because of this breakdown. im trying to figure out with my therapist stuff about work, if i should change the area where i work or look for a job somewhere else. ill probably leave it soon, after only 2 months there. so im still feeling sort of depressed and all and im trying to take things easy. after it all happened, a lot of my habits washed away, as expected. im eating terribly loads of fast food, sugar and unhealthy stuff, my sleep schedule is not so regular and i dont always sleep as much as i do, im not exercising at all, im not studying as id like to be to improve my career, ive been turning down invites to go out with friends as i dont have much energy most of the time. when im not at work, i spend most of the time playing, watching videos and twitch, browsing reddit and thats all. i get home mentally drained and all i want to do is reward myself with instant pleasure, with foodcellphonecomputer. its a vicious cycle, i dont feel like doing stuff that could help and so it feels worse. im looking to recover and thats why im taking things lightly. at the same time, i know that having a more structured day and week would help in bringing me up, specially eating, sleeping and exercising better. then going back to studying would be very good. can you help me with tips on how to reestablish these habits, even though im not feeling 100?
+Assesement: {'depression': 'yes', 'anxiety': 'no'}
+
+Post: so about 6 months ago i reached my darkest place yet and finally sought out help. since then ive started taking antidepressants and gone to therapy and ive definitely seen an improvement. particularly in april which was a huge boost for my mental health. my general outlook is more positive. im more sociable with friends and family, have started reconnecting with some of my old hobbies a littler and have started a new hobby baking. but my motivation to do things is still very low. i still have a lot of days where i have little energy and spend most of the day in bed doing nothing productive then feeling guilty about it. any ideastips on how to break this annoying cycle?
+Assesement: {'depression': 'yes', 'anxiety': 'no'}
+
+Based on the above, assess the content of the following post:
+Post: How do you stick to good habits when youre depressed. I have a bad habit of dropping good habits I start when I am having a bad day. When Im having a good day depression is tolerable, I eat healthy, exercise, socialize etc. However, when I get extremely depressed, all of my progress goes out the window. I tend to isolate myself, binge on junk food, and waste the day watching porn and playing video games. I was going to the gym nearly everyday about a year ago, and I made some incredible gains. My depression wasnt that bad at that point though. Im sure consistently exercising had something to do with it. However, come summertime, I quit working out and isolated myself in my house. I spent the whole summer wasting away, and my anxiety and depression got that much worse. I know that deep inside of me, I want to be productive. I want to be healthy. I want to go out and meet new people. Whenever I try to implement good lifestyle habits into my routine, the voice at the back of my head tells me that Ill just fall back into a relapse in a couple of days. For some background info, I am 17, and I have been diagnosed with severe depression and am on an antidepressant which has helped tremendously. Right now I am being assessed for possible bipolar disorder, but we are not completely sure yet. Im just sick and tired of starting something productive, then never continuing it in the long run. Any advice or personal stories would be greatly appreciated. If you got this far, thanks for reading. Have a great day!
+Assessment:
+
+/data/models/huggingface/meta-llama/Llama-2-7b-chat-hf
+
+current device: 0
+
+{'': 0}
+
+Loaded llama_chat_7b for prompting...
+
+Device: cuda:0
+
+data: Dataset({
+    features: ['prompt'],
+    num_rows: 2872
+})
+
+tokenized_data: Dataset({
+    features: ['input_ids', 'attention_mask'],
+    num_rows: 2872
+})
+
+
+Preprocessed prompts...
+dataloader size: 718
+
+
+data processed.
+

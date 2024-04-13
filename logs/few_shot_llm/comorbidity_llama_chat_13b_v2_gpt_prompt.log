@@ -1,0 +1,64 @@
+
+Process ID: 1330188
+
+Seed: 2
+
+Arguments:
+seed: 2
+data_path: ./data/few_shot_prompts/comorbidity_num_examples_ss_2.csv
+model: llama_chat_13b
+prompt_type: comorbidity
+num_examples_per_label: 2
+version: 2
+result_dir: ./results/few_shot
+
+
+Using data for comorbidity
+
+
+
+size of prompt data: (2872, 12)
+
+result_file: ./results/few_shot/few_shot_comorbidity_llama_chat_13b_num_examples_ss_2_v2_seed_2.csv
+
+Sample Input: 
+Below are posts and their respective assessments based on the criteria for clinical depression and clinical anxiety as defined in the DSM-5.
+Format your response as a JSON object {'depression': '', 'anxiety': ''} with values either 'yes' or 'no'.
+
+Post: i dont want to be happy, i dont want money, or more friends or anything else. i literally only want to die, thats all i want. truly, genuinely, i want to die. because i know for a fact the only thing i ever wanted in life doesnt exist. im never going to fall in love with a girl like i always dreamed of, ill never get a wholesome romance, my life has shown ill be alone always. as a 24m what i hear most is that im young and i have plenty of time. but if you were on fire would you be ok with someone telling you to wait before jumping into a pool of water? i live in emotional agony and it becomes harder to escape every day. my only relief is death, verily. i only want to die. edit i deeply appreciate the comments on this post, they gave me plenty to think about.
+Assesement: {'depression': 'yes', 'anxiety': 'no'}
+
+Post: i dont want to look for a job anymore i dont want to talk to family i dont want to talk to.my friends i dont want to visit my family i want to get up anymore i dont want to eat i dont want to clean i just want to fucking die i want someone to put me out of my misery. but im to lazy to kill myself so ill just waste away for the rest of my life, not something to enjoy but just a matter of fact for me.
+Assesement: {'depression': 'yes', 'anxiety': 'no'}
+
+Based on the above, assess the content of the following post:
+Post: Hate death but despise life more. Depression ptsd bpd They all drag me down with the people i love Im a leech, hurts like shit if you rip it off but slowly killing in the long run Wish for death every second terrified of all these people in the world with the same mental capacity and suffering If she exists hate hate hate god Cant take care of my cat anymore cant do anything Lying in bed takes up too much energy Stopped doing things i love reading drawing gaming socialising drinking eating Less sad but more empty Cant wash brush teeth get dressed eat healthy Self harm still bleeding, been 2 days Wasting time Wasting money Wasting love Wasting life Wasting Frustrated because i am held down in life by loved ones Cant study because of medical condition Want to go in a coma and spend an infinite amount of time in my head Nightmares are painful but bearable compared to real life Shutting down not talking My body only makes sound when farting, no voices Want to fade away Anger bitterness sadness disgust towards ptsd Hyperventilation in a very slight amount always gasping for air all the time Feels like Im hungover even though i didnt drink Look at others, look at me, see how much of a failure i am Never doing productive work Has tons of ideas of the perfect suicide My blanket is choking me Shut the fuck up clocks No more tic tic bullshit Im never going to get better I prefer to die Please
+Assessment:
+
+/data/models/huggingface/meta-llama/Llama-2-13b-chat-hf
+
+current device: 0
+
+{'model.embed_tokens': 0, 'model.layers.0': 0, 'model.layers.1': 0, 'model.layers.2': 0, 'model.layers.3': 0, 'model.layers.4': 0, 'model.layers.5': 0, 'model.layers.6': 0, 'model.layers.7': 0, 'model.layers.8': 0, 'model.layers.9': 0, 'model.layers.10': 0, 'model.layers.11': 0, 'model.layers.12': 0, 'model.layers.13': 0, 'model.layers.14': 0, 'model.layers.15': 0, 'model.layers.16': 0, 'model.layers.17': 0, 'model.layers.18': 0, 'model.layers.19': 0, 'model.layers.20': 1, 'model.layers.21': 1, 'model.layers.22': 1, 'model.layers.23': 1, 'model.layers.24': 1, 'model.layers.25': 1, 'model.layers.26': 1, 'model.layers.27': 1, 'model.layers.28': 1, 'model.layers.29': 1, 'model.layers.30': 1, 'model.layers.31': 1, 'model.layers.32': 1, 'model.layers.33': 1, 'model.layers.34': 1, 'model.layers.35': 1, 'model.layers.36': 1, 'model.layers.37': 1, 'model.layers.38': 1, 'model.layers.39': 1, 'model.norm': 1, 'lm_head': 1}
+
+Loaded llama_chat_13b for prompting...
+
+Device: cuda:1
+
+data: Dataset({
+    features: ['prompt'],
+    num_rows: 2872
+})
+
+tokenized_data: Dataset({
+    features: ['input_ids', 'attention_mask'],
+    num_rows: 2872
+})
+
+
+Preprocessed prompts...
+dataloader size: 718
+
+
+data processed.
+
