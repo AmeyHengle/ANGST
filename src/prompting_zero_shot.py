@@ -159,7 +159,7 @@ if __name__ == "__main__":
         index = random.randint(0, len(input))
         print(f"\nSample Input: {input[index]['prompt']}")
               
-        generator = LLM_Generator(model_name=args.model, messages_list=input, batch_size=4)
+        generator = LLM_Generator(model_name=args.model, messages_list=input, batch_size=8)
 
         predictions = generator.text_completion(
             temperature=1,
@@ -169,6 +169,7 @@ if __name__ == "__main__":
         
     # for prediction in predictions:
     #     print(f"{prediction}\n")
-        
+       
+    prompt_data[f"few_shot_prompt_{args.prompt_type}"] = input 
     prompt_data[f"results_{args.prompt_type}_{args.model}"] = predictions
     prompt_data.to_csv(result_file, index=False)
