@@ -1,0 +1,67 @@
+
+Process ID: 667143
+
+Seed: 2
+
+Arguments:
+seed: 2
+data_path: ./data/test/full_test.csv
+model: llama_chat_7b
+prompt_type: anxiety
+version: 2
+result_dir: ./results/zero_shot
+
+
+Using prompt anxiety:
+
+Assess whether the content of the post delimited by triple backticks aligns with the criteria for clinical anxiety as defined in DSM-5.
+Format your response as a JSON object {'anxiety':''} with values strictly either 'yes' or 'no'.
+Do not return anything else apart from the json object.
+
+Post:
+```
+
+
+
+
+size of prompt data: (2872, 9)
+
+result_file: ./results/zero_shot/zero_shot_anxiety_llama_chat_7b_seed_2_v2.csv
+
+Sample Input: Post: Hate death but despise life more. Depression ptsd bpd They all drag me down with the people i love Im a leech, hurts like shit if you rip it off but slowly killing in the long run Wish for death every second terrified of all these people in the world with the same mental capacity and suffering If she exists hate hate hate god Cant take care of my cat anymore cant do anything Lying in bed takes up too much energy Stopped doing things i love reading drawing gaming socialising drinking eating Less sad but more empty Cant wash brush teeth get dressed eat healthy Self harm still bleeding, been 2 days Wasting time Wasting money Wasting love Wasting life Wasting Frustrated because i am held down in life by loved ones Cant study because of medical condition Want to go in a coma and spend an infinite amount of time in my head Nightmares are painful but bearable compared to real life Shutting down not talking My body only makes sound when farting, no voices Want to fade away Anger bitterness sadness disgust towards ptsd Hyperventilation in a very slight amount always gasping for air all the time Feels like Im hungover even though i didnt drink Look at others, look at me, see how much of a failure i am Never doing productive work Has tons of ideas of the perfect suicide My blanket is choking me Shut the fuck up clocks No more tic tic bullshit Im never going to get better I prefer to die Please
+Question: 
+Assess whether the content of the post delimited by triple backticks aligns with the criteria for clinical anxiety as defined in DSM-5.
+Format your response as a JSON object {'anxiety':''} with values strictly either 'yes' or 'no'.
+Do not return anything else apart from the json object.
+
+Post:
+```
+
+Answer: 
+/data/models/huggingface/meta-llama/Llama-2-7b-chat-hf
+
+current device: 0
+
+{'': 0}
+
+Loaded llama_chat_7b for prompting...
+
+Device: cuda:0
+
+data: Dataset({
+    features: ['prompt'],
+    num_rows: 2872
+})
+
+tokenized_data: Dataset({
+    features: ['input_ids', 'attention_mask'],
+    num_rows: 2872
+})
+
+
+Preprocessed prompts...
+dataloader size: 718
+
+
+data processed.
+

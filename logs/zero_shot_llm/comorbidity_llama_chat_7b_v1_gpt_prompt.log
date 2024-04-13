@@ -1,0 +1,569 @@
+
+Process ID: 4041385
+
+Seed: 1
+
+Arguments:
+seed: 1
+data_path: ./data/test/full_test.csv
+model: llama_chat_7b
+prompt_type: comorbidity_llama
+version: 1
+result_dir: ./results/zero_shot
+
+
+Using prompt comorbidity_llama:
+
+This person wrote this paragraph on social media. As a psychologist, read the post on social media
+and answer the following questions.
+1. Does the poster of this post have anxiety?
+2. Does the poster of this post have depression?
+Format your response as a JSON object {'depression':'' 'anxiety': } with values strictly either 'yes' or 'no'.
+Do not return anything else apart from the json object.
+
+
+
+
+size of prompt data: (100, 9)
+
+result_file: ./results/zero_shot/zero_shot_comorbidity_llama_llama_chat_7b_seed_1_v1_gpt_prompt.csv
+
+Sample Input: Post: Ive been refusing treatment for a decade. On mobile so bear with me I tried committing suicide when I was 15. Had my stomach pumped, said it was an accident lol? given a shrink who couldnt remember my name. Got rid of her and moved on. Ive tried three times since. Ive been depressed since I started middle school. What is that, like 10, 11 years old? I know the stigma of pubescent teens. This wasnt like that. It was angry and scary. Nothing has changed since. Im 22 now. Ive refused treatment, I havent seen a psychiatrist about my anxiety or depression since the first time. I dont have panic attacks anymore but I still have the thoughts. Suicidal ideation. Panic breathing although it stopped escalating to panic attacks. The spiraling. The anger. I just get this fucking rage now. Like I wanna burn everything and everyone around me down and then stomp on the ashes. I know its not okay, I just dont want to be medicated. I dont even know what it is. I was diagnosed with severe anxiety disorder, clinical depressive disorder and acute ocd. Im just not sure if I should balls up and go see somebody about this rage. I was never medicated because I want to be strong enough to fix it myself. Im a nursing student, I KNOW thats not how it works. I just dont know who to see, how it works or if I can even afford it. Im scared. I dont like to selfdiagnose and Im not going to get into the details but Im afraid I might have bpd. Nobody would listen to me in the past. I was a kid. I dont know why Im posting this.
+Question: 
+This person wrote this paragraph on social media. As a psychologist, read the post on social media
+and answer the following questions.
+1. Does the poster of this post have anxiety?
+2. Does the poster of this post have depression?
+Format your response as a JSON object {'depression':'' 'anxiety': } with values strictly either 'yes' or 'no'.
+Do not return anything else apart from the json object.
+
+Answer: 
+/data/models/huggingface/meta-llama/Llama-2-7b-chat-hf
+
+current device: 0
+
+{'': 0}
+
+Loaded llama_chat_7b for prompting...
+
+Device: cuda:0
+
+data: Dataset({
+    features: ['prompt'],
+    num_rows: 100
+})
+
+tokenized_data: Dataset({
+    features: ['input_ids', 'attention_mask'],
+    num_rows: 100
+})
+
+
+Preprocessed prompts...
+dataloader size: 50
+
+
+data processed.
+
+
+{
+'anxiety': 'yes',
+'depression': 'yes'
+}
+
+
+ {'depression': 'yes', 'anxiety': 'yes'}
+
+
+{ 'depression': 'yes', 'anxiety': 'yes' }
+
+
+{
+'depression': 'yes',
+'anxiety': 'yes'
+}
+
+
+{
+'anxiety': 'yes',
+'depression': 'yes'
+}
+
+
+{ 'depression': 'yes', 'anxiety': 'yes' }
+
+
+{
+'anxiety': 'yes',
+'depression': 'yes'
+}
+
+
+{
+"depression": "yes",
+"anxiety": "yes"
+}
+
+{
+'depression': 'yes',
+'anxiety': 'yes'
+}
+
+
+
+{
+"depression": "yes"
+"anxiety": "yes"
+}
+
+
+{
+"anxiety": "yes",
+"depression": "yes"
+}
+
+
+{ 'depression': 'yes', 'anxiety': 'yes' }
+
+
+{
+"anxiety": "yes",
+"depression": "yes"
+}
+
+
+{
+"depression": "yes",
+"anxiety": "yes"
+}
+
+{'depression': 'yes', 'anxiety': 'no'}
+
+
+{
+"depression": "yes",
+"anxiety": "yes"
+}
+
+
+{
+"anxiety": "yes",
+"depression": "yes"
+}
+
+
+{
+"anxiety": "yes",
+"depression": "yes"
+}
+
+
+{'anxiety': 'yes', 'depression': 'no'}
+
+
+{
+"anxiety": "yes",
+"depression": "yes"
+}
+
+
+{
+"depression": "yes",
+"anxiety": "yes"
+}
+
+
+{
+'depression': 'yes'
+'anxiety': 'yes'
+}
+
+Explanation:
+
+Based on the content of the post, it is clear that the person is struggling with both
+
+
+{
+'depression': 'yes',
+'anxiety': 'yes'
+}
+
+
+{
+'anxiety': 'yes',
+'depression': 'yes'
+}
+
+
+{
+"depression": "yes",
+"anxiety": "yes"
+}
+
+{'depression': 'yes', 'anxiety': 'no'}
+
+
+{
+"anxiety": "yes",
+"depression": "no"
+}
+
+
+{ 'anxiety': 'yes', 'depression': 'no' }
+
+
+{ 'depression': 'yes', 'anxiety': 'yes' }
+
+
+{
+'depression': 'yes',
+'anxiety': 'yes'
+}
+
+
+{
+"depression": "yes",
+"anxiety": "yes"
+}
+
+
+{ 'depression': 'yes', 'anxiety': 'no' }
+
+
+{
+"depression": "yes",
+"anxiety": "no"
+}
+
+
+{
+"depression": "yes",
+"anxiety": "yes"
+}
+
+
+{
+"anxiety": "yes",
+"depression": "yes"
+}
+
+
+{
+'depression': 'yes'
+'anxiety': 'yes'
+}
+
+
+{ 'depression': 'yes', 'anxiety': 'no' }
+
+{'anxiety': 'yes', 'depression': 'yes'}
+
+
+{
+"depression": "yes",
+"anxiety": "yes"
+}
+
+{'anxiety': 'yes', 'depression': 'yes'}
+
+
+{
+'anxiety': 'yes',
+'depression': 'yes'
+}
+
+
+{
+"depression": "yes"
+"anxiety": "yes"
+}
+
+
+{
+"anxiety": "yes",
+"depression": "yes"
+}
+
+
+{ 'anxiety': 'yes', 'depression': 'yes' }
+
+
+{ 'depression': 'yes', 'anxiety': 'yes' }
+
+
+{ 'depression': 'yes', 'anxiety': 'yes' }
+
+
+{
+"anxiety": "yes",
+"depression": "yes"
+}
+
+
+{
+"depression": "yes",
+"anxiety": "no"
+}
+
+Explanation:
+
+Based on the text provided, it seems that the person is experiencing a depressive
+
+
+{ 'depression': 'yes', 'anxiety': 'yes' }
+
+
+{
+"depression": "yes"
+"anxiety": "no"
+}
+
+{'anxiety': 'yes', 'depression': 'yes'}
+
+{'depression': 'yes', 'anxiety': 'yes'}
+
+
+{
+'anxiety': 'yes',
+'depression': 'yes'
+}
+
+
+{
+"depression": "yes",
+"anxiety": "yes"
+}
+
+Explanation:
+The poster of this post expresses a sense of hopelessness and despair, which are common
+
+
+{
+'depression': 'yes',
+'anxiety': 'yes'
+}
+
+
+{
+"depression": "yes"
+"anxiety": "yes"
+}
+
+
+{
+"depression": "yes",
+"anxiety": "yes"
+}
+
+{'depression': 'yes', 'anxiety': 'yes'}
+
+{'depression': 'yes', 'anxiety': 'no'}
+
+
+{ 'depression': 'yes', 'anxiety': 'yes' }
+
+
+{
+"anxiety": "yes"
+"depression": "yes"
+}
+
+
+{
+"depression": "yes",
+"anxiety": "yes"
+}
+
+
+{ 'anxiety': 'yes', 'depression': 'no' }
+
+{'anxiety': 'yes', 'depression': 'yes'}
+
+
+{ 'depression': 'yes', 'anxiety': 'yes' }
+
+
+{ 'depression': 'yes', 'anxiety': 'yes' }
+
+
+{
+'anxiety': 'yes',
+'depression': 'yes'
+}
+
+
+{
+"depression": "yes",
+"anxiety": "yes"
+}
+
+
+{
+"anxiety": "yes",
+"depression": "yes"
+}
+
+
+{
+'anxiety': 'yes',
+'depression': 'yes'
+}
+
+
+{
+"anxiety": "yes",
+"depression": "yes"
+}
+
+
+{
+'depression': 'yes'
+'anxiety': 'yes'
+}
+
+
+{
+'depression': 'yes',
+'anxiety': 'yes'
+}
+
+
+{ 'anxiety': 'yes', 'depression': 'yes' }
+
+
+{ 'anxiety': 'yes', 'depression': 'yes' }
+
+
+{ 'anxiety': 'yes', 'depression': 'yes' }
+
+
+{
+'depression': 'yes',
+'anxiety': 'yes'
+}
+
+
+
+{
+"depression": "yes",
+"anxiety": "yes"
+}
+
+
+{
+"depression": "yes",
+"anxiety": "yes"
+}
+
+
+{
+"anxiety": "yes",
+"depression": "yes"
+}
+
+
+{
+"depression": "yes",
+"anxiety": "yes"
+}
+
+
+{
+'anxiety': 'yes',
+'depression': 'no'
+}
+
+
+{ 'depression': 'yes', 'anxiety': 'yes' }
+
+
+{
+"anxiety": "yes",
+"depression": "yes"
+}
+
+
+{ 'anxiety': 'yes' , 'depression': 'no' }
+
+
+{
+'anxiety': 'yes'
+'depression': 'no'
+}
+
+
+{
+'depression': 'yes',
+'anxiety': 'no'
+}
+
+
+{ 'depression': 'yes', 'anxiety': 'yes' }
+
+
+{
+'anxiety': 'yes',
+'depression': 'yes'
+}
+
+
+{ 'depression': 'yes', 'anxiety': 'yes' }
+
+
+{
+'depression': 'yes',
+'anxiety': 'yes'
+}
+
+
+{
+"depression": "yes",
+"anxiety": "yes"
+}
+
+Explanation:
+
+Based on the text provided, it is clear that the person is experiencing difficulty remembering
+
+
+{ 'depression': 'yes', 'anxiety': 'yes' }
+
+
+{
+"depression": "yes",
+"anxiety": "yes"
+}
+
+
+{
+"anxiety": "yes",
+"depression": "yes"
+}
+
+
+{ 'depression': 'yes', 'anxiety': 'yes' }
+
+
+{
+'anxiety': 'yes',
+'depression': 'yes'
+}
+
+
+{ 'depression': 'yes', 'anxiety': 'yes' }
+
+
+{
+'depression': 'yes',
+'anxiety': 'yes'
+}
+
+Explanation:
+Based on the content of the post, it is evident that the writer is struggling with both de
+
+
+{
+'depression': 'yes',
+'anxiety': 'yes'
+}
+

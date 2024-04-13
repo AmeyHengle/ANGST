@@ -100,21 +100,21 @@ if __name__ == "__main__":
     if args.prompt_type in ['depression_mards', 'depression_phq9', 'anxiety_bai', 'anxiety_hamilton']:
         max_tokens = 1024
     else:
-        max_tokens = 16
+        max_tokens = 48
     prompt_data = pd.read_csv(args.data_path)
     
     filename = f"zero_shot_{args.prompt_type}_{args.model}_seed_{args.seed}_v{args.version}"
     old_result_file = os.path.join(args.result_dir, f"{filename}_old.csv")
     if os.path.isfile(old_result_file):
         print("Found existing results")
-        # result_data = pd.read_csv(old_result_file)
-        # ids = result_data[result_data[f'results_{args.prompt_type}_{args.model}'].isnull()]['id'].tolist()
-        # prompt_data = prompt_data[prompt_data['id'].isin(ids)].reset_index(drop=True)
+        result_data = pd.read_csv(old_result_file)
+        ids = result_data[result_data[f'results_{args.prompt_type}_{args.model}'].isnull()]['id'].tolist()
+        prompt_data = prompt_data[prompt_data['id'].isin(ids)].reset_index(drop=True)
         result_file = os.path.join(args.result_dir, f"{filename}_new.csv")
     else:
         result_file = os.path.join(args.result_dir, f"{filename}.csv")
         
-    # prompt_data = prompt_data[:20]
+    # prompt_data = prompt_data[:100]
     print(f"\nsize of prompt data: {prompt_data.shape}")
     print(f"\nresult_file: {result_file}")
     
@@ -159,13 +159,14 @@ if __name__ == "__main__":
         index = random.randint(0, len(input))
         print(f"\nSample Input: {input[index]['prompt']}")
               
-        generator = LLM_Generator(model_name=args.model, messages_list=input, batch_size=2)
+        generator = LLM_Generator(model_name=args.model, messages_list=input, batch_size=4)
 
         predictions = generator.text_completion(
             temperature=1,
             max_tokens=max_tokens,
             top_p=0.95,
         )
+        
     # for prediction in predictions:
     #     print(f"{prediction}\n")
         

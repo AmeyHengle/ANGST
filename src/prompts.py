@@ -61,7 +61,7 @@ Post:
 '''
 
 DEPRESSION = '''
-Assess whether the content of the post delimited by triple backticks aligns with the criteria for clinical depression as defined in DSM-5:
+Assess whether the content of the post delimited by triple backticks aligns with the criteria for clinical depression as defined in DSM-5.
 Format your response as a JSON object {'depression':''} with values strictly either 'yes' or 'no'.
 Do not return anything else apart from the json object.
 
@@ -194,7 +194,7 @@ Post:
 '''
 
 ANXIETY = '''
-Assess whether the content of the post delimited by triple backticks aligns with the criteria for clinical anxiety as defined in DSM-5:
+Assess whether the content of the post delimited by triple backticks aligns with the criteria for clinical anxiety as defined in DSM-5.
 Format your response as a JSON object {'anxiety':''} with values strictly either 'yes' or 'no'.
 Do not return anything else apart from the json object.
 
@@ -261,13 +261,13 @@ COMORBIDITY = """
 This person wrote this paragraph on social media. As a psychologist, read the post on social media
 and answer the following questions.
 1. Does the poster of this post have anxiety?
-2. Does if the poster of this post have depression?
+2. Does the poster of this post have depression?
 Format your response as a JSON object {'depression':'' 'anxiety': } with values strictly either 'yes' or 'no'.
 Do not return anything else apart from the json object.
 """
 
 COMORBIDITY_LLAMA = '''
-Does the poster suffer from anxiety, depression, both or None?
+Does the poster suffer from anxiety, depression, both or None? Strictly answers as 'only depression', 'only anxiety', 'anxiety and depression', or 'None'.
 '''
 
 

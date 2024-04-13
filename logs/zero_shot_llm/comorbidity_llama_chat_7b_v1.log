@@ -1,0 +1,441 @@
+
+Process ID: 4041219
+
+Seed: 1
+
+Arguments:
+seed: 1
+data_path: ./data/test/full_test.csv
+model: llama_chat_7b
+prompt_type: comorbidity_llama
+version: 1
+result_dir: ./results/zero_shot
+
+
+Using prompt comorbidity_llama:
+
+Does the poster suffer from anxiety, depression, both or None? Strictly answers as 'only depression', 'only anxiety', 'anxiety and depression', or 'None'.
+
+
+
+
+size of prompt data: (100, 9)
+
+result_file: ./results/zero_shot/zero_shot_comorbidity_llama_llama_chat_7b_seed_1_v1.csv
+
+Sample Input: Post: Ive been refusing treatment for a decade. On mobile so bear with me I tried committing suicide when I was 15. Had my stomach pumped, said it was an accident lol? given a shrink who couldnt remember my name. Got rid of her and moved on. Ive tried three times since. Ive been depressed since I started middle school. What is that, like 10, 11 years old? I know the stigma of pubescent teens. This wasnt like that. It was angry and scary. Nothing has changed since. Im 22 now. Ive refused treatment, I havent seen a psychiatrist about my anxiety or depression since the first time. I dont have panic attacks anymore but I still have the thoughts. Suicidal ideation. Panic breathing although it stopped escalating to panic attacks. The spiraling. The anger. I just get this fucking rage now. Like I wanna burn everything and everyone around me down and then stomp on the ashes. I know its not okay, I just dont want to be medicated. I dont even know what it is. I was diagnosed with severe anxiety disorder, clinical depressive disorder and acute ocd. Im just not sure if I should balls up and go see somebody about this rage. I was never medicated because I want to be strong enough to fix it myself. Im a nursing student, I KNOW thats not how it works. I just dont know who to see, how it works or if I can even afford it. Im scared. I dont like to selfdiagnose and Im not going to get into the details but Im afraid I might have bpd. Nobody would listen to me in the past. I was a kid. I dont know why Im posting this.
+Question: 
+Does the poster suffer from anxiety, depression, both or None? Strictly answers as 'only depression', 'only anxiety', 'anxiety and depression', or 'None'.
+
+Answer: 
+/data/models/huggingface/meta-llama/Llama-2-7b-chat-hf
+
+current device: 0
+
+{'': 0}
+
+Loaded llama_chat_7b for prompting...
+
+Device: cuda:0
+
+data: Dataset({
+    features: ['prompt'],
+    num_rows: 100
+})
+
+tokenized_data: Dataset({
+    features: ['input_ids', 'attention_mask'],
+    num_rows: 100
+})
+
+
+Preprocessed prompts...
+dataloader size: 50
+
+
+data processed.
+
+
+The poster does suffer from both anxiety and depression. 
+
+
+
+
+Depression.
+
+
+Only Depression
+
+
+The poster suffers from depression. The poem mentions feelings of sadness
+
+
+The poster suffers from depression and anxiety.
+
+
+Only depression
+
+
+Only depression.
+
+Rationale: 
+The poster expresses
+
+
+The poster does suffer from depression. The text mentions "dysth
+
+
+Only depression
+
+
+Anxiety and depression
+
+
+Only anxiety
+
+
+Only depression.
+
+
+Only Depression.
+
+Explanation:
+
+Based on
+
+
+Response: 
+
+The poster suffers from depression.
+
+
+
+
+Only depression
+
+The poster suffer from both anxiety and depression. They mention that they have
+
+
+The poster suffers from depression.
+
+
+ Only anxiety
+
+
+The poster suffers from anxiety and depression. The language used in
+
+
+The poster does suffer from anxiety and depression. It is mentioned in
+
+
+Only depression
+
+Please provide any other details you have, so I
+
+
+The poster suffers from depression. They mention that they have been feeling
+
+
+Only depression
+
+Reasoning:
+The poster mentions that they
+
+
+Only Depression
+
+The poster mentions experiencing suicidal thoughts and actions
+
+
+The poster suffers from depression.
+
+Reason: The poster
+
+
+Only Depression
+
+The poster seems to be experiencing classic symptoms
+
+
+The poster suffers from anxiety and depression.
+
+
+
+Yes, the poster does suffer from anxiety and depression, as
+
+
+
+only depression
+
+The poster appears to suffer from depression. The poster mentions feeling like they are
+
+
+Only depression
+
+
+The poster suffers from depression. The poem describes depression as a
+
+
+1. Yes, the subdisorder atypical depression is diagn
+
+
+The poster suffers from depression. The poster mentions feeling "trapped
+
+
+Only depression
+
+Reasoning: Based on the poster's
+
+
+Both
+
+Explanation:
+The poster mentions that they have
+
+
+The poster suffers from depression.
+
+Reasoning:
+
+
+
+Only depression
+
+
+The poster suffer from depression. They mention that their depression has been
+
+
+Both
+
+Reasoning:
+The poster seems to be experien
+
+
+The poster suffers from anxiety and depression.
+
+Reason
+
+
+Only depression.
+
+Explanation:
+Based on the
+
+
+
+Based on the information provided in the post, it seems that the
+
+
+Based on the text provided, the poster likely suffers from both anx
+
+
+Only depression.
+
+
+The poster suffers from depression. 
+
+Only depression
+
+
+
+The poster seems to be experiencing symptoms of both depression and
+
+
+The poster suffers from both depression and anxiety. It is mentioned
+
+
+The poster suffers from depression. They mention being diagnosed with clin
+
+
+The poster suffers from depression.
+
+Explanation:
+
+
+
+Only depression
+
+
+The poster suffers from both anxiety and depression. The experiences they
+
+
+'Only depression'
+
+
+
+Only depression
+
+
+The poster suffers from depression.  The poster mentions that they have
+
+
+Anxiety and depression
+
+Explanation: The poster mentions
+
+
+
+The poster suffers from depression and anxiety disorder, as
+
+
+Only depression
+
+
+The poster suffers from depression. The statement "I felt as if
+
+
+The poster suffers from depression. The fact that they mention having intr
+
+Only depression
+
+
+
+Does the poster suffer from anxiety, depression, both or None
+
+
+Anxiety and depression
+
+Explanation: The poster mentions
+
+
+Only depression
+
+Explanation:
+The poster mentions that they
+
+
+Only depression
+
+
+The poster suffers from anxiety and depression. The poster mentions being
+
+The poster suffers from depression. 
+Reasoning:  The
+
+
+Only depression
+
+Explanation:
+The poster mentions feeling "
+
+
+The poster suffers from anxiety and depression. They mention feeling "
+
+
+The poster suffers from both anxiety and depression. They mention feeling
+
+
+The poster suffers from depression. The post expresses feelings of l
+
+
+ Only depression
+
+Comments: 
+
+Thank you for reaching
+
+
+
+Based on the information provided in the post, it seems that the
+
+
+The poster seems to suffer from both anxiety and depression. The sympt
+
+
+Only depression
+
+This post highlights the intense emotional dist
+
+
+Both.
+
+Reasoning: The poster mentions that they have
+
+
+Hello,
+Thank you for sharing your story with me. It takes a
+
+
+
+The poster suffers from schizoaffective disorder, which
+
+
+'Only depression'
+
+
+Only depression.
+
+
+
+
+
+
+
+
+
+
+
+
+
+Only Depression
+
+This poster seems to be struggling with feelings of gu
+
+
+Only depression
+
+
+Only depression
+
+
+The poster does not mention any specific symptoms of anxiety, such as
+
+
+The poster suffers from anxiety and depression. They mention that they
+
+
+The poster suffers from depression.
+
+
+
+Only depression
+
+
+The poster does not specify any specific mental health conditions in their post. However
+
+
+Only depression.
+
+
+Only depression
+
+
+Both
+
+The poster mentions struggling with depression and anxiety for
+
+
+Only depression
+
+
+
+Both
+
+Reasoning:
+
+The poster mentions feeling "
+
+Only depression
+
+
+The poster suffers from depression. The poster mentions feeling empty and wanting
+
+
+The poster does not specify if they suffer from anxiety, depression,
+
+The poster suffers from depression.
+
+Both
+
+Only depression
+
