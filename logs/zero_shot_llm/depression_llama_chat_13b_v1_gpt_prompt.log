@@ -1,0 +1,67 @@
+
+Process ID: 2494760
+
+Seed: 1
+
+Arguments:
+seed: 1
+data_path: ./data/test/full_test.csv
+model: llama_chat_13b
+prompt_type: depression
+version: 1
+result_dir: ./results/zero_shot
+
+
+Using prompt depression:
+
+Assess whether the content of the post delimited by triple backticks aligns with the criteria for clinical depression as defined in DSM-5.
+Format your response as a JSON object {'depression':''} with values strictly either 'yes' or 'no'.
+Do not return anything else apart from the json object.
+
+Post:
+```
+
+
+
+
+size of prompt data: (2872, 9)
+
+result_file: ./results/zero_shot/zero_shot_depression_llama_chat_13b_seed_1_v1.csv
+
+Sample Input: Post: I am always alone. Hi everyone! i have recently attempted suicide and not many people know about it. I am always alone and when I am alone is when I get depressed the most. I havent had any suicidal thoughts since december up until as recent as valentines day as I have no one to celebrate it with. My dad is also dying from Terminal Lukemia and we dont exactly know how long he has left. I am on anti depressants and I am going to see my DR tomorrow as I dont think they are working at all. I have been on them since the 1st January and I dont feel any different. I am ok around people but when I am alone is when I get depressed. I cant sleep without the help of medication, I tried earlier this week to sleep without my triazolam and quetiapine but if I dont have them I dont get a wink of sleep and it sucks. I wish I had the luxury of friends my only two friends I have both live in Aus and im in NZ. I am so close to these 2 that I was Andrews best man at his wedding last year in Thailand. Andrew knows what I have been through recently and Josh doesnt as he has alot on his plate currently and I dont want to pile on to his plate. I enjoy gaming, cars,technology and cooking but as of recently with all of this going on I have found myself not enjoying gaming as much as I use too.
+Question: 
+Assess whether the content of the post delimited by triple backticks aligns with the criteria for clinical depression as defined in DSM-5.
+Format your response as a JSON object {'depression':''} with values strictly either 'yes' or 'no'.
+Do not return anything else apart from the json object.
+
+Post:
+```
+
+Answer: 
+/data/models/huggingface/meta-llama/Llama-2-13b-chat-hf
+
+current device: 0
+
+{'model.embed_tokens': 0, 'model.layers.0': 0, 'model.layers.1': 0, 'model.layers.2': 0, 'model.layers.3': 0, 'model.layers.4': 0, 'model.layers.5': 0, 'model.layers.6': 0, 'model.layers.7': 0, 'model.layers.8': 0, 'model.layers.9': 0, 'model.layers.10': 0, 'model.layers.11': 0, 'model.layers.12': 0, 'model.layers.13': 0, 'model.layers.14': 0, 'model.layers.15': 0, 'model.layers.16': 0, 'model.layers.17': 0, 'model.layers.18': 0, 'model.layers.19': 0, 'model.layers.20': 1, 'model.layers.21': 1, 'model.layers.22': 1, 'model.layers.23': 1, 'model.layers.24': 1, 'model.layers.25': 1, 'model.layers.26': 1, 'model.layers.27': 1, 'model.layers.28': 1, 'model.layers.29': 1, 'model.layers.30': 1, 'model.layers.31': 1, 'model.layers.32': 1, 'model.layers.33': 1, 'model.layers.34': 1, 'model.layers.35': 1, 'model.layers.36': 1, 'model.layers.37': 1, 'model.layers.38': 1, 'model.layers.39': 1, 'model.norm': 1, 'lm_head': 1}
+
+Loaded llama_chat_13b for prompting...
+
+Device: cuda:1
+
+data: Dataset({
+    features: ['prompt'],
+    num_rows: 2872
+})
+
+tokenized_data: Dataset({
+    features: ['input_ids', 'attention_mask'],
+    num_rows: 2872
+})
+
+
+Preprocessed prompts...
+dataloader size: 359
+
+
+data processed.
+
