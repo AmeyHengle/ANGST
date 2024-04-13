@@ -127,7 +127,7 @@ if __name__ == "__main__":
         index = random.randint(0, len(input))
         print(f"\nSample Input: {input[index]['prompt']}")
 
-        generator = LLM_Generator(model_name=args.model, messages_list=input, batch_size=4)
+        generator = LLM_Generator(model_name=args.model, messages_list=input, batch_size=2)
 
         predictions = generator.text_completion(
             temperature=1,

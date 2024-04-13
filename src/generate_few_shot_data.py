@@ -121,8 +121,6 @@ def generate_few_shot_prompts(
                 )
 
         elif data_type == 'comorbidity':
-            if num_icl_examples < 4: 
-                num_icl_examples = 4
 
             if use_semantic_similarity_only:
                 exemplars = mapping_semantic_similiary[df_test.iloc[i][id_col]]

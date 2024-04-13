@@ -214,24 +214,9 @@ Do not return anything else apart from the json object.
 """
 
 
-COMORBIDITY_FEWSHOT_1 = """
-Below are posts and their respective assessments based on the criteria for clinical depression and clinical anxiety respectively as defined in the DSM-5.
-Format your response as a JSON object {'depression': '', 'anxiety': ''} with values either 'yes' or 'no'.
-
-Post: "Every night I lay in bed with intense fear and dread, and these feelings have persisted for a year."
-Assessment: {'depression': 'yes', 'anxiety': 'yes'}
-
-Post: "I have a cat named Whiskers and he loves playing with yarn."
-Assessment: {'depression': 'no', 'anxiety': 'no'}
-
-Based on the above, assess the content of the following post:
-Post: "sample post"
-Assessment:
-"""
-
 COMORBIDITY_FEWSHOT = {
 "few_shot_prefix": '''
-Below are posts and their respective assessments based on the criteria for clinical depression and clinical anxiety respectively as defined in the DSM-5.
+Below are posts and their respective assessments based on the criteria for clinical depression and clinical anxiety as defined in the DSM-5.
 Format your response as a JSON object {'depression': '', 'anxiety': ''} with values either 'yes' or 'no'.
 '''
 ,
