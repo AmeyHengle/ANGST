@@ -23,7 +23,7 @@ def parse_config():
         '--model', 
         type=str, 
         default="gpt-3.5-turbo",
-        choices=["gpt-3.5-turbo", "gpt-4", "mental_llama_chat_7b", "mental_llama_chat_13b", "llama_chat_7b", "llama_chat_13b", "llama_chat_70b"],
+        choices=["gpt-3.5-turbo", "gpt-4", "llama_chat_7b", "llama_chat_13b", "llama_chat_70b"],
         help="type of model to use for prompting."
     )
     parser.add_argument(
@@ -83,7 +83,8 @@ if __name__ == "__main__":
         result_file = os.path.join(args.result_dir, f"few_shot_{args.prompt_type}_{args.model}_num_examples_ss_{args.num_examples_per_label}_v{args.version}_seed_{args.seed}_new.csv")
     else:
         result_file = os.path.join(args.result_dir, f"few_shot_{args.prompt_type}_{args.model}_num_examples_ss_{args.num_examples_per_label}_v{args.version}_seed_{args.seed}.csv")
-    # prompt_data = prompt_data[:20]
+    
+    # prompt_data = prompt_data[:100]
     print(f"\nsize of prompt data: {prompt_data.shape}")
     print(f"\nresult_file: {result_file}")
     
@@ -126,7 +127,7 @@ if __name__ == "__main__":
         index = random.randint(0, len(input))
         print(f"\nSample Input: {input[index]['prompt']}")
 
-        generator = LLM_Generator(model_name=args.model, messages_list=input, batch_size=2)
+        generator = LLM_Generator(model_name=args.model, messages_list=input, batch_size=4)
 
         predictions = generator.text_completion(
             temperature=1,

@@ -69,11 +69,7 @@ Post:
 ```
 '''
 
-DEPRESSION_LLAMA = '''
-Does the poster suffer from depression? Strictly answers as 'Yes' or 'No'.
-'''
-
-DEPRESSION_FEWSHOT_LANGCHAIN = {
+DEPRESSION_FEWSHOT = {
 "few_shot_prefix": '''
 Below are posts and their respective assessments based on the criteria for clinical depression as defined in the DSM-5.
 Format your response as a JSON object {'depression': ''} with values either 'yes' or 'no'.
@@ -88,20 +84,6 @@ Assesement: {label}
 Based on the above, assess the content of the following post:
 Post: {post}
 Assessment:
-'''
-}
-
-DEPRESSION_FEWSHOT_LLAMA_LANGCHAIN = {
-"few_shot_prefix": ""
-,
-"prompt_template": lambda post, label: f'''
-Post: {post}\nQuestion: Does the poster suffer from depression? Strictly answers as 'Yes' or 'No'.
-Answer: {label}
-'''
-,
-"few_shot_suffix": lambda post: f'''
-Post: {post}\nQuestion: Does the poster suffer from depression? Strictly answers as 'Yes' or 'No'.
-Answer:
 '''
 }
 
@@ -202,26 +184,7 @@ Post:
 ```
 '''
 
-ANXIETY_LLAMA = '''
-Does the poster suffer from anxiety? Strictly answers as 'Yes' or 'No'.
-'''
-
-ANXIETY_FEWSHOT = '''
-Below are posts and their respective assessments based on the criteria for clinical anxiety as defined in the DSM-5.
-Format your response as a JSON object {'anxiety':''} with values either 'yes' or 'no'.
-
-Post: "Every night I lay in bed with intense fear and dread, and these feelings have persisted for a year."
-Assessment: {'anxiety': 'yes'}
-
-Post: "I have a cat named Whiskers and he loves playing with yarn."
-Assessment: {'anxiety': 'no'}
-
-Based on the above, assess the content of the following post:
-Post: "sample post"
-Assessment:
-'''
-
-ANXIETY_FEWSHOT_LANGCHAIN = {
+ANXIETY_FEWSHOT = {
 "few_shot_prefix": '''
 Below are posts and their respective assessments based on the criteria for clinical anxiety as defined in the DSM-5.
 Format your response as a JSON object {'anxiety':''} with values either 'yes' or 'no'.
@@ -239,22 +202,6 @@ Assessment:
 '''
 }
 
-ANXIETY_FEWSHOT_LLAMA_LANGCHAIN = {
-"few_shot_prefix": '''
-You will be presented with a post and an assigned label to identify whether the poster shows symptoms of anxiety. Consider this post to explain the reasoning of the label step by step. Here are two examples:
-'''
-,
-"prompt_template": lambda post, label: f'''
-Post: {post}
-Response: {label}
-'''
-,
-"few_shot_suffix": lambda post: f'''
-Post: {post}
-Response:
-'''
-}
-
 # ----------------------------------------- DEPRESSION-ANXIETY COMORBIDITY PROMPTS -----------------------------------------
 
 COMORBIDITY = """
@@ -262,13 +209,9 @@ This person wrote this paragraph on social media. As a psychologist, read the po
 and answer the following questions.
 1. Does the poster of this post have anxiety?
 2. Does the poster of this post have depression?
-Format your response as a JSON object {'depression':'' 'anxiety': } with values strictly either 'yes' or 'no'.
+Format your response as a JSON object {'depression':'', 'anxiety': ''} with values strictly either 'yes' or 'no'.
 Do not return anything else apart from the json object.
 """
-
-COMORBIDITY_LLAMA = '''
-Does the poster suffer from anxiety, depression, both or None? Strictly answers as 'only depression', 'only anxiety', 'anxiety and depression', or 'None'.
-'''
 
 
 COMORBIDITY_FEWSHOT_1 = """
@@ -286,23 +229,7 @@ Post: "sample post"
 Assessment:
 """
 
-
-COMORBIDITY_FEWSHOT_2 = '''
-Below are posts and their respective assessments based on the criteria for either of clinical depression, clinical anxiety, comorbidity (depression and anxiety) or none as defined in the DSM-5.
-Format your response as a JSON object {'depression': '', 'anxiety': ''} with values either 'yes' or 'no'.
-
-Post: "Every night I lay in bed with intense fear and dread, and these feelings have persisted for a year."
-Assessment: {'label': 'depression'}
-
-Post: "I have a cat named Whiskers and he loves playing with yarn."
-Assessment: {'label': 'none'}
-
-Based on the above, assess the content of the following post:
-Post: "sample post"
-Assessment:
-'''
-
-COMORBIDITY_FEWSHOT_LANGCHAIN = {
+COMORBIDITY_FEWSHOT = {
 "few_shot_prefix": '''
 Below are posts and their respective assessments based on the criteria for clinical depression and clinical anxiety respectively as defined in the DSM-5.
 Format your response as a JSON object {'depression': '', 'anxiety': ''} with values either 'yes' or 'no'.
@@ -317,22 +244,6 @@ Assesement: {label}
 Based on the above, assess the content of the following post:
 Post: {post}
 Assessment:
-'''
-}
-
-COMORBIDITY_FEWSHOT_LLAMA_LANGCHAIN = {
-"few_shot_prefix": '''
-You will be presented with a post and an assigned label to identify whether the poster shows symptoms of both anxiety and depression. Here are two examples:
-'''
-,
-"prompt_template": lambda post, label: f'''
-Post: {post}
-Response: {label}
-'''
-,
-"few_shot_suffix": lambda post: f'''
-Post: {post}
-Response:
 '''
 }
 

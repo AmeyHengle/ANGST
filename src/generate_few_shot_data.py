@@ -5,12 +5,9 @@ import pandas as pd
 from tqdm import tqdm
 
 from prompts import (
-DEPRESSION_FEWSHOT_LANGCHAIN,
-ANXIETY_FEWSHOT_LANGCHAIN,
-COMORBIDITY_FEWSHOT_LANGCHAIN,
-DEPRESSION_FEWSHOT_LLAMA_LANGCHAIN,
-ANXIETY_FEWSHOT_LLAMA_LANGCHAIN,
-COMORBIDITY_FEWSHOT_LLAMA_LANGCHAIN
+DEPRESSION_FEWSHOT,
+ANXIETY_FEWSHOT,
+COMORBIDITY_FEWSHOT
 )
 
 text_col = 'text'
@@ -86,20 +83,7 @@ def generate_few_shot_prompts(
             
             for j, row in exemplar_df.iterrows():
                 exemplar_post = row['text']
-                
-                if "llama" in model:
-                    exemplar_label = row['depression_label']['depression']
-                    # exemplar_label = {
-                    #     "yes": "Yes, the poster suffers from depression. Reasoning: The language of the post and the symptoms mentioned are indicative of depression as per DSM-5.",
-                    #     "no": "No, the poster does not suffer from depression. Reasoning: The language of the post and the symptoms mentioned are NOT indicative of depression as per DSM-5."
-                    # }[exemplar_label.lower()]
-                    exemplar_label = {
-                        "yes": "Yes, the poster suffers from depression.",
-                        "no": "No, the poster does not suffer from depression."
-                    }[exemplar_label.lower()]
-                
-                else:
-                    exemplar_label = row['depression_label']
+                exemplar_label = row['depression_label']
                     
                 few_shot_labels.append(exemplar_label)
                 few_shot_examples.append(
@@ -126,15 +110,7 @@ def generate_few_shot_prompts(
 
             for j, row in exemplar_df.iterrows():
                 exemplar_post = row['text']
-                
-                if "llama" in model:
-                    exemplar_label = row['anxiety_label']['anxiety']
-                    exemplar_label = {
-                        "yes": "Yes, the poster suffers from anxiety. Reasoning: The language of the post and the symptoms mentioned are indicative of anxiety as per DSM-5.",
-                        "no": "No, the poster does not suffer from anxiety. Reasoning: The language of the post and the symptoms mentioned are NOT indicative of anxiety as per DSM-5."
-                    }[exemplar_label.lower()]
-                else:
-                    exemplar_label = row['anxiety_label']
+                exemplar_label = row['anxiety_label']
                     
                 few_shot_labels.append(exemplar_label)
                 few_shot_examples.append(
@@ -168,10 +144,7 @@ def generate_few_shot_prompts(
 
             for j, row in exemplar_df.iterrows():
                 exemplar_post = row['text']
-                if "llama" in model:
-                    exemplar_label = " and ".join([f"{key} {value}" for key, value in row['comorbidity_label'].items()])
-                else:
-                    exemplar_label = row['comorbidity_label']
+                exemplar_label = row['comorbidity_label']
                     
                 few_shot_labels.append(exemplar_label)
                 few_shot_examples.append(
@@ -203,25 +176,13 @@ def main(
     print(f"Output File: {outfile}")
     print('-'*50)
     
-    if args.data_type == "depression":
-        if "llama" in args.model:
-            icl_icl_template = DEPRESSION_FEWSHOT_LLAMA_LANGCHAIN
-        else:
-            icl_icl_template = DEPRESSION_FEWSHOT_LANGCHAIN
-            
-    elif args.data_type == "anxiety":
-        if "llama" in args.model:
-            icl_icl_template = ANXIETY_FEWSHOT_LLAMA_LANGCHAIN
-        else:
-            icl_icl_template = ANXIETY_FEWSHOT_LANGCHAIN
-            
-    elif args.data_type == "comorbidity":
-        if "llama" in args.model:
-            icl_icl_template = COMORBIDITY_FEWSHOT_LLAMA_LANGCHAIN
-        else:
-            icl_icl_template = COMORBIDITY_FEWSHOT_LANGCHAIN
+    icl_template = {
+         'depression': DEPRESSION_FEWSHOT, 
+         'anxiety': ANXIETY_FEWSHOT,
+         'comorbidity': COMORBIDITY_FEWSHOT,
+    }[args.data_type]
     
-    prompts, exemplar_labels = generate_few_shot_prompts(data_type, num_icl_examples, use_semantic_similarity_only, model, outfile, icl_icl_template)
+    prompts, exemplar_labels = generate_few_shot_prompts(data_type, num_icl_examples, use_semantic_similarity_only, model, outfile, icl_template)
     df_test[f'few_shot_prompt_{data_type}'] = prompts
     df_test[f'exemplar_labels_{data_type}'] = exemplar_labels
     
@@ -255,7 +216,7 @@ if __name__ == "__main__":
         '--model', 
         type=str, 
         default="gpt-3.5-turbo",
-        choices=["gpt-3.5-turbo", "gpt-4", "mental_llama_chat_7b", "mental_llama_chat_13b", "llama_chat_7b", "llama_chat_13b", "llama_chat_70b"],
+        choices=["gpt-3.5-turbo", "gpt-4", "llama_chat_7b", "llama_chat_13b", "llama_chat_70b"],
         help="type of model to use for prompting later."
     )
     parser.add_argument(

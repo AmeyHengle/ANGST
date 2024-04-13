@@ -8,13 +8,10 @@ from prompts import (
     DEPRESSION_MARDS,
     DEPRESSION_PHQ9,
     DEPRESSION,
-    DEPRESSION_LLAMA,
     ANXIETY_BAI,
     ANXIETY_HAMILTON,
     ANXIETY,
-    ANXIETY_LLAMA,
     COMORBIDITY,
-    COMORBIDITY_LLAMA,
 )
 import pprint
 pp = pprint.PrettyPrinter(indent=4)
@@ -38,7 +35,7 @@ def parse_config():
         '--model', 
         type=str, 
         default="gpt-3.5-turbo",
-        choices=["gpt-3.5-turbo", "gpt-4", "mental_llama_chat_7b", "mental_llama_chat_13b", "llama_chat_7b", "llama_chat_13b", "llama_chat_70b"],
+        choices=["gpt-3.5-turbo", "gpt-4", "llama_chat_7b", "llama_chat_13b", "llama_chat_70b"],
         help="type of model to use for prompting."
     )
     parser.add_argument(
@@ -46,9 +43,9 @@ def parse_config():
         type=str, 
         default="depression",
         choices=[
-            'depression_mards', 'depression_phq9', 'depression', 'depression_llama', 
-            'anxiety_bai', 'anxiety_hamilton', 'anxiety', 'anxiety_llama', 
-            'comorbidity', 'comorbidity_llama'
+            'depression_mards', 'depression_phq9', 'depression', 
+            'anxiety_bai', 'anxiety_hamilton', 'anxiety', 
+            'comorbidity'
         ],
         help='Type of prompt to use.'
     )
@@ -87,13 +84,10 @@ if __name__ == "__main__":
         'depression_mards': DEPRESSION_MARDS, 
          'depression_phq9': DEPRESSION_PHQ9, 
          'depression': DEPRESSION, 
-         'depression_llama': DEPRESSION_LLAMA,
          'anxiety_bai': ANXIETY_BAI, 
          'anxiety_hamilton': ANXIETY_HAMILTON, 
          'anxiety': ANXIETY,
-         'anxiety_llama': ANXIETY_LLAMA,
          'comorbidity': COMORBIDITY,
-         'comorbidity_llama': COMORBIDITY_LLAMA
     }[args.prompt_type]
     print(f"Using prompt {args.prompt_type}:\n{llm_prompt}\n\n")
     
