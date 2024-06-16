@@ -1,0 +1,16 @@
+name: mentallm_env
+channels:
+  - defaults
+dependencies:
+  - matplotlib
+  - pandas
+  - datasets
+  - conda-forge::transformers
+  - torchaudio
+  - torchvision
+  - pytorch-cuda=12.1
+  - pytorch
+  - huggingface_hub
+  - accelerate
+  - ipywidgets
+  - langchain

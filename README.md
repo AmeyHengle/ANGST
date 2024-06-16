@@ -12,10 +12,10 @@
 
 
 ## Environment
-We use [Miniconda](https://docs.conda.io/en/latest/miniconda.html) to manage the environment. Our Python version is <code>3.11.5</code>. To create the environment, run the following command:
+We use [Miniconda](https://docs.conda.io/en/latest/miniconda.html) to manage the environment. Our Python version is <code>3.12.2</code>. To create the environment, run the following command:
 
 ```
-conda env create -f environment.yml -n mentallm_env
+conda env create -f environment.yaml -n mentallm_env
 ```
 
 To activate the environment, run the following command:
@@ -26,13 +26,11 @@ conda activate mentallm_env
 
 ## Reproducing Paper Results
 
-```bash
-TODO
-```
+The <code>predictions</code> folder encompasses the prediction results obtained from all the models across various hyperparameter configurations.
 
 ## Additional Support/Issues?
 
-If you face any issues in our code / reporducing our results raise a Github issue or contact Amey Hengle (ameyh@iiitd.ac.in), Atharva Kulkarni (atharvak@andrew.cmu.edu), or Shantanu Patankar (spatankar34@gatech.edu).
+If you face any issues in our code / reporducing our results raise a Github issue.
 
 
 ## Citation 
